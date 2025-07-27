@@ -41,6 +41,7 @@
             this.btnAttempt = new System.Windows.Forms.Button();
             this.lstPlayers = new System.Windows.Forms.ListBox();
             this.lstChannels = new System.Windows.Forms.ListBox();
+            this.btnAboutThisObstacle = new System.Windows.Forms.Button();
             this.pnlObstacle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,15 +85,16 @@
             // 
             // pnlObstacle
             // 
+            this.pnlObstacle.Controls.Add(this.btnAboutThisObstacle);
             this.pnlObstacle.Controls.Add(this.rtbMessages);
             this.pnlObstacle.Controls.Add(this.lblObsName);
             this.pnlObstacle.Controls.Add(this.lblObs);
             this.pnlObstacle.Controls.Add(this.lblObsLevelNo);
             this.pnlObstacle.Controls.Add(this.lblObsLevel);
             this.pnlObstacle.Controls.Add(this.btnAttempt);
-            this.pnlObstacle.Location = new System.Drawing.Point(231, 192);
+            this.pnlObstacle.Location = new System.Drawing.Point(231, 158);
             this.pnlObstacle.Name = "pnlObstacle";
-            this.pnlObstacle.Size = new System.Drawing.Size(388, 199);
+            this.pnlObstacle.Size = new System.Drawing.Size(388, 233);
             this.pnlObstacle.TabIndex = 6;
             // 
             // rtbMessages
@@ -109,9 +111,8 @@
             this.lblObsName.AutoSize = true;
             this.lblObsName.Location = new System.Drawing.Point(231, 12);
             this.lblObsName.Name = "lblObsName";
-            this.lblObsName.Size = new System.Drawing.Size(44, 16);
+            this.lblObsName.Size = new System.Drawing.Size(0, 16);
             this.lblObsName.TabIndex = 4;
-            this.lblObsName.Text = "label1";
             // 
             // lblObs
             // 
@@ -141,9 +142,9 @@
             // 
             // btnAttempt
             // 
-            this.btnAttempt.Location = new System.Drawing.Point(155, 166);
+            this.btnAttempt.Location = new System.Drawing.Point(15, 171);
             this.btnAttempt.Name = "btnAttempt";
-            this.btnAttempt.Size = new System.Drawing.Size(75, 23);
+            this.btnAttempt.Size = new System.Drawing.Size(153, 44);
             this.btnAttempt.TabIndex = 0;
             this.btnAttempt.Text = "Attempt";
             this.btnAttempt.UseVisualStyleBackColor = true;
@@ -168,6 +169,16 @@
             this.lstChannels.Size = new System.Drawing.Size(140, 116);
             this.lstChannels.TabIndex = 8;
             this.lstChannels.SelectedIndexChanged += new System.EventHandler(this.lstChannels_SelectedIndexChanged);
+            // 
+            // btnAboutThisObstacle
+            // 
+            this.btnAboutThisObstacle.Location = new System.Drawing.Point(223, 171);
+            this.btnAboutThisObstacle.Name = "btnAboutThisObstacle";
+            this.btnAboutThisObstacle.Size = new System.Drawing.Size(153, 44);
+            this.btnAboutThisObstacle.TabIndex = 6;
+            this.btnAboutThisObstacle.Text = "About this Obstacle";
+            this.btnAboutThisObstacle.UseVisualStyleBackColor = true;
+            this.btnAboutThisObstacle.Click += new System.EventHandler(this.btnAboutThisObstacle_Click);
             // 
             // Cosmos
             // 
@@ -204,6 +215,7 @@
         private System.Windows.Forms.RichTextBox rtbMessages;
         private System.Windows.Forms.ListBox lstPlayers;
         private System.Windows.Forms.ListBox lstChannels;
+        private System.Windows.Forms.Button btnAboutThisObstacle;
     }
 }
 

@@ -61,10 +61,38 @@ namespace Cosmos.Model
                 stats["strength"] += 3; // Increase strength for strength obstacles
                 stats["endurance"] += 1; // Increase endurance for strength obstacles
             }
+            else if (currentObstacle.tags.Contains("tech"))
+            {
+                stats["tech"] += 2; // Increase tech for tech obstacles
+                stats["intelligence"] += 1; // Increase intelligence for tech obstacles
+            }
+            else if (currentObstacle.tags.Contains("speed"))
+            {
+                stats["speed"] += 2; // Increase speed for speed obstacles
+                stats["agility"] += 1; // Increase agility for speed obstacles
+            }
+            else if (currentObstacle.tags.Contains("grip"))
+            {
+                stats["grip"] += 2; // Increase grip for grip obstacles
+                stats["strength"] += 1; // Increase strength for grip obstacles
+            }
+            else if (currentObstacle.tags.Contains("endurance"))
+            {
+                stats["endurance"] += 2; // Increase endurance for endurance obstacles
+                stats["stamina"] += 1; // Increase stamina for endurance obstacles
+            }
+            else if (currentObstacle.tags.Contains("lache"))
+            {
+                stats["lache"] += 2; // Increase lache for lache obstacles
+                stats["agility"] += 1; // Increase agility for lache obstacles
+            }
+            else if (currentObstacle.tags.Contains("intelligence"))
+            {
+                stats["intelligence"] += 2; // Increase intelligence for intelligence obstacles
+                stats["tech"] += 1; // Increase tech for intelligence obstacles
+            }
 
             return stats;
-
-            // double totalStats = stats.Values.Sum()
         }
     }
 }

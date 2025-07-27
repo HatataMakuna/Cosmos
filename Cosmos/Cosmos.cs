@@ -19,7 +19,7 @@ namespace Cosmos
         private List<Obstacle> obstacles = new List<Obstacle>();
         private List<Channel> channels = new List<Channel>();
 
-        private InitData initData;
+        private InitData initData = new InitData();
         private AttemptEvent attemptEvent = new AttemptEvent();
 
         public Cosmos()
@@ -27,7 +27,6 @@ namespace Cosmos
             InitializeComponent();
 
             // Initialize data
-            initData = new InitData();
             initData.Initialize();
             LoadData();
         }
@@ -97,9 +96,7 @@ namespace Cosmos
             int index = lstPlayers.SelectedIndex;
             if (index >= 0 && index < players.Count)
             {
-                Model.Player selectedPlayer = players[index];
-                // Display player info as needed
-                //MessageBox.Show($"Selected: {selectedPlayer.name}, Level: {selectedPlayer.level}");
+                Player selectedPlayer = players[index];
             }
         }
 
@@ -126,11 +123,13 @@ namespace Cosmos
                 return;
             } else
             {
-                attemptEvent.AttemptObstacle(
-                    players[lstPlayers.SelectedIndex],
-                    channels[lstChannels.SelectedIndex]
-                );
+                attemptEvent.AttemptObstacle(players[lstPlayers.SelectedIndex], channels[lstChannels.SelectedIndex]);
             }
+        }
+
+        private void btnAboutThisObstacle_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

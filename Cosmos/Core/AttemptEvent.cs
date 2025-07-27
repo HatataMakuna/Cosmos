@@ -13,12 +13,6 @@ namespace Cosmos.Core
 
         public void AttemptObstacle(Player player, Channel channel)
         {
-            //if (player.level < channel.currentObstacle.requiredLevel)
-            //{
-            //    Console.WriteLine($"Player {player.name} does not meet the level requirement to attempt {channel.currentObstacle.name}.");
-            //    return;
-            //}
-
             // Calculate the player's effective stats against the obstacle's tags
             double obstacleTotalStats = channel.GetObstacleStats().Values.Sum();
             Console.WriteLine($"Obstacle Total Stats: {obstacleTotalStats}");
@@ -40,12 +34,15 @@ namespace Cosmos.Core
             if (successChance <= successChanceFactor)
             {
                 Console.WriteLine($"Player {player.name} successfully completed the obstacle: {channel.currentObstacle.name}.");
-                //AddExperience(player, channel.currentObstacle.difficulty * 10); // Award experience based on difficulty
+                AddExperience(player, channel.currentLevel); // Award experience based on difficulty
             }
             else
             {
                 Console.WriteLine($"Player {player.name} failed to complete the obstacle: {channel.currentObstacle.name}.");
             }
+
+            // TODO: Put output in the UI instead of console
+            // TODO: After add experience, +1 to the channel's current level and refresh the current obstacle (use random obstacle from data)
         }
 
         // Calculate player effectiveness against the obstacle (based on obstacle tags)
@@ -108,7 +105,9 @@ namespace Cosmos.Core
             int previousLevel = player.level;
             player.experience += amount;
             int newLevel = player.level;
+            // TODO: Notify player of experience gain and level up
 
+            // If player levelled up, add available points
             if (newLevel > previousLevel)
             {
                 player.availablePoints += (newLevel - previousLevel);
