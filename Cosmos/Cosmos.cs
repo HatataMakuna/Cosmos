@@ -1,6 +1,7 @@
-﻿using Cosmos.Model;
+﻿using Cosmos.Core;
 using Cosmos.Data;
-using Cosmos.Core;
+using Cosmos.Model;
+using Cosmos.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace Cosmos
         private List<Channel> channels = new List<Channel>();
 
         private InitData initData = new InitData();
-        private AttemptEvent attemptEvent = new AttemptEvent();
+        private AttemptEvent _attemptEvent;
 
         public Cosmos()
         {
@@ -28,7 +29,12 @@ namespace Cosmos
 
             // Initialize data
             initData.Initialize();
+            _attemptEvent = new AttemptEvent(initData);
             LoadData();
+
+            // Subscribe to the attempt event
+            _attemptEvent.OnMessage += DisplayMessage;
+            _attemptEvent.PropertyChanged += OnPropertyChanged;
         }
 
         private void LoadData()
@@ -49,6 +55,26 @@ namespace Cosmos
             foreach (var channel in channels)
             {
                 lstChannels.Items.Add(channel.name);
+            }
+        }
+
+        private void DisplayMessage(object sender, MessageEventArgs messageEventArgs)
+        {
+            rtbMessages.Text += messageEventArgs.Message + Environment.NewLine;
+            if (messageEventArgs.AddExtraNewLine)
+            {
+                rtbMessages.Text += Environment.NewLine;
+            }
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == "currentObstacle")
+            {
+                lblObsLevelNo.Text = channels[lstChannels.SelectedIndex].currentLevel.ToString();
+                lblObsName.Text = channels[lstChannels.SelectedIndex].currentObstacle?.name ?? "N/A";
             }
         }
 
@@ -98,6 +124,7 @@ namespace Cosmos
             {
                 Player selectedPlayer = players[index];
             }
+            btnPlayerInfo.Enabled = true;
         }
 
         private void lstChannels_SelectedIndexChanged(object sender, EventArgs e)
@@ -109,8 +136,6 @@ namespace Cosmos
                 Channel selectedChannel = channels[index];
                 lblObsLevelNo.Text = selectedChannel.currentLevel.ToString();
                 lblObsName.Text = selectedChannel.currentObstacle?.name ?? "N/A";
-                // Display channel info as needed
-                // MessageBox.Show($"Selected: {selectedChannel.name}, Current Level: {selectedChannel.currentLevel}");
             }
         }
 
@@ -123,12 +148,25 @@ namespace Cosmos
                 return;
             } else
             {
-                attemptEvent.AttemptObstacle(players[lstPlayers.SelectedIndex], channels[lstChannels.SelectedIndex]);
+                _attemptEvent.AttemptObstacle(players[lstPlayers.SelectedIndex], channels[lstChannels.SelectedIndex]);
             }
         }
 
         private void btnAboutThisObstacle_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void rtbMessages_TextChanged(object sender, EventArgs e)
+        {
+            // scroll to bottom
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
+        }
+
+        private void btnPlayerInfo_Click(object sender, EventArgs e)
+        {
+            // TODO: Show player info in a new form or dialog, also allow them to edit their stats
 
         }
     }

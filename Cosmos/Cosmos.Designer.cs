@@ -33,6 +33,7 @@
             this.lblChannels = new System.Windows.Forms.Label();
             this.btnNewChannel = new System.Windows.Forms.Button();
             this.pnlObstacle = new System.Windows.Forms.Panel();
+            this.btnAboutThisObstacle = new System.Windows.Forms.Button();
             this.rtbMessages = new System.Windows.Forms.RichTextBox();
             this.lblObsName = new System.Windows.Forms.Label();
             this.lblObs = new System.Windows.Forms.Label();
@@ -41,14 +42,14 @@
             this.btnAttempt = new System.Windows.Forms.Button();
             this.lstPlayers = new System.Windows.Forms.ListBox();
             this.lstChannels = new System.Windows.Forms.ListBox();
-            this.btnAboutThisObstacle = new System.Windows.Forms.Button();
+            this.btnPlayerInfo = new System.Windows.Forms.Button();
             this.pnlObstacle.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblPlayer
             // 
             this.lblPlayer.AutoSize = true;
-            this.lblPlayer.Location = new System.Drawing.Point(64, 47);
+            this.lblPlayer.Location = new System.Drawing.Point(64, 15);
             this.lblPlayer.Name = "lblPlayer";
             this.lblPlayer.Size = new System.Drawing.Size(53, 16);
             this.lblPlayer.TabIndex = 1;
@@ -56,7 +57,7 @@
             // 
             // btnNewPlayer
             // 
-            this.btnNewPlayer.Location = new System.Drawing.Point(23, 192);
+            this.btnNewPlayer.Location = new System.Drawing.Point(23, 160);
             this.btnNewPlayer.Name = "btnNewPlayer";
             this.btnNewPlayer.Size = new System.Drawing.Size(140, 32);
             this.btnNewPlayer.TabIndex = 2;
@@ -97,6 +98,16 @@
             this.pnlObstacle.Size = new System.Drawing.Size(388, 233);
             this.pnlObstacle.TabIndex = 6;
             // 
+            // btnAboutThisObstacle
+            // 
+            this.btnAboutThisObstacle.Location = new System.Drawing.Point(223, 171);
+            this.btnAboutThisObstacle.Name = "btnAboutThisObstacle";
+            this.btnAboutThisObstacle.Size = new System.Drawing.Size(153, 44);
+            this.btnAboutThisObstacle.TabIndex = 6;
+            this.btnAboutThisObstacle.Text = "About this Obstacle";
+            this.btnAboutThisObstacle.UseVisualStyleBackColor = true;
+            this.btnAboutThisObstacle.Click += new System.EventHandler(this.btnAboutThisObstacle_Click);
+            // 
             // rtbMessages
             // 
             this.rtbMessages.Location = new System.Drawing.Point(15, 44);
@@ -105,6 +116,7 @@
             this.rtbMessages.Size = new System.Drawing.Size(361, 112);
             this.rtbMessages.TabIndex = 5;
             this.rtbMessages.Text = "";
+            this.rtbMessages.TextChanged += new System.EventHandler(this.rtbMessages_TextChanged);
             // 
             // lblObsName
             // 
@@ -154,7 +166,7 @@
             // 
             this.lstPlayers.FormattingEnabled = true;
             this.lstPlayers.ItemHeight = 16;
-            this.lstPlayers.Location = new System.Drawing.Point(23, 66);
+            this.lstPlayers.Location = new System.Drawing.Point(23, 34);
             this.lstPlayers.Name = "lstPlayers";
             this.lstPlayers.Size = new System.Drawing.Size(140, 116);
             this.lstPlayers.TabIndex = 7;
@@ -170,21 +182,23 @@
             this.lstChannels.TabIndex = 8;
             this.lstChannels.SelectedIndexChanged += new System.EventHandler(this.lstChannels_SelectedIndexChanged);
             // 
-            // btnAboutThisObstacle
+            // btnPlayerInfo
             // 
-            this.btnAboutThisObstacle.Location = new System.Drawing.Point(223, 171);
-            this.btnAboutThisObstacle.Name = "btnAboutThisObstacle";
-            this.btnAboutThisObstacle.Size = new System.Drawing.Size(153, 44);
-            this.btnAboutThisObstacle.TabIndex = 6;
-            this.btnAboutThisObstacle.Text = "About this Obstacle";
-            this.btnAboutThisObstacle.UseVisualStyleBackColor = true;
-            this.btnAboutThisObstacle.Click += new System.EventHandler(this.btnAboutThisObstacle_Click);
+            this.btnPlayerInfo.Enabled = false;
+            this.btnPlayerInfo.Location = new System.Drawing.Point(23, 197);
+            this.btnPlayerInfo.Name = "btnPlayerInfo";
+            this.btnPlayerInfo.Size = new System.Drawing.Size(140, 32);
+            this.btnPlayerInfo.TabIndex = 9;
+            this.btnPlayerInfo.Text = "Player Info";
+            this.btnPlayerInfo.UseVisualStyleBackColor = true;
+            this.btnPlayerInfo.Click += new System.EventHandler(this.btnPlayerInfo_Click);
             // 
             // Cosmos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 437);
+            this.Controls.Add(this.btnPlayerInfo);
             this.Controls.Add(this.lstChannels);
             this.Controls.Add(this.lstPlayers);
             this.Controls.Add(this.pnlObstacle);
@@ -216,6 +230,7 @@
         private System.Windows.Forms.ListBox lstPlayers;
         private System.Windows.Forms.ListBox lstChannels;
         private System.Windows.Forms.Button btnAboutThisObstacle;
+        private System.Windows.Forms.Button btnPlayerInfo;
     }
 }
 

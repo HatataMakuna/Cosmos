@@ -17,7 +17,6 @@ namespace Cosmos.Data
         {
             // Initialize the data for the Cosmos application
             // This could include setting up initial players, obstacles, channels, etc.
-            // For now, we will just print a message to indicate initialization
             Obstacles = new List<Obstacle>
             {
                 new Obstacle(1, "Wall Climb", "A steep wall that requires climbing skills.", 3, 120, 5, new List<string> { "climbing" }, 15, 10, 12, 14, 10, 8, 9, 11, 13, 10),
@@ -42,6 +41,14 @@ namespace Cosmos.Data
             };
 
             Console.WriteLine("Cosmos data initialized.");
+        }
+
+        // Method to get a random obstacle
+        public Obstacle GetRandomObstacle()
+        {
+            Random rand = new Random();
+            int index = rand.Next(Obstacles.Count);
+            return Obstacles[index];
         }
     }
 }

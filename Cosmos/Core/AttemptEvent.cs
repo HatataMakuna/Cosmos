@@ -1,6 +1,9 @@
-﻿using Cosmos.Model;
+﻿using Cosmos.Data;
+using Cosmos.Model;
+using Cosmos.Service;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +13,14 @@ namespace Cosmos.Core
     public class AttemptEvent
     {
         private Dictionary<string, double> obstacleStats;
+        private InitData data = new InitData();
+        public event EventHandler<MessageEventArgs> OnMessage;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public AttemptEvent(InitData data)
+        {
+            this.data = data ?? throw new ArgumentNullException(nameof(data));
+        }
 
         public void AttemptObstacle(Player player, Channel channel)
         {
@@ -23,26 +34,37 @@ namespace Cosmos.Core
 
             // Calculate the success chance based on player effectiveness and obstacle stats
             double successChanceFactor = ((playerTotalStats * playerEffectiveness) / obstacleTotalStats) * 100;
+            if (successChanceFactor >= 100)
+            {
+                successChanceFactor = 100; // Cap at 100% success chance
+            }
+            else if (successChanceFactor <= 0)
+            {
+                successChanceFactor = 0; // Minimum success chance
+            }
 
             // Simulate a random success chance
             Random rand = new Random();
             double successChance = rand.NextDouble() * 100; // Random value between 0 and 100
-            Console.WriteLine($"Player {player.name} attempts obstacle: {channel.currentObstacle.name}");
-            Console.WriteLine($"Success Chance: {successChanceFactor}% (Random: {successChance})");
+            
+            RaiseMessage($"Player {player.name} attempts obstacle: {channel.currentObstacle.name}");
+            RaiseMessage($"Success Chance: {successChanceFactor}% (Random: {successChance})");
 
             // Check if the player successfully completes the obstacle
             if (successChance <= successChanceFactor)
             {
-                Console.WriteLine($"Player {player.name} successfully completed the obstacle: {channel.currentObstacle.name}.");
+                RaiseMessage($"Player {player.name} successfully completed the obstacle: {channel.currentObstacle.name}.");
                 AddExperience(player, channel.currentLevel); // Award experience based on difficulty
+                channel.currentLevel++; // Increment the channel's level
+                channel.currentObstacle = data.GetRandomObstacle(); // Refresh the current obstacle with a new one
+
+                // Call the OnObstacleCompleted event to change the current obstacle and level
+                OnPropertyChanged("currentObstacle");
             }
             else
             {
-                Console.WriteLine($"Player {player.name} failed to complete the obstacle: {channel.currentObstacle.name}.");
+                RaiseMessage($"Player {player.name} failed to complete the obstacle: {channel.currentObstacle.name}.");
             }
-
-            // TODO: Put output in the UI instead of console
-            // TODO: After add experience, +1 to the channel's current level and refresh the current obstacle (use random obstacle from data)
         }
 
         // Calculate player effectiveness against the obstacle (based on obstacle tags)
@@ -105,12 +127,29 @@ namespace Cosmos.Core
             int previousLevel = player.level;
             player.experience += amount;
             int newLevel = player.level;
-            // TODO: Notify player of experience gain and level up
+            RaiseMessage($"Player {player.name} gained {amount} experience.");
 
             // If player levelled up, add available points
             if (newLevel > previousLevel)
             {
+                RaiseMessage($"Player {player.name} leveled up to level {newLevel}!");
                 player.availablePoints += (newLevel - previousLevel);
+            }
+        }
+
+        private void RaiseMessage(string message, bool addExtraNewLine = false)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(this, new MessageEventArgs(message, addExtraNewLine));
+            }
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
     }
