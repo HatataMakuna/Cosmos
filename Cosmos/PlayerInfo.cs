@@ -1,0 +1,24 @@
+﻿using Cosmos.Model;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Cosmos
+{
+    public partial class PlayerInfo : Form
+    {
+        private Player _currentPlayer;
+
+        public PlayerInfo(Player player)
+        {
+            _currentPlayer = player;
+            InitializeComponent();
+        }
+    }
+}

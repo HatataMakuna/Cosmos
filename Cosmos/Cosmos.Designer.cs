@@ -43,15 +43,17 @@
             this.lstPlayers = new System.Windows.Forms.ListBox();
             this.lstChannels = new System.Windows.Forms.ListBox();
             this.btnPlayerInfo = new System.Windows.Forms.Button();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlObstacle.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblPlayer
             // 
             this.lblPlayer.AutoSize = true;
-            this.lblPlayer.Location = new System.Drawing.Point(64, 15);
+            this.lblPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayer.Location = new System.Drawing.Point(60, 15);
             this.lblPlayer.Name = "lblPlayer";
-            this.lblPlayer.Size = new System.Drawing.Size(53, 16);
+            this.lblPlayer.Size = new System.Drawing.Size(60, 16);
             this.lblPlayer.TabIndex = 1;
             this.lblPlayer.Text = "Players";
             // 
@@ -68,9 +70,10 @@
             // lblChannels
             // 
             this.lblChannels.AutoSize = true;
-            this.lblChannels.Location = new System.Drawing.Point(60, 238);
+            this.lblChannels.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChannels.Location = new System.Drawing.Point(54, 238);
             this.lblChannels.Name = "lblChannels";
-            this.lblChannels.Size = new System.Drawing.Size(63, 16);
+            this.lblChannels.Size = new System.Drawing.Size(71, 16);
             this.lblChannels.TabIndex = 4;
             this.lblChannels.Text = "Channels";
             // 
@@ -93,7 +96,7 @@
             this.pnlObstacle.Controls.Add(this.lblObsLevelNo);
             this.pnlObstacle.Controls.Add(this.lblObsLevel);
             this.pnlObstacle.Controls.Add(this.btnAttempt);
-            this.pnlObstacle.Location = new System.Drawing.Point(231, 158);
+            this.pnlObstacle.Location = new System.Drawing.Point(231, 160);
             this.pnlObstacle.Name = "pnlObstacle";
             this.pnlObstacle.Size = new System.Drawing.Size(388, 233);
             this.pnlObstacle.TabIndex = 6;
@@ -193,15 +196,24 @@
             this.btnPlayerInfo.UseVisualStyleBackColor = true;
             this.btnPlayerInfo.Click += new System.EventHandler(this.btnPlayerInfo_Click);
             // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 437);
+            this.splitter1.TabIndex = 10;
+            this.splitter1.TabStop = false;
+            // 
             // Cosmos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 437);
+            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.pnlObstacle);
             this.Controls.Add(this.btnPlayerInfo);
             this.Controls.Add(this.lstChannels);
             this.Controls.Add(this.lstPlayers);
-            this.Controls.Add(this.pnlObstacle);
             this.Controls.Add(this.btnNewChannel);
             this.Controls.Add(this.lblChannels);
             this.Controls.Add(this.btnNewPlayer);
@@ -231,6 +243,7 @@
         private System.Windows.Forms.ListBox lstChannels;
         private System.Windows.Forms.Button btnAboutThisObstacle;
         private System.Windows.Forms.Button btnPlayerInfo;
+        private System.Windows.Forms.Splitter splitter1;
     }
 }
 

@@ -167,7 +167,18 @@ namespace Cosmos
         private void btnPlayerInfo_Click(object sender, EventArgs e)
         {
             // TODO: Show player info in a new form or dialog, also allow them to edit their stats
-
+            // Open the PlayerInfo form with the selected player
+            int index = lstPlayers.SelectedIndex;
+            if (index >= 0 && index < players.Count)
+            {
+                Player selectedPlayer = players[index];
+                PlayerInfo playerInfoForm = new PlayerInfo(selectedPlayer);
+                playerInfoForm.ShowDialog(); // Show as a modal dialog
+            }
+            else
+            {
+                MessageBox.Show("Please select a player to view their information.");
+            }
         }
     }
 }
