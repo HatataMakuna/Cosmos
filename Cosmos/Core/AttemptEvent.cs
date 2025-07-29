@@ -55,6 +55,7 @@ namespace Cosmos.Core
             {
                 RaiseMessage($"Player {player.name} successfully completed the obstacle: {channel.currentObstacle.name}.");
                 AddExperience(player, channel.currentLevel); // Award experience based on difficulty
+                player.noCompletedObstacles++; // Increment completed obstacles count
                 channel.currentLevel++; // Increment the channel's level
                 channel.currentObstacle = data.GetRandomObstacle(); // Refresh the current obstacle with a new one
 
@@ -65,7 +66,10 @@ namespace Cosmos.Core
             {
                 RaiseMessage($"Player {player.name} failed to complete the obstacle: {channel.currentObstacle.name}.");
             }
+            player.noAttemptedObstacles++; // Increment attempted obstacles count
         }
+
+        // TODO: Update the player info to display in PlayerInfo form
 
         // Calculate player effectiveness against the obstacle (based on obstacle tags)
         private double CalculatePlayerEffectiveness(Player player, Channel channel)
