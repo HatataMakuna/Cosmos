@@ -106,7 +106,6 @@ namespace Cosmos.Model
             return ((experience - expStart) / (expEnd - expStart) * 100.0);
         }
 
-        // Get player total stats
         public double GetTotalStats()
         {
             return speed + tech + grip + strength + endurance + agility + balance + lache + stamina + intelligence;

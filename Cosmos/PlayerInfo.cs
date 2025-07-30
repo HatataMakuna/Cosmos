@@ -17,6 +17,8 @@ namespace Cosmos
         private Player _currentPlayer;
         private EditPlayerStats _editPlayerStats;
 
+        public event EventHandler<Player> PlayerDeleted;
+
         public PlayerInfo(Player player)
         {
             _currentPlayer = player;
@@ -173,6 +175,25 @@ namespace Cosmos
         private void btnAddIntelligence_Click(object sender, EventArgs e)
         {
             _editPlayerStats.AddStat("Intelligence");
+        }
+
+        private void btnDeletePlayer_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Are you sure you want to delete this player? This action cannot be undone.",
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                // Raise delete player event
+                PlayerDeleted?.Invoke(this, _currentPlayer);
+
+                MessageBox.Show("Player deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            }
         }
     }
 }

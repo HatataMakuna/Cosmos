@@ -209,6 +209,7 @@ namespace Cosmos
             {
                 Player selectedPlayer = players[index];
                 PlayerInfo playerInfoForm = new PlayerInfo(selectedPlayer);
+                playerInfoForm.PlayerDeleted += PlayerInfoForm_PlayerDeleted;
                 playerInfoForm.ShowDialog(); // Show as a modal dialog
             }
             else
@@ -217,9 +218,50 @@ namespace Cosmos
             }
         }
 
+        private void PlayerInfoForm_PlayerDeleted(object sender, Player player)
+        {
+            players.Remove(player);
+            lstPlayers.Items.Remove(player.name);
+            saveLoad.SaveData(players, channels, obstacles);
+        }
+
         private void CloseForm(object sender, FormClosingEventArgs e)
         {
             saveLoad.SaveData(players, channels, obstacles);
+        }
+
+        private void btnDeleteChannel_Click(object sender, EventArgs e)
+        {
+            // Check if a channel is selected
+            if (lstChannels.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select a channel to delete.");
+                return;
+            }
+            // Confirm deletion
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this channel?", "Confirm Deletion", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                int index = lstChannels.SelectedIndex;
+                channels.RemoveAt(index);
+                lstChannels.Items.RemoveAt(index);
+                if (channels.Count > 0)
+                {
+                    lstChannels.SelectedIndex = Math.Min(index, channels.Count - 1); // Select the next available channel
+                }
+                else
+                {
+                    lblObsLevelNo.Text = "N/A";
+                    lblObsName.Text = "N/A";
+                }
+                saveLoad.SaveData(players, channels, obstacles);
+            }
+        }
+
+        private void tsmiExit_Click(object sender, EventArgs e)
+        {
+            saveLoad.SaveData(players, channels, obstacles);
+            Close();
         }
     }
 }

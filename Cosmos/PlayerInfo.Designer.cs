@@ -70,6 +70,7 @@
             this.lblPlayerExperience = new System.Windows.Forms.Label();
             this.lblPlayerLevel = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
+            this.btnDeletePlayer = new System.Windows.Forms.Button();
             this.gbStats.SuspendLayout();
             this.tlpPlayerStats.SuspendLayout();
             this.gbPlayerProfile.SuspendLayout();
@@ -77,7 +78,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(244, 401);
+            this.btnClose.Location = new System.Drawing.Point(311, 401);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(120, 37);
             this.btnClose.TabIndex = 2;
@@ -512,6 +513,7 @@
             // 
             // gbPlayerProfile
             // 
+            this.gbPlayerProfile.Controls.Add(this.btnDeletePlayer);
             this.gbPlayerProfile.Controls.Add(this.lblNoCompletedObstacles);
             this.gbPlayerProfile.Controls.Add(this.lblNoAttemptedObstacles);
             this.gbPlayerProfile.Controls.Add(this.lblExpPercentage);
@@ -594,6 +596,17 @@
             this.lblPlayerName.TabIndex = 0;
             this.lblPlayerName.Text = "Name: ";
             // 
+            // btnDeletePlayer
+            // 
+            this.btnDeletePlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletePlayer.Location = new System.Drawing.Point(66, 302);
+            this.btnDeletePlayer.Name = "btnDeletePlayer";
+            this.btnDeletePlayer.Size = new System.Drawing.Size(120, 37);
+            this.btnDeletePlayer.TabIndex = 8;
+            this.btnDeletePlayer.Text = "Delete Player";
+            this.btnDeletePlayer.UseVisualStyleBackColor = true;
+            this.btnDeletePlayer.Click += new System.EventHandler(this.btnDeletePlayer_Click);
+            // 
             // PlayerInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -657,5 +670,6 @@
         private System.Windows.Forms.ProgressBar pbExpProgress;
         private System.Windows.Forms.Label lblNoAttemptedObstacles;
         private System.Windows.Forms.Label lblNoCompletedObstacles;
+        private System.Windows.Forms.Button btnDeletePlayer;
     }
 }
