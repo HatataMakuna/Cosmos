@@ -220,6 +220,7 @@
             this.Controls.Add(this.lblPlayer);
             this.Name = "Cosmos";
             this.Text = "Cosmos";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CloseForm);
             this.pnlObstacle.ResumeLayout(false);
             this.pnlObstacle.PerformLayout();
             this.ResumeLayout(false);

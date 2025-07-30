@@ -5,12 +5,8 @@ using Cosmos.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace Cosmos
 {
@@ -20,15 +16,26 @@ namespace Cosmos
         private List<Obstacle> obstacles = new List<Obstacle>();
         private List<Channel> channels = new List<Channel>();
 
-        private InitData initData = new InitData();
+        private InitData initData;
         private AttemptEvent _attemptEvent;
+        private SaveLoadData saveLoad = new SaveLoadData();
 
         public Cosmos()
         {
             InitializeComponent();
 
-            // Initialize data
-            initData.Initialize();
+            var (loadedPlayers, loadedChannels, loadedObstacles, isError) = saveLoad.LoadData();
+            players = loadedPlayers;
+            channels = loadedChannels;
+            obstacles = loadedObstacles;
+
+            // Notify the user if there was an error loading data
+            if (isError)
+            {
+                MessageBox.Show("Error loading data. Initializing with default values.");
+            }
+
+            initData = new InitData(obstacles, channels, players);
             _attemptEvent = new AttemptEvent(initData);
             LoadData();
 
@@ -80,10 +87,21 @@ namespace Cosmos
 
         private void btnNewPlayer_Click(object sender, EventArgs e)
         {
+            NewPlayer();
+        }
+
+        private void NewPlayer()
+        {
+            string newPlayerName = Interaction.InputBox("Enter new player name:", "New Player");
+            if (newPlayerName == "")
+            {
+                newPlayerName = $"Player {players.Count + 1}"; // Default name if empty
+            }
+
             Player newPlayer = new Player
             {
                 ID = players.Count + 1,
-                name = $"Player {players.Count + 1}",
+                name = newPlayerName,
                 availablePoints = 0,
                 speed = 10,
                 tech = 10,
@@ -154,7 +172,26 @@ namespace Cosmos
 
         private void btnAboutThisObstacle_Click(object sender, EventArgs e)
         {
-
+            // TODO: Show a dialog with information about the current obstacle
+            int index = lstChannels.SelectedIndex;
+            if (index >= 0 && index < channels.Count)
+            {
+                Channel selectedChannel = channels[index];
+                if (selectedChannel.currentObstacle != null)
+                {
+                    MessageBox.Show($"Obstacle Name: {selectedChannel.currentObstacle.name}\n" +
+                                    $"Description: {selectedChannel.currentObstacle.description}\n" +
+                                    $"Difficulty: {selectedChannel.currentObstacle.difficulty}");
+                }
+                else
+                {
+                    MessageBox.Show("No obstacle selected for this channel.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a channel to view its obstacle.");
+            }
         }
 
         private void rtbMessages_TextChanged(object sender, EventArgs e)
@@ -166,7 +203,6 @@ namespace Cosmos
 
         private void btnPlayerInfo_Click(object sender, EventArgs e)
         {
-            // TODO: Show player info in a new form or dialog, also allow them to edit their stats
             // Open the PlayerInfo form with the selected player
             int index = lstPlayers.SelectedIndex;
             if (index >= 0 && index < players.Count)
@@ -179,6 +215,11 @@ namespace Cosmos
             {
                 MessageBox.Show("Please select a player to view their information.");
             }
+        }
+
+        private void CloseForm(object sender, FormClosingEventArgs e)
+        {
+            saveLoad.SaveData(players, channels, obstacles);
         }
     }
 }

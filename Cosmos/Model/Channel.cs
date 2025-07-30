@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cosmos.Model
 {
+    [Serializable]
     public class Channel
     {
         public int ID { get; set; }

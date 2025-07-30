@@ -13,6 +13,19 @@ namespace Cosmos.Data
         public List<Channel> Channels { get; private set; }
         public List<Player> Players { get; private set; }
 
+        public InitData(List<Obstacle> obstacles, List<Channel> channels, List<Player> players)
+        {
+            Obstacles = obstacles ?? new List<Obstacle>();
+            Channels = channels ?? new List<Channel>();
+            Players = players ?? new List<Player>();
+
+            // If the lists are empty, initialize them with default values
+            if (Obstacles.Count == 0 || Channels.Count == 0 || Players.Count == 0)
+            {
+                Initialize();
+            }
+        }
+
         public void Initialize()
         {
             // Initialize the data for the Cosmos application

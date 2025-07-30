@@ -1,4 +1,5 @@
-﻿using Cosmos.Model;
+﻿using Cosmos.Core;
+using Cosmos.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +15,22 @@ namespace Cosmos
     public partial class PlayerInfo : Form
     {
         private Player _currentPlayer;
+        private EditPlayerStats _editPlayerStats;
 
         public PlayerInfo(Player player)
         {
             _currentPlayer = player;
             InitializeComponent();
+            _editPlayerStats = new EditPlayerStats(_currentPlayer);
 
+            InitPlayerInfo();
+            ToggleAllAddButtons();
+
+            _editPlayerStats.PropertyChanged += OnPropertyChanged;
+        }
+
+        private void InitPlayerInfo()
+        {
             // Player Profile
             lblPlayerName.Text += _currentPlayer.name;
             lblPlayerLevel.Text += _currentPlayer.level.ToString();
@@ -28,7 +39,6 @@ namespace Cosmos
             int expPercentage = (int)Math.Round(
                 Convert.ToDecimal(_currentPlayer.GetExperiencePercentage())
             );
-            //Console.WriteLine($"{_currentPlayer.experience / _currentPlayer.GetExperienceForNextLevel()}");
             pbExpProgress.Value = expPercentage;
             lblExpPercentage.Text = $"{expPercentage}%";
             lblNoAttemptedObstacles.Text += _currentPlayer.noAttemptedObstacles.ToString();
@@ -48,9 +58,121 @@ namespace Cosmos
             lblIntelligenceStat.Text = _currentPlayer.intelligence.ToString();
         }
 
+        private void ToggleAllAddButtons()
+        {
+            bool hasAvailablePoints = _currentPlayer.availablePoints > 0;
+            // Enable Add Buttons if player has available points
+            btnAddSpeed.Enabled = hasAvailablePoints;
+            btnAddTech.Enabled = hasAvailablePoints;
+            btnAddGrip.Enabled = hasAvailablePoints;
+            btnAddStrength.Enabled = hasAvailablePoints;
+            btnAddEndurance.Enabled = hasAvailablePoints;
+            btnAddAgility.Enabled = hasAvailablePoints;
+            btnAddBalance.Enabled = hasAvailablePoints;
+            btnAddLache.Enabled = hasAvailablePoints;
+            btnAddStamina.Enabled = hasAvailablePoints;
+            btnAddIntelligence.Enabled = hasAvailablePoints;
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == "speed")
+            {
+                lblSpeedStat.Text = _currentPlayer.speed.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "tech")
+            {
+                lblTechStat.Text = _currentPlayer.tech.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "grip")
+            {
+                lblGripStat.Text = _currentPlayer.grip.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "strength")
+            {
+                lblStrengthStat.Text = _currentPlayer.strength.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "endurance")
+            {
+                lblEnduranceStat.Text = _currentPlayer.endurance.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "agility")
+            {
+                lblAgilityStat.Text = _currentPlayer.agility.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "balance")
+            {
+                lblBalanceStat.Text = _currentPlayer.balance.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "lache")
+            {
+                lblLacheStat.Text = _currentPlayer.lache.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "stamina")
+            {
+                lblStaminaStat.Text = _currentPlayer.stamina.ToString();
+            }
+            else if (propertyChangedEventArgs.PropertyName == "intelligence")
+            {
+                lblIntelligenceStat.Text = _currentPlayer.intelligence.ToString();
+            }
+            lblAvailablePoints.Text = "Available Points: " + _currentPlayer.availablePoints.ToString();
+            ToggleAllAddButtons();
+        }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnAddSpeed_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Speed");
+        }
+
+        private void btnAddTech_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Tech");
+        }
+
+        private void btnAddGrip_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Grip");
+        }
+
+        private void btnAddStrength_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Strength");
+        }
+
+        private void btnAddEndurance_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Endurance");
+        }
+
+        private void btnAddAgility_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Agility");
+        }
+
+        private void btnAddBalance_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Balance");
+        }
+
+        private void btnAddLache_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Lache");
+        }
+
+        private void btnAddStamina_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Stamina");
+        }
+
+        private void btnAddIntelligence_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.AddStat("Intelligence");
         }
     }
 }

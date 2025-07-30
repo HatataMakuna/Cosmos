@@ -13,7 +13,7 @@ namespace Cosmos.Core
     public class AttemptEvent
     {
         private Dictionary<string, double> obstacleStats;
-        private InitData data = new InitData();
+        private InitData data;
         public event EventHandler<MessageEventArgs> OnMessage;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -68,8 +68,6 @@ namespace Cosmos.Core
             }
             player.noAttemptedObstacles++; // Increment attempted obstacles count
         }
-
-        // TODO: Update the player info to display in PlayerInfo form
 
         // Calculate player effectiveness against the obstacle (based on obstacle tags)
         private double CalculatePlayerEffectiveness(Player player, Channel channel)
