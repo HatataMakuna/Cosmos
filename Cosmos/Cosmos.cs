@@ -93,24 +93,13 @@ namespace Cosmos
         private void NewPlayer()
         {
             string newPlayerName = Interaction.InputBox("Enter new player name:", "New Player");
-            if (newPlayerName == "")
-            {
-                newPlayerName = $"Player {players.Count + 1}"; // Default name if empty
-            }
+            if (newPlayerName == "") return;
 
             Player newPlayer = new Player
             {
-                ID = players.Count + 1,
-                name = newPlayerName,
-                availablePoints = 0,
-                speed = 10,
-                tech = 10,
-                grip = 10,
-                strength = 10,
-                balance = 10,
-                lache = 10,
-                stamina = 10,
-                intelligence = 10
+                ID = players.Count + 1, name = newPlayerName, availablePoints = 0,
+                speed = 10, tech = 10, grip = 10, strength = 10,
+                balance = 10, lache = 10, stamina = 10, intelligence = 10
             };
             players.Add(newPlayer);
 
@@ -121,17 +110,24 @@ namespace Cosmos
 
         private void btnNewChannel_Click(object sender, EventArgs e)
         {
-            Channel newChannel = new Channel
+            string newChannelName = Interaction.InputBox("Enter new channel name:", "New Channel");
+            if (newChannelName == "") return;
+
+            // Create a new channel
+            if (obstacles.Count == 0)
             {
-                ID = channels.Count + 1,
-                name = $"Channel {channels.Count + 1}",
-                currentLevel = 1,
-                currentObstacle = obstacles.Count > 0 ? obstacles[0] : null // Assign first obstacle if available
-            };
-            channels.Add(newChannel);
-            // Update ListBox
-            lstChannels.Items.Add(newChannel.name);
-            lstChannels.SelectedIndex = lstChannels.Items.Count - 1; // Auto-select new channel
+                MessageBox.Show("No obstacles available to assign to the new channel.");
+                return;
+            }
+            else
+            {
+                Channel newChannel = new Channel(channels.Count + 1, newChannelName, 1, initData.GetRandomObstacle());
+                channels.Add(newChannel);
+
+                // Update ListBox
+                lstChannels.Items.Add(newChannel.name);
+                lstChannels.SelectedIndex = lstChannels.Items.Count - 1; // Auto-select new channel
+            }
         }
 
         private void lstPlayers_SelectedIndexChanged(object sender, EventArgs e)
@@ -262,6 +258,11 @@ namespace Cosmos
         {
             saveLoad.SaveData(players, channels, obstacles);
             Close();
+        }
+
+        private void tsmiSettings_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Cosmos.Model;
 
 namespace Cosmos.Data
@@ -42,9 +39,9 @@ namespace Cosmos.Data
 
             Channels = new List<Channel>
             {
-                new Channel { ID = 1, name = "Beginner Channel", currentLevel = 1, currentObstacle = Obstacles[0] },
-                new Channel { ID = 2, name = "Intermediate Channel", currentLevel = 2, currentObstacle = Obstacles[5] },
-                new Channel { ID = 3, name = "Advanced Channel", currentLevel = 3, currentObstacle = Obstacles[2] }
+                new Channel(1, "Beginner Channel", 1, GetRandomObstacle()),
+                new Channel(2, "Intermediate Channel", 2, GetRandomObstacle()),
+                new Channel(3, "Advanced Channel", 3, GetRandomObstacle())
             };
 
             Players = new List<Player>

@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Cosmos.Data;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cosmos.Model
 {
@@ -13,6 +11,14 @@ namespace Cosmos.Model
         public string name { get; set; }
         public int currentLevel { get; set; } // Current obstacle level of the channel
         public Obstacle currentObstacle { get; set; } // Current obstacle in the channel
+
+        public Channel(int id, string name, int currentLevel, Obstacle currentObstacle)
+        {
+            ID = id;
+            this.name = name;
+            this.currentLevel = currentLevel;
+            this.currentObstacle = currentObstacle ?? throw new ArgumentNullException(nameof(currentObstacle));
+        }
 
         public Dictionary<string, double> GetObstacleStats()
         {

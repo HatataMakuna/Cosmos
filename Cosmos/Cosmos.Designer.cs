@@ -47,7 +47,7 @@
             this.btnDeleteChannel = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPlayersAndChannels = new System.Windows.Forms.Panel();
             this.pnlObstacle.SuspendLayout();
@@ -67,7 +67,7 @@
             // 
             // btnNewPlayer
             // 
-            this.btnNewPlayer.Location = new System.Drawing.Point(22, 154);
+            this.btnNewPlayer.Location = new System.Drawing.Point(22, 168);
             this.btnNewPlayer.Name = "btnNewPlayer";
             this.btnNewPlayer.Size = new System.Drawing.Size(140, 32);
             this.btnNewPlayer.TabIndex = 2;
@@ -87,7 +87,7 @@
             // 
             // btnNewChannel
             // 
-            this.btnNewChannel.Location = new System.Drawing.Point(186, 154);
+            this.btnNewChannel.Location = new System.Drawing.Point(186, 168);
             this.btnNewChannel.Name = "btnNewChannel";
             this.btnNewChannel.Size = new System.Drawing.Size(140, 32);
             this.btnNewChannel.TabIndex = 5;
@@ -118,7 +118,7 @@
             // btnPlayerInfo
             // 
             this.btnPlayerInfo.Enabled = false;
-            this.btnPlayerInfo.Location = new System.Drawing.Point(22, 191);
+            this.btnPlayerInfo.Location = new System.Drawing.Point(22, 218);
             this.btnPlayerInfo.Name = "btnPlayerInfo";
             this.btnPlayerInfo.Size = new System.Drawing.Size(140, 32);
             this.btnPlayerInfo.TabIndex = 9;
@@ -236,18 +236,21 @@
             // 
             // tsmiMenu
             // 
+            this.tsmiMenu.BackColor = System.Drawing.SystemColors.Control;
             this.tsmiMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menu1ToolStripMenuItem,
+            this.tsmiSettings,
             this.tsmiExit});
+            this.tsmiMenu.ForeColor = System.Drawing.SystemColors.MenuText;
             this.tsmiMenu.Name = "tsmiMenu";
             this.tsmiMenu.Size = new System.Drawing.Size(60, 24);
             this.tsmiMenu.Text = "Menu";
             // 
-            // menu1ToolStripMenuItem
+            // tsmiSettings
             // 
-            this.menu1ToolStripMenuItem.Name = "menu1ToolStripMenuItem";
-            this.menu1ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.menu1ToolStripMenuItem.Text = "Menu1";
+            this.tsmiSettings.Name = "tsmiSettings";
+            this.tsmiSettings.Size = new System.Drawing.Size(224, 26);
+            this.tsmiSettings.Text = "Settings";
+            this.tsmiSettings.Click += new System.EventHandler(this.tsmiSettings_Click);
             // 
             // tsmiExit
             // 
@@ -313,7 +316,7 @@
         private System.Windows.Forms.Button btnDeleteChannel;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmiMenu;
-        private System.Windows.Forms.ToolStripMenuItem menu1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.Panel pnlPlayersAndChannels;
     }

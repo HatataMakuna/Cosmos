@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cosmos.Core
 {
@@ -34,9 +32,9 @@ namespace Cosmos.Core
 
             // Calculate the success chance based on player effectiveness and obstacle stats
             double successChanceFactor = ((playerTotalStats * playerEffectiveness) / obstacleTotalStats) * 100;
-            if (successChanceFactor >= 100)
+            if (successChanceFactor > 95)
             {
-                successChanceFactor = 100; // Cap at 100% success chance
+                successChanceFactor = 95; // Cap at 95% success chance
             }
             else if (successChanceFactor <= 0)
             {

@@ -26,7 +26,7 @@ namespace Cosmos
             _editPlayerStats = new EditPlayerStats(_currentPlayer);
 
             InitPlayerInfo();
-            ToggleAllAddButtons();
+            UpdateStatControls();
 
             _editPlayerStats.PropertyChanged += OnPropertyChanged;
         }
@@ -46,80 +46,59 @@ namespace Cosmos
             lblNoAttemptedObstacles.Text += _currentPlayer.noAttemptedObstacles.ToString();
             lblNoCompletedObstacles.Text += _currentPlayer.noCompletedObstacles.ToString();
 
-            // Player Stats
-            lblAvailablePoints.Text += _currentPlayer.availablePoints.ToString();
-            lblSpeedStat.Text = _currentPlayer.speed.ToString();
-            lblTechStat.Text = _currentPlayer.tech.ToString();
-            lblGripStat.Text = _currentPlayer.grip.ToString();
-            lblStrengthStat.Text = _currentPlayer.strength.ToString();
-            lblEnduranceStat.Text = _currentPlayer.endurance.ToString();
-            lblAgilityStat.Text = _currentPlayer.agility.ToString();
-            lblBalanceStat.Text = _currentPlayer.balance.ToString();
-            lblLacheStat.Text = _currentPlayer.lache.ToString();
-            lblStaminaStat.Text = _currentPlayer.stamina.ToString();
-            lblIntelligenceStat.Text = _currentPlayer.intelligence.ToString();
+            UpdateStatLabels();
         }
 
-        private void ToggleAllAddButtons()
+        private void UpdateStatLabels()
         {
-            bool hasAvailablePoints = _currentPlayer.availablePoints > 0;
-            // Enable Add Buttons if player has available points
-            btnAddSpeed.Enabled = hasAvailablePoints;
-            btnAddTech.Enabled = hasAvailablePoints;
-            btnAddGrip.Enabled = hasAvailablePoints;
-            btnAddStrength.Enabled = hasAvailablePoints;
-            btnAddEndurance.Enabled = hasAvailablePoints;
-            btnAddAgility.Enabled = hasAvailablePoints;
-            btnAddBalance.Enabled = hasAvailablePoints;
-            btnAddLache.Enabled = hasAvailablePoints;
-            btnAddStamina.Enabled = hasAvailablePoints;
-            btnAddIntelligence.Enabled = hasAvailablePoints;
+            lblAvailablePoints.Text = "Available Points: " + _editPlayerStats.EditedAvailablePoints.ToString();
+            lblSpeedStat.Text = _editPlayerStats.GetEditedStat("Speed").ToString();
+            lblTechStat.Text = _editPlayerStats.GetEditedStat("Tech").ToString();
+            lblGripStat.Text = _editPlayerStats.GetEditedStat("Grip").ToString();
+            lblStrengthStat.Text = _editPlayerStats.GetEditedStat("Strength").ToString();
+            lblEnduranceStat.Text = _editPlayerStats.GetEditedStat("Endurance").ToString();
+            lblAgilityStat.Text = _editPlayerStats.GetEditedStat("Agility").ToString();
+            lblBalanceStat.Text = _editPlayerStats.GetEditedStat("Balance").ToString();
+            lblLacheStat.Text = _editPlayerStats.GetEditedStat("Lache").ToString();
+            lblStaminaStat.Text = _editPlayerStats.GetEditedStat("Stamina").ToString();
+            lblIntelligenceStat.Text = _editPlayerStats.GetEditedStat("Intelligence").ToString();
+        }
+
+        private void UpdateStatControls()
+        {
+            // Add buttons
+            btnAddSpeed.Enabled = _editPlayerStats.CanAddStat("Speed");
+            btnAddTech.Enabled = _editPlayerStats.CanAddStat("Tech");
+            btnAddGrip.Enabled = _editPlayerStats.CanAddStat("Grip");
+            btnAddStrength.Enabled = _editPlayerStats.CanAddStat("Strength");
+            btnAddEndurance.Enabled = _editPlayerStats.CanAddStat("Endurance");
+            btnAddAgility.Enabled = _editPlayerStats.CanAddStat("Agility");
+            btnAddBalance.Enabled = _editPlayerStats.CanAddStat("Balance");
+            btnAddLache.Enabled = _editPlayerStats.CanAddStat("Lache");
+            btnAddStamina.Enabled = _editPlayerStats.CanAddStat("Stamina");
+            btnAddIntelligence.Enabled = _editPlayerStats.CanAddStat("Intelligence");
+
+            // Minus buttons
+            btnMinusSpeed.Enabled = _editPlayerStats.CanMinusStat("Speed");
+            btnMinusTech.Enabled = _editPlayerStats.CanMinusStat("Tech");
+            btnMinusGrip.Enabled = _editPlayerStats.CanMinusStat("Grip");
+            btnMinusStrength.Enabled = _editPlayerStats.CanMinusStat("Strength");
+            btnMinusEndurance.Enabled = _editPlayerStats.CanMinusStat("Endurance");
+            btnMinusAgility.Enabled = _editPlayerStats.CanMinusStat("Agility");
+            btnMinusBalance.Enabled = _editPlayerStats.CanMinusStat("Balance");
+            btnMinusLache.Enabled = _editPlayerStats.CanMinusStat("Lache");
+            btnMinusStamina.Enabled = _editPlayerStats.CanMinusStat("Stamina");
+            btnMinusIntelligence.Enabled = _editPlayerStats.CanMinusStat("Intelligence");
+
+            // Enable the save and reset button if there are changes
+            btnReset.Enabled = _editPlayerStats.HasChanges();
+            btnSaveStat.Enabled = _editPlayerStats.HasChanges();
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (propertyChangedEventArgs.PropertyName == "speed")
-            {
-                lblSpeedStat.Text = _currentPlayer.speed.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "tech")
-            {
-                lblTechStat.Text = _currentPlayer.tech.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "grip")
-            {
-                lblGripStat.Text = _currentPlayer.grip.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "strength")
-            {
-                lblStrengthStat.Text = _currentPlayer.strength.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "endurance")
-            {
-                lblEnduranceStat.Text = _currentPlayer.endurance.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "agility")
-            {
-                lblAgilityStat.Text = _currentPlayer.agility.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "balance")
-            {
-                lblBalanceStat.Text = _currentPlayer.balance.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "lache")
-            {
-                lblLacheStat.Text = _currentPlayer.lache.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "stamina")
-            {
-                lblStaminaStat.Text = _currentPlayer.stamina.ToString();
-            }
-            else if (propertyChangedEventArgs.PropertyName == "intelligence")
-            {
-                lblIntelligenceStat.Text = _currentPlayer.intelligence.ToString();
-            }
-            lblAvailablePoints.Text = "Available Points: " + _currentPlayer.availablePoints.ToString();
-            ToggleAllAddButtons();
+            UpdateStatLabels();
+            UpdateStatControls();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -175,6 +154,69 @@ namespace Cosmos
         private void btnAddIntelligence_Click(object sender, EventArgs e)
         {
             _editPlayerStats.AddStat("Intelligence");
+        }
+
+        private void btnMinusSpeed_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Speed");
+        }
+
+        private void btnMinusTech_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Tech");
+        }
+
+        private void btnMinusGrip_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Grip");
+        }
+
+        private void btnMinusStrength_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Strength");
+        }
+
+        private void btnMinusEndurance_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Endurance");
+        }
+
+        private void btnMinusAgility_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Agility");
+        }
+
+        private void btnMinusBalance_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Balance");
+        }
+
+        private void btnMinusLache_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Lache");
+        }
+
+        private void btnMinusStamina_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Stamina");
+        }
+
+        private void btnMinusIntelligence_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.MinusStat("Intelligence");
+        }
+
+        private void btnSaveStat_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.SaveStats();
+            MessageBox.Show("Player stats saved.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            UpdateStatLabels();
+            UpdateStatControls();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            _editPlayerStats.ResetStats();
         }
 
         private void btnDeletePlayer_Click(object sender, EventArgs e)
