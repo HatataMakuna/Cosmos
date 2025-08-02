@@ -260,9 +260,12 @@ namespace Cosmos
             Close();
         }
 
-        private void tsmiSettings_Click(object sender, EventArgs e)
+        private void tsmiManageObstacles_Click(object sender, EventArgs e)
         {
-
+            // Open the ManageObstacles form
+            ManageObstacles manageObstaclesForm = new ManageObstacles();
+            //manageObstaclesForm.ObstacleUpdated += ManageObstaclesForm_ObstacleUpdated;
+            manageObstaclesForm.ShowDialog();
         }
     }
 }

@@ -47,7 +47,7 @@
             this.btnDeleteChannel = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiManageObstacles = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPlayersAndChannels = new System.Windows.Forms.Panel();
             this.pnlObstacle.SuspendLayout();
@@ -238,19 +238,19 @@
             // 
             this.tsmiMenu.BackColor = System.Drawing.SystemColors.Control;
             this.tsmiMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiSettings,
+            this.tsmiManageObstacles,
             this.tsmiExit});
             this.tsmiMenu.ForeColor = System.Drawing.SystemColors.MenuText;
             this.tsmiMenu.Name = "tsmiMenu";
             this.tsmiMenu.Size = new System.Drawing.Size(60, 24);
             this.tsmiMenu.Text = "Menu";
             // 
-            // tsmiSettings
+            // tsmiManageObstacles
             // 
-            this.tsmiSettings.Name = "tsmiSettings";
-            this.tsmiSettings.Size = new System.Drawing.Size(224, 26);
-            this.tsmiSettings.Text = "Settings";
-            this.tsmiSettings.Click += new System.EventHandler(this.tsmiSettings_Click);
+            this.tsmiManageObstacles.Name = "tsmiManageObstacles";
+            this.tsmiManageObstacles.Size = new System.Drawing.Size(224, 26);
+            this.tsmiManageObstacles.Text = "Manage Obstacles";
+            this.tsmiManageObstacles.Click += new System.EventHandler(this.tsmiManageObstacles_Click);
             // 
             // tsmiExit
             // 
@@ -316,7 +316,7 @@
         private System.Windows.Forms.Button btnDeleteChannel;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmiMenu;
-        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiManageObstacles;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.Panel pnlPlayersAndChannels;
     }

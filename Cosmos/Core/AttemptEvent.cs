@@ -24,11 +24,8 @@ namespace Cosmos.Core
         {
             // Calculate the player's effective stats against the obstacle's tags
             double obstacleTotalStats = channel.GetObstacleStats().Values.Sum();
-            Console.WriteLine($"Obstacle Total Stats: {obstacleTotalStats}");
             double playerTotalStats = player.GetTotalStats();
-            Console.WriteLine($"Player Total Stats: {playerTotalStats}");
             double playerEffectiveness = CalculatePlayerEffectiveness(player, channel);
-            Console.WriteLine($"Player Effectiveness: {playerEffectiveness}");
 
             // Calculate the success chance based on player effectiveness and obstacle stats
             double successChanceFactor = ((playerTotalStats * playerEffectiveness) / obstacleTotalStats) * 100;
@@ -45,8 +42,8 @@ namespace Cosmos.Core
             Random rand = new Random();
             double successChance = rand.NextDouble() * 100; // Random value between 0 and 100
             
-            RaiseMessage($"Player {player.name} attempts obstacle: {channel.currentObstacle.name}");
-            RaiseMessage($"Success Chance: {successChanceFactor}% (Random: {successChance})");
+            //RaiseMessage($"Player {player.name} attempts obstacle: {channel.currentObstacle.name}");
+            //RaiseMessage($"Success Chance: {successChanceFactor}% (Random: {successChance})");
 
             // Check if the player successfully completes the obstacle
             if (successChance <= successChanceFactor)

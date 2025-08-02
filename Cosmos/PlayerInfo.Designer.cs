@@ -30,8 +30,20 @@
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.gbStats = new System.Windows.Forms.GroupBox();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnSaveStat = new System.Windows.Forms.Button();
             this.lblAvailablePoints = new System.Windows.Forms.Label();
             this.tlpPlayerStats = new System.Windows.Forms.TableLayoutPanel();
+            this.btnMinusIntelligence = new System.Windows.Forms.Button();
+            this.btnMinusStamina = new System.Windows.Forms.Button();
+            this.btnMinusLache = new System.Windows.Forms.Button();
+            this.btnMinusBalance = new System.Windows.Forms.Button();
+            this.btnMinusAgility = new System.Windows.Forms.Button();
+            this.btnMinusEndurance = new System.Windows.Forms.Button();
+            this.btnMinusStrength = new System.Windows.Forms.Button();
+            this.btnMinusGrip = new System.Windows.Forms.Button();
+            this.btnMinusTech = new System.Windows.Forms.Button();
+            this.btnMinusSpeed = new System.Windows.Forms.Button();
             this.lblIntelligenceStat = new System.Windows.Forms.Label();
             this.lblStaminaStat = new System.Windows.Forms.Label();
             this.lblLacheStat = new System.Windows.Forms.Label();
@@ -41,16 +53,6 @@
             this.lblStrengthStat = new System.Windows.Forms.Label();
             this.lblGripStat = new System.Windows.Forms.Label();
             this.lblTechStat = new System.Windows.Forms.Label();
-            this.btnAddSpeed = new System.Windows.Forms.Button();
-            this.btnAddTech = new System.Windows.Forms.Button();
-            this.btnAddGrip = new System.Windows.Forms.Button();
-            this.btnAddStrength = new System.Windows.Forms.Button();
-            this.btnAddEndurance = new System.Windows.Forms.Button();
-            this.btnAddAgility = new System.Windows.Forms.Button();
-            this.btnAddBalance = new System.Windows.Forms.Button();
-            this.btnAddLache = new System.Windows.Forms.Button();
-            this.btnAddStamina = new System.Windows.Forms.Button();
-            this.btnAddIntelligence = new System.Windows.Forms.Button();
             this.lblSpeed = new System.Windows.Forms.Label();
             this.lblTech = new System.Windows.Forms.Label();
             this.lblGrip = new System.Windows.Forms.Label();
@@ -62,6 +64,16 @@
             this.lblStamina = new System.Windows.Forms.Label();
             this.lblIntelligence = new System.Windows.Forms.Label();
             this.lblSpeedStat = new System.Windows.Forms.Label();
+            this.btnAddSpeed = new System.Windows.Forms.Button();
+            this.btnAddTech = new System.Windows.Forms.Button();
+            this.btnAddGrip = new System.Windows.Forms.Button();
+            this.btnAddStrength = new System.Windows.Forms.Button();
+            this.btnAddEndurance = new System.Windows.Forms.Button();
+            this.btnAddAgility = new System.Windows.Forms.Button();
+            this.btnAddBalance = new System.Windows.Forms.Button();
+            this.btnAddLache = new System.Windows.Forms.Button();
+            this.btnAddStamina = new System.Windows.Forms.Button();
+            this.btnAddIntelligence = new System.Windows.Forms.Button();
             this.gbPlayerProfile = new System.Windows.Forms.GroupBox();
             this.btnDeletePlayer = new System.Windows.Forms.Button();
             this.lblNoCompletedObstacles = new System.Windows.Forms.Label();
@@ -71,18 +83,6 @@
             this.lblPlayerExperience = new System.Windows.Forms.Label();
             this.lblPlayerLevel = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
-            this.btnMinusSpeed = new System.Windows.Forms.Button();
-            this.btnMinusTech = new System.Windows.Forms.Button();
-            this.btnMinusGrip = new System.Windows.Forms.Button();
-            this.btnMinusStrength = new System.Windows.Forms.Button();
-            this.btnMinusEndurance = new System.Windows.Forms.Button();
-            this.btnMinusAgility = new System.Windows.Forms.Button();
-            this.btnMinusBalance = new System.Windows.Forms.Button();
-            this.btnMinusLache = new System.Windows.Forms.Button();
-            this.btnMinusStamina = new System.Windows.Forms.Button();
-            this.btnMinusIntelligence = new System.Windows.Forms.Button();
-            this.btnSaveStat = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
             this.gbStats.SuspendLayout();
             this.tlpPlayerStats.SuspendLayout();
             this.gbPlayerProfile.SuspendLayout();
@@ -111,6 +111,30 @@
             this.gbStats.TabIndex = 3;
             this.gbStats.TabStop = false;
             this.gbStats.Text = "Player Stats";
+            // 
+            // btnReset
+            // 
+            this.btnReset.Enabled = false;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Location = new System.Drawing.Point(29, 377);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(120, 37);
+            this.btnReset.TabIndex = 9;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnSaveStat
+            // 
+            this.btnSaveStat.Enabled = false;
+            this.btnSaveStat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveStat.Location = new System.Drawing.Point(178, 377);
+            this.btnSaveStat.Name = "btnSaveStat";
+            this.btnSaveStat.Size = new System.Drawing.Size(120, 37);
+            this.btnSaveStat.TabIndex = 8;
+            this.btnSaveStat.Text = "Save";
+            this.btnSaveStat.UseVisualStyleBackColor = true;
+            this.btnSaveStat.Click += new System.EventHandler(this.btnSaveStat_Click);
             // 
             // lblAvailablePoints
             // 
@@ -184,6 +208,136 @@
             this.tlpPlayerStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpPlayerStats.Size = new System.Drawing.Size(283, 310);
             this.tlpPlayerStats.TabIndex = 5;
+            // 
+            // btnMinusIntelligence
+            // 
+            this.btnMinusIntelligence.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusIntelligence.Enabled = false;
+            this.btnMinusIntelligence.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusIntelligence.Location = new System.Drawing.Point(182, 282);
+            this.btnMinusIntelligence.Name = "btnMinusIntelligence";
+            this.btnMinusIntelligence.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusIntelligence.TabIndex = 53;
+            this.btnMinusIntelligence.Text = "-";
+            this.btnMinusIntelligence.UseVisualStyleBackColor = true;
+            this.btnMinusIntelligence.Click += new System.EventHandler(this.btnMinusIntelligence_Click);
+            // 
+            // btnMinusStamina
+            // 
+            this.btnMinusStamina.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusStamina.Enabled = false;
+            this.btnMinusStamina.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusStamina.Location = new System.Drawing.Point(182, 251);
+            this.btnMinusStamina.Name = "btnMinusStamina";
+            this.btnMinusStamina.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusStamina.TabIndex = 52;
+            this.btnMinusStamina.Text = "-";
+            this.btnMinusStamina.UseVisualStyleBackColor = true;
+            this.btnMinusStamina.Click += new System.EventHandler(this.btnMinusStamina_Click);
+            // 
+            // btnMinusLache
+            // 
+            this.btnMinusLache.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusLache.Enabled = false;
+            this.btnMinusLache.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusLache.Location = new System.Drawing.Point(182, 220);
+            this.btnMinusLache.Name = "btnMinusLache";
+            this.btnMinusLache.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusLache.TabIndex = 51;
+            this.btnMinusLache.Text = "-";
+            this.btnMinusLache.UseVisualStyleBackColor = true;
+            this.btnMinusLache.Click += new System.EventHandler(this.btnMinusLache_Click);
+            // 
+            // btnMinusBalance
+            // 
+            this.btnMinusBalance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusBalance.Enabled = false;
+            this.btnMinusBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusBalance.Location = new System.Drawing.Point(182, 189);
+            this.btnMinusBalance.Name = "btnMinusBalance";
+            this.btnMinusBalance.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusBalance.TabIndex = 50;
+            this.btnMinusBalance.Text = "-";
+            this.btnMinusBalance.UseVisualStyleBackColor = true;
+            this.btnMinusBalance.Click += new System.EventHandler(this.btnMinusBalance_Click);
+            // 
+            // btnMinusAgility
+            // 
+            this.btnMinusAgility.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusAgility.Enabled = false;
+            this.btnMinusAgility.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusAgility.Location = new System.Drawing.Point(182, 158);
+            this.btnMinusAgility.Name = "btnMinusAgility";
+            this.btnMinusAgility.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusAgility.TabIndex = 49;
+            this.btnMinusAgility.Text = "-";
+            this.btnMinusAgility.UseVisualStyleBackColor = true;
+            this.btnMinusAgility.Click += new System.EventHandler(this.btnMinusAgility_Click);
+            // 
+            // btnMinusEndurance
+            // 
+            this.btnMinusEndurance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusEndurance.Enabled = false;
+            this.btnMinusEndurance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusEndurance.Location = new System.Drawing.Point(182, 127);
+            this.btnMinusEndurance.Name = "btnMinusEndurance";
+            this.btnMinusEndurance.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusEndurance.TabIndex = 48;
+            this.btnMinusEndurance.Text = "-";
+            this.btnMinusEndurance.UseVisualStyleBackColor = true;
+            this.btnMinusEndurance.Click += new System.EventHandler(this.btnMinusEndurance_Click);
+            // 
+            // btnMinusStrength
+            // 
+            this.btnMinusStrength.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusStrength.Enabled = false;
+            this.btnMinusStrength.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusStrength.Location = new System.Drawing.Point(182, 96);
+            this.btnMinusStrength.Name = "btnMinusStrength";
+            this.btnMinusStrength.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusStrength.TabIndex = 47;
+            this.btnMinusStrength.Text = "-";
+            this.btnMinusStrength.UseVisualStyleBackColor = true;
+            this.btnMinusStrength.Click += new System.EventHandler(this.btnMinusStrength_Click);
+            // 
+            // btnMinusGrip
+            // 
+            this.btnMinusGrip.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusGrip.Enabled = false;
+            this.btnMinusGrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusGrip.Location = new System.Drawing.Point(182, 65);
+            this.btnMinusGrip.Name = "btnMinusGrip";
+            this.btnMinusGrip.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusGrip.TabIndex = 46;
+            this.btnMinusGrip.Text = "-";
+            this.btnMinusGrip.UseVisualStyleBackColor = true;
+            this.btnMinusGrip.Click += new System.EventHandler(this.btnMinusGrip_Click);
+            // 
+            // btnMinusTech
+            // 
+            this.btnMinusTech.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusTech.Enabled = false;
+            this.btnMinusTech.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusTech.Location = new System.Drawing.Point(182, 34);
+            this.btnMinusTech.Name = "btnMinusTech";
+            this.btnMinusTech.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusTech.TabIndex = 45;
+            this.btnMinusTech.Text = "-";
+            this.btnMinusTech.UseVisualStyleBackColor = true;
+            this.btnMinusTech.Click += new System.EventHandler(this.btnMinusTech_Click);
+            // 
+            // btnMinusSpeed
+            // 
+            this.btnMinusSpeed.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMinusSpeed.Enabled = false;
+            this.btnMinusSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinusSpeed.Location = new System.Drawing.Point(182, 3);
+            this.btnMinusSpeed.Name = "btnMinusSpeed";
+            this.btnMinusSpeed.Size = new System.Drawing.Size(30, 25);
+            this.btnMinusSpeed.TabIndex = 44;
+            this.btnMinusSpeed.Text = "-";
+            this.btnMinusSpeed.UseVisualStyleBackColor = true;
+            this.btnMinusSpeed.Click += new System.EventHandler(this.btnMinusSpeed_Click);
             // 
             // lblIntelligenceStat
             // 
@@ -283,6 +437,127 @@
             this.lblTechStat.Size = new System.Drawing.Size(46, 17);
             this.lblTechStat.TabIndex = 35;
             this.lblTechStat.Text = "label1";
+            // 
+            // lblSpeed
+            // 
+            this.lblSpeed.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblSpeed.AutoSize = true;
+            this.lblSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSpeed.Location = new System.Drawing.Point(3, 7);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Size = new System.Drawing.Size(53, 16);
+            this.lblSpeed.TabIndex = 24;
+            this.lblSpeed.Text = "Speed";
+            // 
+            // lblTech
+            // 
+            this.lblTech.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblTech.AutoSize = true;
+            this.lblTech.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTech.Location = new System.Drawing.Point(3, 38);
+            this.lblTech.Name = "lblTech";
+            this.lblTech.Size = new System.Drawing.Size(42, 16);
+            this.lblTech.TabIndex = 25;
+            this.lblTech.Text = "Tech";
+            // 
+            // lblGrip
+            // 
+            this.lblGrip.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblGrip.AutoSize = true;
+            this.lblGrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrip.Location = new System.Drawing.Point(3, 69);
+            this.lblGrip.Name = "lblGrip";
+            this.lblGrip.Size = new System.Drawing.Size(36, 16);
+            this.lblGrip.TabIndex = 26;
+            this.lblGrip.Text = "Grip";
+            // 
+            // lblStrength
+            // 
+            this.lblStrength.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblStrength.AutoSize = true;
+            this.lblStrength.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStrength.Location = new System.Drawing.Point(3, 100);
+            this.lblStrength.Name = "lblStrength";
+            this.lblStrength.Size = new System.Drawing.Size(64, 16);
+            this.lblStrength.TabIndex = 27;
+            this.lblStrength.Text = "Strength";
+            // 
+            // lblEndurance
+            // 
+            this.lblEndurance.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblEndurance.AutoSize = true;
+            this.lblEndurance.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEndurance.Location = new System.Drawing.Point(3, 131);
+            this.lblEndurance.Name = "lblEndurance";
+            this.lblEndurance.Size = new System.Drawing.Size(81, 16);
+            this.lblEndurance.TabIndex = 28;
+            this.lblEndurance.Text = "Endurance";
+            // 
+            // lblAgility
+            // 
+            this.lblAgility.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblAgility.AutoSize = true;
+            this.lblAgility.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAgility.Location = new System.Drawing.Point(3, 162);
+            this.lblAgility.Name = "lblAgility";
+            this.lblAgility.Size = new System.Drawing.Size(50, 16);
+            this.lblAgility.TabIndex = 29;
+            this.lblAgility.Text = "Agility";
+            // 
+            // lblBalance
+            // 
+            this.lblBalance.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblBalance.AutoSize = true;
+            this.lblBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBalance.Location = new System.Drawing.Point(3, 193);
+            this.lblBalance.Name = "lblBalance";
+            this.lblBalance.Size = new System.Drawing.Size(64, 16);
+            this.lblBalance.TabIndex = 30;
+            this.lblBalance.Text = "Balance";
+            // 
+            // lblLache
+            // 
+            this.lblLache.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblLache.AutoSize = true;
+            this.lblLache.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLache.Location = new System.Drawing.Point(3, 224);
+            this.lblLache.Name = "lblLache";
+            this.lblLache.Size = new System.Drawing.Size(49, 16);
+            this.lblLache.TabIndex = 31;
+            this.lblLache.Text = "Lache";
+            // 
+            // lblStamina
+            // 
+            this.lblStamina.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblStamina.AutoSize = true;
+            this.lblStamina.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStamina.Location = new System.Drawing.Point(3, 255);
+            this.lblStamina.Name = "lblStamina";
+            this.lblStamina.Size = new System.Drawing.Size(63, 16);
+            this.lblStamina.TabIndex = 32;
+            this.lblStamina.Text = "Stamina";
+            // 
+            // lblIntelligence
+            // 
+            this.lblIntelligence.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblIntelligence.AutoSize = true;
+            this.lblIntelligence.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIntelligence.Location = new System.Drawing.Point(3, 286);
+            this.lblIntelligence.Name = "lblIntelligence";
+            this.lblIntelligence.Size = new System.Drawing.Size(87, 16);
+            this.lblIntelligence.TabIndex = 33;
+            this.lblIntelligence.Text = "Intelligence";
+            // 
+            // lblSpeedStat
+            // 
+            this.lblSpeedStat.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblSpeedStat.AutoSize = true;
+            this.lblSpeedStat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSpeedStat.Location = new System.Drawing.Point(118, 7);
+            this.lblSpeedStat.Name = "lblSpeedStat";
+            this.lblSpeedStat.Size = new System.Drawing.Size(46, 17);
+            this.lblSpeedStat.TabIndex = 34;
+            this.lblSpeedStat.Text = "label1";
             // 
             // btnAddSpeed
             // 
@@ -414,127 +689,6 @@
             this.btnAddIntelligence.UseVisualStyleBackColor = true;
             this.btnAddIntelligence.Click += new System.EventHandler(this.btnAddIntelligence_Click);
             // 
-            // lblSpeed
-            // 
-            this.lblSpeed.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblSpeed.AutoSize = true;
-            this.lblSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSpeed.Location = new System.Drawing.Point(3, 7);
-            this.lblSpeed.Name = "lblSpeed";
-            this.lblSpeed.Size = new System.Drawing.Size(53, 16);
-            this.lblSpeed.TabIndex = 24;
-            this.lblSpeed.Text = "Speed";
-            // 
-            // lblTech
-            // 
-            this.lblTech.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblTech.AutoSize = true;
-            this.lblTech.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTech.Location = new System.Drawing.Point(3, 38);
-            this.lblTech.Name = "lblTech";
-            this.lblTech.Size = new System.Drawing.Size(42, 16);
-            this.lblTech.TabIndex = 25;
-            this.lblTech.Text = "Tech";
-            // 
-            // lblGrip
-            // 
-            this.lblGrip.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblGrip.AutoSize = true;
-            this.lblGrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGrip.Location = new System.Drawing.Point(3, 69);
-            this.lblGrip.Name = "lblGrip";
-            this.lblGrip.Size = new System.Drawing.Size(36, 16);
-            this.lblGrip.TabIndex = 26;
-            this.lblGrip.Text = "Grip";
-            // 
-            // lblStrength
-            // 
-            this.lblStrength.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblStrength.AutoSize = true;
-            this.lblStrength.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStrength.Location = new System.Drawing.Point(3, 100);
-            this.lblStrength.Name = "lblStrength";
-            this.lblStrength.Size = new System.Drawing.Size(64, 16);
-            this.lblStrength.TabIndex = 27;
-            this.lblStrength.Text = "Strength";
-            // 
-            // lblEndurance
-            // 
-            this.lblEndurance.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblEndurance.AutoSize = true;
-            this.lblEndurance.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEndurance.Location = new System.Drawing.Point(3, 131);
-            this.lblEndurance.Name = "lblEndurance";
-            this.lblEndurance.Size = new System.Drawing.Size(81, 16);
-            this.lblEndurance.TabIndex = 28;
-            this.lblEndurance.Text = "Endurance";
-            // 
-            // lblAgility
-            // 
-            this.lblAgility.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblAgility.AutoSize = true;
-            this.lblAgility.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAgility.Location = new System.Drawing.Point(3, 162);
-            this.lblAgility.Name = "lblAgility";
-            this.lblAgility.Size = new System.Drawing.Size(50, 16);
-            this.lblAgility.TabIndex = 29;
-            this.lblAgility.Text = "Agility";
-            // 
-            // lblBalance
-            // 
-            this.lblBalance.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblBalance.AutoSize = true;
-            this.lblBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBalance.Location = new System.Drawing.Point(3, 193);
-            this.lblBalance.Name = "lblBalance";
-            this.lblBalance.Size = new System.Drawing.Size(64, 16);
-            this.lblBalance.TabIndex = 30;
-            this.lblBalance.Text = "Balance";
-            // 
-            // lblLache
-            // 
-            this.lblLache.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblLache.AutoSize = true;
-            this.lblLache.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLache.Location = new System.Drawing.Point(3, 224);
-            this.lblLache.Name = "lblLache";
-            this.lblLache.Size = new System.Drawing.Size(49, 16);
-            this.lblLache.TabIndex = 31;
-            this.lblLache.Text = "Lache";
-            // 
-            // lblStamina
-            // 
-            this.lblStamina.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblStamina.AutoSize = true;
-            this.lblStamina.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStamina.Location = new System.Drawing.Point(3, 255);
-            this.lblStamina.Name = "lblStamina";
-            this.lblStamina.Size = new System.Drawing.Size(63, 16);
-            this.lblStamina.TabIndex = 32;
-            this.lblStamina.Text = "Stamina";
-            // 
-            // lblIntelligence
-            // 
-            this.lblIntelligence.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblIntelligence.AutoSize = true;
-            this.lblIntelligence.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIntelligence.Location = new System.Drawing.Point(3, 286);
-            this.lblIntelligence.Name = "lblIntelligence";
-            this.lblIntelligence.Size = new System.Drawing.Size(87, 16);
-            this.lblIntelligence.TabIndex = 33;
-            this.lblIntelligence.Text = "Intelligence";
-            // 
-            // lblSpeedStat
-            // 
-            this.lblSpeedStat.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblSpeedStat.AutoSize = true;
-            this.lblSpeedStat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSpeedStat.Location = new System.Drawing.Point(118, 7);
-            this.lblSpeedStat.Name = "lblSpeedStat";
-            this.lblSpeedStat.Size = new System.Drawing.Size(46, 17);
-            this.lblSpeedStat.TabIndex = 34;
-            this.lblSpeedStat.Text = "label1";
-            // 
             // gbPlayerProfile
             // 
             this.gbPlayerProfile.Controls.Add(this.btnDeletePlayer);
@@ -631,160 +785,6 @@
             this.lblPlayerName.TabIndex = 0;
             this.lblPlayerName.Text = "Name: ";
             // 
-            // btnMinusSpeed
-            // 
-            this.btnMinusSpeed.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusSpeed.Enabled = false;
-            this.btnMinusSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusSpeed.Location = new System.Drawing.Point(182, 3);
-            this.btnMinusSpeed.Name = "btnMinusSpeed";
-            this.btnMinusSpeed.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusSpeed.TabIndex = 44;
-            this.btnMinusSpeed.Text = "-";
-            this.btnMinusSpeed.UseVisualStyleBackColor = true;
-            this.btnMinusSpeed.Click += new System.EventHandler(this.btnMinusSpeed_Click);
-            // 
-            // btnMinusTech
-            // 
-            this.btnMinusTech.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusTech.Enabled = false;
-            this.btnMinusTech.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusTech.Location = new System.Drawing.Point(182, 34);
-            this.btnMinusTech.Name = "btnMinusTech";
-            this.btnMinusTech.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusTech.TabIndex = 45;
-            this.btnMinusTech.Text = "-";
-            this.btnMinusTech.UseVisualStyleBackColor = true;
-            this.btnMinusTech.Click += new System.EventHandler(this.btnMinusTech_Click);
-            // 
-            // btnMinusGrip
-            // 
-            this.btnMinusGrip.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusGrip.Enabled = false;
-            this.btnMinusGrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusGrip.Location = new System.Drawing.Point(182, 65);
-            this.btnMinusGrip.Name = "btnMinusGrip";
-            this.btnMinusGrip.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusGrip.TabIndex = 46;
-            this.btnMinusGrip.Text = "-";
-            this.btnMinusGrip.UseVisualStyleBackColor = true;
-            this.btnMinusGrip.Click += new System.EventHandler(this.btnMinusGrip_Click);
-            // 
-            // btnMinusStrength
-            // 
-            this.btnMinusStrength.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusStrength.Enabled = false;
-            this.btnMinusStrength.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusStrength.Location = new System.Drawing.Point(182, 96);
-            this.btnMinusStrength.Name = "btnMinusStrength";
-            this.btnMinusStrength.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusStrength.TabIndex = 47;
-            this.btnMinusStrength.Text = "-";
-            this.btnMinusStrength.UseVisualStyleBackColor = true;
-            this.btnMinusStrength.Click += new System.EventHandler(this.btnMinusStrength_Click);
-            // 
-            // btnMinusEndurance
-            // 
-            this.btnMinusEndurance.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusEndurance.Enabled = false;
-            this.btnMinusEndurance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusEndurance.Location = new System.Drawing.Point(182, 127);
-            this.btnMinusEndurance.Name = "btnMinusEndurance";
-            this.btnMinusEndurance.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusEndurance.TabIndex = 48;
-            this.btnMinusEndurance.Text = "-";
-            this.btnMinusEndurance.UseVisualStyleBackColor = true;
-            this.btnMinusEndurance.Click += new System.EventHandler(this.btnMinusEndurance_Click);
-            // 
-            // btnMinusAgility
-            // 
-            this.btnMinusAgility.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusAgility.Enabled = false;
-            this.btnMinusAgility.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusAgility.Location = new System.Drawing.Point(182, 158);
-            this.btnMinusAgility.Name = "btnMinusAgility";
-            this.btnMinusAgility.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusAgility.TabIndex = 49;
-            this.btnMinusAgility.Text = "-";
-            this.btnMinusAgility.UseVisualStyleBackColor = true;
-            this.btnMinusAgility.Click += new System.EventHandler(this.btnMinusAgility_Click);
-            // 
-            // btnMinusBalance
-            // 
-            this.btnMinusBalance.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusBalance.Enabled = false;
-            this.btnMinusBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusBalance.Location = new System.Drawing.Point(182, 189);
-            this.btnMinusBalance.Name = "btnMinusBalance";
-            this.btnMinusBalance.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusBalance.TabIndex = 50;
-            this.btnMinusBalance.Text = "-";
-            this.btnMinusBalance.UseVisualStyleBackColor = true;
-            this.btnMinusBalance.Click += new System.EventHandler(this.btnMinusBalance_Click);
-            // 
-            // btnMinusLache
-            // 
-            this.btnMinusLache.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusLache.Enabled = false;
-            this.btnMinusLache.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusLache.Location = new System.Drawing.Point(182, 220);
-            this.btnMinusLache.Name = "btnMinusLache";
-            this.btnMinusLache.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusLache.TabIndex = 51;
-            this.btnMinusLache.Text = "-";
-            this.btnMinusLache.UseVisualStyleBackColor = true;
-            this.btnMinusLache.Click += new System.EventHandler(this.btnMinusLache_Click);
-            // 
-            // btnMinusStamina
-            // 
-            this.btnMinusStamina.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusStamina.Enabled = false;
-            this.btnMinusStamina.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusStamina.Location = new System.Drawing.Point(182, 251);
-            this.btnMinusStamina.Name = "btnMinusStamina";
-            this.btnMinusStamina.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusStamina.TabIndex = 52;
-            this.btnMinusStamina.Text = "-";
-            this.btnMinusStamina.UseVisualStyleBackColor = true;
-            this.btnMinusStamina.Click += new System.EventHandler(this.btnMinusStamina_Click);
-            // 
-            // btnMinusIntelligence
-            // 
-            this.btnMinusIntelligence.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMinusIntelligence.Enabled = false;
-            this.btnMinusIntelligence.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinusIntelligence.Location = new System.Drawing.Point(182, 282);
-            this.btnMinusIntelligence.Name = "btnMinusIntelligence";
-            this.btnMinusIntelligence.Size = new System.Drawing.Size(30, 25);
-            this.btnMinusIntelligence.TabIndex = 53;
-            this.btnMinusIntelligence.Text = "-";
-            this.btnMinusIntelligence.UseVisualStyleBackColor = true;
-            this.btnMinusIntelligence.Click += new System.EventHandler(this.btnMinusIntelligence_Click);
-            // 
-            // btnSaveStat
-            // 
-            this.btnSaveStat.Enabled = false;
-            this.btnSaveStat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveStat.Location = new System.Drawing.Point(178, 377);
-            this.btnSaveStat.Name = "btnSaveStat";
-            this.btnSaveStat.Size = new System.Drawing.Size(120, 37);
-            this.btnSaveStat.TabIndex = 8;
-            this.btnSaveStat.Text = "Save";
-            this.btnSaveStat.UseVisualStyleBackColor = true;
-            this.btnSaveStat.Click += new System.EventHandler(this.btnSaveStat_Click);
-            // 
-            // btnReset
-            // 
-            this.btnReset.Enabled = false;
-            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(29, 377);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(120, 37);
-            this.btnReset.TabIndex = 9;
-            this.btnReset.Text = "Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
             // PlayerInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -794,7 +794,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.gbStats);
             this.Name = "PlayerInfo";
-            this.Text = "PlayerInfo";
+            this.Text = "Player Info";
             this.gbStats.ResumeLayout(false);
             this.gbStats.PerformLayout();
             this.tlpPlayerStats.ResumeLayout(false);
