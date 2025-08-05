@@ -263,7 +263,7 @@ namespace Cosmos
         private void tsmiManageObstacles_Click(object sender, EventArgs e)
         {
             // Open the ManageObstacles form
-            ManageObstacles manageObstaclesForm = new ManageObstacles();
+            ManageObstacles manageObstaclesForm = new ManageObstacles(obstacles);
             //manageObstaclesForm.ObstacleUpdated += ManageObstaclesForm_ObstacleUpdated;
             manageObstaclesForm.ShowDialog();
         }

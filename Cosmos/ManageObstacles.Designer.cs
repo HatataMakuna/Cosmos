@@ -48,6 +48,15 @@ namespace Cosmos
             this.tbpBaseStats = new System.Windows.Forms.TabPage();
             this.lblBaseStatsHelp = new System.Windows.Forms.Label();
             this.tlpBaseStats = new System.Windows.Forms.TableLayoutPanel();
+            this.ntbBaseIntelligence = new System.Windows.Forms.TextBox();
+            this.ntbBaseStamina = new System.Windows.Forms.TextBox();
+            this.ntbBaseLache = new System.Windows.Forms.TextBox();
+            this.ntbBaseBalance = new System.Windows.Forms.TextBox();
+            this.ntbBaseAgility = new System.Windows.Forms.TextBox();
+            this.ntbBaseEndurance = new System.Windows.Forms.TextBox();
+            this.ntbBaseStrength = new System.Windows.Forms.TextBox();
+            this.ntbBaseGrip = new System.Windows.Forms.TextBox();
+            this.ntbBaseTech = new System.Windows.Forms.TextBox();
             this.lblBaseSpeed = new System.Windows.Forms.Label();
             this.lblBaseTech = new System.Windows.Forms.Label();
             this.lblBaseGrip = new System.Windows.Forms.Label();
@@ -61,15 +70,6 @@ namespace Cosmos
             this.ntbBaseSpeed = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
-            this.ntbBaseTech = new System.Windows.Forms.TextBox();
-            this.ntbBaseGrip = new System.Windows.Forms.TextBox();
-            this.ntbBaseStrength = new System.Windows.Forms.TextBox();
-            this.ntbBaseEndurance = new System.Windows.Forms.TextBox();
-            this.ntbBaseAgility = new System.Windows.Forms.TextBox();
-            this.ntbBaseBalance = new System.Windows.Forms.TextBox();
-            this.ntbBaseLache = new System.Windows.Forms.TextBox();
-            this.ntbBaseStamina = new System.Windows.Forms.TextBox();
-            this.ntbBaseIntelligence = new System.Windows.Forms.TextBox();
             this.tlpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRequiredLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDifficulty)).BeginInit();
@@ -87,6 +87,7 @@ namespace Cosmos
             this.lstObstacles.Name = "lstObstacles";
             this.lstObstacles.Size = new System.Drawing.Size(139, 308);
             this.lstObstacles.TabIndex = 0;
+            this.lstObstacles.SelectedIndexChanged += new System.EventHandler(this.lstObstacles_SelectedIndexChanged);
             // 
             // btnNewObstacle
             // 
@@ -142,6 +143,7 @@ namespace Cosmos
             this.clbTags.Name = "clbTags";
             this.clbTags.Size = new System.Drawing.Size(242, 89);
             this.clbTags.TabIndex = 3;
+            this.clbTags.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbTags_ItemCheck);
             // 
             // lblTags
             // 
@@ -171,6 +173,7 @@ namespace Cosmos
             0,
             0,
             0});
+            this.nudRequiredLevel.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblRequiredLevel
             // 
@@ -210,6 +213,7 @@ namespace Cosmos
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(242, 22);
             this.tbName.TabIndex = 0;
+            this.tbName.TextChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblName
             // 
@@ -230,6 +234,7 @@ namespace Cosmos
             this.rtbDescription.Size = new System.Drawing.Size(242, 50);
             this.rtbDescription.TabIndex = 2;
             this.rtbDescription.Text = "";
+            this.rtbDescription.TextChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // nudDifficulty
             // 
@@ -254,6 +259,7 @@ namespace Cosmos
             0,
             0,
             0});
+            this.nudDifficulty.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // tabControl1
             // 
@@ -339,6 +345,105 @@ namespace Cosmos
             this.tlpBaseStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpBaseStats.Size = new System.Drawing.Size(367, 245);
             this.tlpBaseStats.TabIndex = 0;
+            // 
+            // ntbBaseIntelligence
+            // 
+            this.ntbBaseIntelligence.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseIntelligence.Enabled = false;
+            this.ntbBaseIntelligence.Location = new System.Drawing.Point(111, 219);
+            this.ntbBaseIntelligence.Name = "ntbBaseIntelligence";
+            this.ntbBaseIntelligence.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseIntelligence.TabIndex = 19;
+            this.ntbBaseIntelligence.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseIntelligence.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseIntelligence_KeyPress);
+            // 
+            // ntbBaseStamina
+            // 
+            this.ntbBaseStamina.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseStamina.Enabled = false;
+            this.ntbBaseStamina.Location = new System.Drawing.Point(111, 195);
+            this.ntbBaseStamina.Name = "ntbBaseStamina";
+            this.ntbBaseStamina.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseStamina.TabIndex = 18;
+            this.ntbBaseStamina.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseStamina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseStamina_KeyPress);
+            // 
+            // ntbBaseLache
+            // 
+            this.ntbBaseLache.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseLache.Enabled = false;
+            this.ntbBaseLache.Location = new System.Drawing.Point(111, 171);
+            this.ntbBaseLache.Name = "ntbBaseLache";
+            this.ntbBaseLache.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseLache.TabIndex = 17;
+            this.ntbBaseLache.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseLache.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseLache_KeyPress);
+            // 
+            // ntbBaseBalance
+            // 
+            this.ntbBaseBalance.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseBalance.Enabled = false;
+            this.ntbBaseBalance.Location = new System.Drawing.Point(111, 147);
+            this.ntbBaseBalance.Name = "ntbBaseBalance";
+            this.ntbBaseBalance.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseBalance.TabIndex = 16;
+            this.ntbBaseBalance.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseBalance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseBalance_KeyPress);
+            // 
+            // ntbBaseAgility
+            // 
+            this.ntbBaseAgility.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseAgility.Enabled = false;
+            this.ntbBaseAgility.Location = new System.Drawing.Point(111, 123);
+            this.ntbBaseAgility.Name = "ntbBaseAgility";
+            this.ntbBaseAgility.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseAgility.TabIndex = 15;
+            this.ntbBaseAgility.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseAgility.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseAgility_KeyPress);
+            // 
+            // ntbBaseEndurance
+            // 
+            this.ntbBaseEndurance.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseEndurance.Enabled = false;
+            this.ntbBaseEndurance.Location = new System.Drawing.Point(111, 99);
+            this.ntbBaseEndurance.Name = "ntbBaseEndurance";
+            this.ntbBaseEndurance.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseEndurance.TabIndex = 14;
+            this.ntbBaseEndurance.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseEndurance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseEndurance_KeyPress);
+            // 
+            // ntbBaseStrength
+            // 
+            this.ntbBaseStrength.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseStrength.Enabled = false;
+            this.ntbBaseStrength.Location = new System.Drawing.Point(111, 75);
+            this.ntbBaseStrength.Name = "ntbBaseStrength";
+            this.ntbBaseStrength.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseStrength.TabIndex = 13;
+            this.ntbBaseStrength.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseStrength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseStrength_KeyPress);
+            // 
+            // ntbBaseGrip
+            // 
+            this.ntbBaseGrip.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseGrip.Enabled = false;
+            this.ntbBaseGrip.Location = new System.Drawing.Point(111, 51);
+            this.ntbBaseGrip.Name = "ntbBaseGrip";
+            this.ntbBaseGrip.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseGrip.TabIndex = 12;
+            this.ntbBaseGrip.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseGrip.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseGrip_KeyPress);
+            // 
+            // ntbBaseTech
+            // 
+            this.ntbBaseTech.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ntbBaseTech.Enabled = false;
+            this.ntbBaseTech.Location = new System.Drawing.Point(111, 27);
+            this.ntbBaseTech.Name = "ntbBaseTech";
+            this.ntbBaseTech.Size = new System.Drawing.Size(243, 22);
+            this.ntbBaseTech.TabIndex = 11;
+            this.ntbBaseTech.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            this.ntbBaseTech.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseTech_KeyPress);
             // 
             // lblBaseSpeed
             // 
@@ -448,6 +553,7 @@ namespace Cosmos
             this.ntbBaseSpeed.Name = "ntbBaseSpeed";
             this.ntbBaseSpeed.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseSpeed.TabIndex = 10;
+            this.ntbBaseSpeed.TextChanged += new System.EventHandler(this.AnyFieldChanged);
             this.ntbBaseSpeed.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseSpeed_KeyPress);
             // 
             // btnSave
@@ -459,6 +565,7 @@ namespace Cosmos
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnReset
             // 
@@ -469,102 +576,13 @@ namespace Cosmos
             this.btnReset.TabIndex = 5;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
-            // 
-            // ntbBaseTech
-            // 
-            this.ntbBaseTech.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseTech.Enabled = false;
-            this.ntbBaseTech.Location = new System.Drawing.Point(111, 27);
-            this.ntbBaseTech.Name = "ntbBaseTech";
-            this.ntbBaseTech.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseTech.TabIndex = 11;
-            this.ntbBaseTech.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseTech_KeyPress);
-            // 
-            // ntbBaseGrip
-            // 
-            this.ntbBaseGrip.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseGrip.Enabled = false;
-            this.ntbBaseGrip.Location = new System.Drawing.Point(111, 51);
-            this.ntbBaseGrip.Name = "ntbBaseGrip";
-            this.ntbBaseGrip.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseGrip.TabIndex = 12;
-            this.ntbBaseGrip.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseGrip_KeyPress);
-            // 
-            // ntbBaseStrength
-            // 
-            this.ntbBaseStrength.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseStrength.Enabled = false;
-            this.ntbBaseStrength.Location = new System.Drawing.Point(111, 75);
-            this.ntbBaseStrength.Name = "ntbBaseStrength";
-            this.ntbBaseStrength.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseStrength.TabIndex = 13;
-            this.ntbBaseStrength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseStrength_KeyPress);
-            // 
-            // ntbBaseEndurance
-            // 
-            this.ntbBaseEndurance.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseEndurance.Enabled = false;
-            this.ntbBaseEndurance.Location = new System.Drawing.Point(111, 99);
-            this.ntbBaseEndurance.Name = "ntbBaseEndurance";
-            this.ntbBaseEndurance.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseEndurance.TabIndex = 14;
-            this.ntbBaseEndurance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseEndurance_KeyPress);
-            // 
-            // ntbBaseAgility
-            // 
-            this.ntbBaseAgility.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseAgility.Enabled = false;
-            this.ntbBaseAgility.Location = new System.Drawing.Point(111, 123);
-            this.ntbBaseAgility.Name = "ntbBaseAgility";
-            this.ntbBaseAgility.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseAgility.TabIndex = 15;
-            this.ntbBaseAgility.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseAgility_KeyPress);
-            // 
-            // ntbBaseBalance
-            // 
-            this.ntbBaseBalance.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseBalance.Enabled = false;
-            this.ntbBaseBalance.Location = new System.Drawing.Point(111, 147);
-            this.ntbBaseBalance.Name = "ntbBaseBalance";
-            this.ntbBaseBalance.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseBalance.TabIndex = 16;
-            this.ntbBaseBalance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseBalance_KeyPress);
-            // 
-            // ntbBaseLache
-            // 
-            this.ntbBaseLache.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseLache.Enabled = false;
-            this.ntbBaseLache.Location = new System.Drawing.Point(111, 171);
-            this.ntbBaseLache.Name = "ntbBaseLache";
-            this.ntbBaseLache.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseLache.TabIndex = 17;
-            this.ntbBaseLache.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseLache_KeyPress);
-            // 
-            // ntbBaseStamina
-            // 
-            this.ntbBaseStamina.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseStamina.Enabled = false;
-            this.ntbBaseStamina.Location = new System.Drawing.Point(111, 195);
-            this.ntbBaseStamina.Name = "ntbBaseStamina";
-            this.ntbBaseStamina.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseStamina.TabIndex = 18;
-            this.ntbBaseStamina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseStamina_KeyPress);
-            // 
-            // ntbBaseIntelligence
-            // 
-            this.ntbBaseIntelligence.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ntbBaseIntelligence.Enabled = false;
-            this.ntbBaseIntelligence.Location = new System.Drawing.Point(111, 219);
-            this.ntbBaseIntelligence.Name = "ntbBaseIntelligence";
-            this.ntbBaseIntelligence.Size = new System.Drawing.Size(243, 22);
-            this.ntbBaseIntelligence.TabIndex = 19;
-            this.ntbBaseIntelligence.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseIntelligence_KeyPress);
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // ManageObstacles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 431);
+            this.ClientSize = new System.Drawing.Size(641, 431);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tabControl1);
