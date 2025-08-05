@@ -11,7 +11,7 @@ namespace Cosmos.Model
         public string name { get; set; }
         public string description { get; set; }
         public int difficulty { get; set; }
-        public int timeLimit { get; set; } // in seconds, prob change to range in complete it
+        public int timeLimit { get; set; } // in seconds, prob change to time range to complete it
         public int requiredLevel { get; set; } // Minimum channel level required to attempt this obstacle
         public List<string> tags { get; set; } // Tags for categorization (e.g., "climbing", "balance", "strength")
 

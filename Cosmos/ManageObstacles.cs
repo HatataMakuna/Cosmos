@@ -238,6 +238,32 @@ namespace Cosmos
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // Check if at least one stat field is filled
+            if (string.IsNullOrWhiteSpace(ntbBaseSpeed.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseTech.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseGrip.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseStrength.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseEndurance.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseAgility.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseBalance.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseLache.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseStamina.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseIntelligence.Text))
+            {
+                MessageBox.Show("Please fill at least one stat field before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Validation for info tab fields
+            if (string.IsNullOrWhiteSpace(tbName.Text))
+            {
+                MessageBox.Show("Obstacle name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(rtbDescription.Text))
+            {
+                MessageBox.Show("Obstacle description cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             // Apply changes to the selected obstacle
             int i = lstObstacles.SelectedIndex;
             if (i >= 0 && i < obstacles.Count)
@@ -246,16 +272,16 @@ namespace Cosmos
                 obstacles[i].description = rtbDescription.Text;
                 obstacles[i].difficulty = (int)nudDifficulty.Value;
                 obstacles[i].requiredLevel = (int)nudRequiredLevel.Value;
-                obstacles[i].speed = double.Parse(ntbBaseSpeed.Text);
-                obstacles[i].tech = double.Parse(ntbBaseTech.Text);
-                obstacles[i].grip = double.Parse(ntbBaseGrip.Text);
-                obstacles[i].strength = double.Parse(ntbBaseStrength.Text);
-                obstacles[i].endurance = double.Parse(ntbBaseEndurance.Text);
-                obstacles[i].agility = double.Parse(ntbBaseAgility.Text);
-                obstacles[i].balance = double.Parse(ntbBaseBalance.Text);
-                obstacles[i].lache = double.Parse(ntbBaseLache.Text);
-                obstacles[i].stamina = double.Parse(ntbBaseStamina.Text);
-                obstacles[i].intelligence = double.Parse(ntbBaseIntelligence.Text);
+                obstacles[i].speed = double.TryParse(ntbBaseSpeed.Text, out double speedValue) ? speedValue : 0.0;
+                obstacles[i].tech = double.TryParse(ntbBaseTech.Text, out double techValue) ? techValue : 0.0;
+                obstacles[i].grip = double.TryParse(ntbBaseGrip.Text, out double gripValue) ? gripValue : 0.0;
+                obstacles[i].strength = double.TryParse(ntbBaseStrength.Text, out double strengthValue) ? strengthValue : 0.0;
+                obstacles[i].endurance = double.TryParse(ntbBaseEndurance.Text, out double enduranceValue) ? enduranceValue : 0.0;
+                obstacles[i].agility = double.TryParse(ntbBaseAgility.Text, out double agilityValue) ? agilityValue : 0.0;
+                obstacles[i].balance = double.TryParse(ntbBaseBalance.Text, out double balanceValue) ? balanceValue : 0.0;
+                obstacles[i].lache = double.TryParse(ntbBaseLache.Text, out double lacheValue) ? lacheValue : 0.0;
+                obstacles[i].stamina = double.TryParse(ntbBaseStamina.Text, out double staminaValue) ? staminaValue : 0.0;
+                obstacles[i].intelligence = double.TryParse(ntbBaseIntelligence.Text, out double intelligenceValue) ? intelligenceValue : 0.0;
                 // Update tags
                 obstacles[i].tags.Clear();
                 foreach (var item in clbTags.CheckedItems)
