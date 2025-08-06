@@ -1,14 +1,9 @@
 ﻿using Cosmos.Model;
-using Cosmos.Service;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cosmos
@@ -17,14 +12,20 @@ namespace Cosmos
     {
         List<Obstacle> obstacles = new List<Obstacle>();
         private Obstacle originalObstacle = null;
+        private bool isNewObstacle = false;
 
         public ManageObstacles(List<Obstacle> obs)
         {
             InitializeComponent();
 
             obstacles = obs;
+            LoadObstaclesList();
+        }
+
+        private void LoadObstaclesList()
+        {
             lstObstacles.Items.Clear();
-            foreach (var obstacle in obs)
+            foreach (var obstacle in obstacles)
             {
                 lstObstacles.Items.Add(obstacle.name);
             }
@@ -46,8 +47,8 @@ namespace Cosmos
             {
                 tbName.Text = currentObstacle.name;
                 rtbDescription.Text = currentObstacle.description;
-                nudDifficulty.Text = currentObstacle.difficulty.ToString();
-                nudRequiredLevel.Text = currentObstacle.requiredLevel.ToString();
+                nudDifficulty.Value = currentObstacle.difficulty;
+                nudRequiredLevel.Value = currentObstacle.requiredLevel;
                 ntbBaseSpeed.Text = currentObstacle.speed.ToString();
                 ntbBaseTech.Text = currentObstacle.tech.ToString();
                 ntbBaseGrip.Text = currentObstacle.grip.ToString();
@@ -77,6 +78,29 @@ namespace Cosmos
                 }
 
                 ToggleTextFields(true);
+            }
+            else
+            {
+                tbName.Clear();
+                rtbDescription.Clear();
+                nudDifficulty.Value = 1;
+                nudRequiredLevel.Value = 1;
+                ntbBaseSpeed.Clear();
+                ntbBaseTech.Clear();
+                ntbBaseGrip.Clear();
+                ntbBaseStrength.Clear();
+                ntbBaseEndurance.Clear();
+                ntbBaseAgility.Clear();
+                ntbBaseBalance.Clear();
+                ntbBaseLache.Clear();
+                ntbBaseStamina.Clear();
+                ntbBaseIntelligence.Clear();
+                // Uncheck all items in the checked list box
+                for (int j = 0; j < clbTags.Items.Count; j++)
+                {
+                    clbTags.SetItemChecked(j, false);
+                }
+                ToggleTextFields(false);
             }
         }
 
@@ -111,8 +135,8 @@ namespace Cosmos
             bool changed =
                 tbName.Text != originalObstacle.name ||
                 rtbDescription.Text != originalObstacle.description ||
-                nudDifficulty.Text != originalObstacle.difficulty.ToString() ||
-                nudRequiredLevel.Text != originalObstacle.requiredLevel.ToString() ||
+                nudDifficulty.Value != originalObstacle.difficulty ||
+                nudRequiredLevel.Value != originalObstacle.requiredLevel ||
                 ntbBaseSpeed.Text != originalObstacle.speed.ToString() ||
                 ntbBaseTech.Text != originalObstacle.tech.ToString() ||
                 ntbBaseGrip.Text != originalObstacle.grip.ToString() ||
@@ -139,54 +163,121 @@ namespace Cosmos
                    !originalTags.Except(checkedTags, StringComparer.OrdinalIgnoreCase).Any();
         }
 
-        private void ntbBaseSpeed_KeyPress(object sender, KeyPressEventArgs e)
+        private void SaveChanges()
         {
-            HandleNumericInput(sender, e);
+            var tags = clbTags.CheckedItems.Cast<string>();
+            if (isNewObstacle)
+            {
+                // Add new obstacle using factory method
+                var newObstacle = Obstacle.CreateFromForm(
+                    obstacles.Count + 1,
+                    tbName.Text,
+                    rtbDescription.Text,
+                    (int)nudDifficulty.Value,
+                    (int)nudRequiredLevel.Value,
+                    tags,
+                    ntbBaseSpeed.Text,
+                    ntbBaseTech.Text,
+                    ntbBaseGrip.Text,
+                    ntbBaseStrength.Text,
+                    ntbBaseEndurance.Text,
+                    ntbBaseAgility.Text,
+                    ntbBaseBalance.Text,
+                    ntbBaseLache.Text,
+                    ntbBaseStamina.Text,
+                    ntbBaseIntelligence.Text
+                );
+                obstacles.Add(newObstacle);
+
+                lstObstacles.Items.Add(tbName.Text);
+                lstObstacles.Enabled = true;
+                MessageBox.Show("New obstacle added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadDetails(null);
+            }
+            else
+            {
+                int i = lstObstacles.SelectedIndex;
+                if (i >= 0 && i < obstacles.Count)
+                {
+                    // Update existing obstacle using factory method
+                    var updated = Obstacle.CreateFromForm(
+                        obstacles[i].ID,
+                        tbName.Text,
+                        rtbDescription.Text,
+                        (int)nudDifficulty.Value,
+                        (int)nudRequiredLevel.Value,
+                        tags,
+                        ntbBaseSpeed.Text,
+                        ntbBaseTech.Text,
+                        ntbBaseGrip.Text,
+                        ntbBaseStrength.Text,
+                        ntbBaseEndurance.Text,
+                        ntbBaseAgility.Text,
+                        ntbBaseBalance.Text,
+                        ntbBaseLache.Text,
+                        ntbBaseStamina.Text,
+                        ntbBaseIntelligence.Text,
+                        obstacles[i].timeLimit
+                    );
+                    obstacles[i] = updated;
+                    lstObstacles.Items[i] = updated.name;
+                    originalObstacle = new Obstacle(
+                        updated.ID,
+                        updated.name,
+                        updated.description,
+                        updated.difficulty,
+                        updated.requiredLevel,
+                        new List<string>(updated.tags),
+                        updated.timeLimit,
+                        updated.speed,
+                        updated.tech,
+                        updated.grip,
+                        updated.strength,
+                        updated.endurance,
+                        updated.agility,
+                        updated.balance,
+                        updated.lache,
+                        updated.stamina,
+                        updated.intelligence
+                    );
+                    MessageBox.Show("Obstacle details saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            CheckForChanges();
         }
 
-        private void ntbBaseTech_KeyPress(object sender, KeyPressEventArgs e)
+        private bool ValidateFields()
         {
-            HandleNumericInput(sender, e);
-        }
-
-        private void ntbBaseGrip_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            HandleNumericInput(sender, e);
-        }
-
-        private void ntbBaseStrength_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            HandleNumericInput(sender, e);
-        }
-
-        private void ntbBaseEndurance_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            HandleNumericInput(sender, e);
-        }
-
-        private void ntbBaseAgility_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            HandleNumericInput(sender, e);
-        }
-
-        private void ntbBaseBalance_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            HandleNumericInput(sender, e);
-        }
-
-        private void ntbBaseLache_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            HandleNumericInput(sender, e);
-        }
-
-        private void ntbBaseStamina_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            HandleNumericInput(sender, e);
-        }
-
-        private void ntbBaseIntelligence_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            HandleNumericInput(sender, e);
+            // Check if at least one stat field is filled
+            if (string.IsNullOrWhiteSpace(ntbBaseSpeed.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseTech.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseGrip.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseStrength.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseEndurance.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseAgility.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseBalance.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseLache.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseStamina.Text) &&
+                string.IsNullOrWhiteSpace(ntbBaseIntelligence.Text))
+            {
+                MessageBox.Show("Please fill at least one stat field before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+            // Validation for info tab fields
+            else if (string.IsNullOrWhiteSpace(tbName.Text))
+            {
+                MessageBox.Show("Obstacle name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+            else if (string.IsNullOrWhiteSpace(rtbDescription.Text))
+            {
+                MessageBox.Show("Obstacle description cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+            else
+            {
+                return false; // No validation errors
+            }
         }
 
         private void lstObstacles_SelectedIndexChanged(object sender, EventArgs e)
@@ -216,6 +307,8 @@ namespace Cosmos
                     obstacles[i].stamina,
                     obstacles[i].intelligence
                 );
+
+                btnDeleteObstacle.Enabled = true;
             }
         }
 
@@ -232,90 +325,66 @@ namespace Cosmos
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            LoadDetails(originalObstacle);
+            if (isNewObstacle)
+            {
+                ToggleTextFields(false);
+                lstObstacles.Enabled = true;
+                btnNewObstacle.Enabled = true;
+                isNewObstacle = false;
+                originalObstacle = null;
+                // Clear all fields
+                LoadDetails(null);
+            }
+            else
+            {
+                // Reset to original obstacle details
+                LoadDetails(originalObstacle);
+            }
             CheckForChanges();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // Check if at least one stat field is filled
-            if (string.IsNullOrWhiteSpace(ntbBaseSpeed.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseTech.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseGrip.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseStrength.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseEndurance.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseAgility.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseBalance.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseLache.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseStamina.Text) &&
-                string.IsNullOrWhiteSpace(ntbBaseIntelligence.Text))
+            bool hasValidationError = ValidateFields();
+            if (hasValidationError)
             {
-                MessageBox.Show("Please fill at least one stat field before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            // Validation for info tab fields
-            if (string.IsNullOrWhiteSpace(tbName.Text))
-            {
-                MessageBox.Show("Obstacle name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(rtbDescription.Text))
-            {
-                MessageBox.Show("Obstacle description cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return; // Stop saving if validation fails
             }
             // Apply changes to the selected obstacle
-            int i = lstObstacles.SelectedIndex;
-            if (i >= 0 && i < obstacles.Count)
+            SaveChanges();
+        }
+
+        private void btnNewObstacle_Click(object sender, EventArgs e)
+        {
+            // If an existing obstacle is selected, clear the selection and the form
+            if (lstObstacles.SelectedIndex >= 0)
             {
-                obstacles[i].name = tbName.Text;
-                obstacles[i].description = rtbDescription.Text;
-                obstacles[i].difficulty = (int)nudDifficulty.Value;
-                obstacles[i].requiredLevel = (int)nudRequiredLevel.Value;
-                obstacles[i].speed = double.TryParse(ntbBaseSpeed.Text, out double speedValue) ? speedValue : 0.0;
-                obstacles[i].tech = double.TryParse(ntbBaseTech.Text, out double techValue) ? techValue : 0.0;
-                obstacles[i].grip = double.TryParse(ntbBaseGrip.Text, out double gripValue) ? gripValue : 0.0;
-                obstacles[i].strength = double.TryParse(ntbBaseStrength.Text, out double strengthValue) ? strengthValue : 0.0;
-                obstacles[i].endurance = double.TryParse(ntbBaseEndurance.Text, out double enduranceValue) ? enduranceValue : 0.0;
-                obstacles[i].agility = double.TryParse(ntbBaseAgility.Text, out double agilityValue) ? agilityValue : 0.0;
-                obstacles[i].balance = double.TryParse(ntbBaseBalance.Text, out double balanceValue) ? balanceValue : 0.0;
-                obstacles[i].lache = double.TryParse(ntbBaseLache.Text, out double lacheValue) ? lacheValue : 0.0;
-                obstacles[i].stamina = double.TryParse(ntbBaseStamina.Text, out double staminaValue) ? staminaValue : 0.0;
-                obstacles[i].intelligence = double.TryParse(ntbBaseIntelligence.Text, out double intelligenceValue) ? intelligenceValue : 0.0;
-                // Update tags
-                obstacles[i].tags.Clear();
-                foreach (var item in clbTags.CheckedItems)
-                {
-                    string tagToAdd = item.ToString().ToLower();
-                    if (!obstacles[i].tags.Contains(tagToAdd))
-                    {
-                        obstacles[i].tags.Add(tagToAdd);
-                    }
-                }
-                // Refresh the list box
-                lstObstacles.Items[i] = obstacles[i].name;
-                // Reset original obstacle to current state
-                originalObstacle = new Obstacle(
-                    obstacles[i].ID,
-                    obstacles[i].name,
-                    obstacles[i].description,
-                    obstacles[i].difficulty,
-                    obstacles[i].requiredLevel,
-                    new List<string>(obstacles[i].tags),
-                    obstacles[i].timeLimit,
-                    obstacles[i].speed,
-                    obstacles[i].tech,
-                    obstacles[i].grip,
-                    obstacles[i].strength,
-                    obstacles[i].endurance,
-                    obstacles[i].agility,
-                    obstacles[i].balance,
-                    obstacles[i].lache,
-                    obstacles[i].stamina,
-                    obstacles[i].intelligence
-                );
+                lstObstacles.ClearSelected();
+                LoadDetails(null);
+            }
+
+            ToggleTextFields(true);
+            lstObstacles.Enabled = false;
+            btnNewObstacle.Enabled = false;
+            originalObstacle = new Obstacle();
+            isNewObstacle = true;
+        }
+
+        private void btnDeleteObstacle_Click(object sender, EventArgs e)
+        {
+            // Show confirmation dialog
+            if (MessageBox.Show("Are you sure to delete this obstacle?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                obstacles.RemoveAt(lstObstacles.SelectedIndex);
+                MessageBox.Show("Obstacle deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Reset the form fields
+                LoadDetails(null);
+                originalObstacle = null;
                 CheckForChanges();
-                MessageBox.Show("Obstacle details saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Update the list box
+                LoadObstaclesList();
             }
         }
     }

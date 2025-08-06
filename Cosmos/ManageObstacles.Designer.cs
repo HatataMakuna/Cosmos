@@ -70,6 +70,7 @@ namespace Cosmos
             this.ntbBaseSpeed = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnDeleteObstacle = new System.Windows.Forms.Button();
             this.tlpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRequiredLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDifficulty)).BeginInit();
@@ -97,6 +98,7 @@ namespace Cosmos
             this.btnNewObstacle.TabIndex = 1;
             this.btnNewObstacle.Text = "New Obstacle";
             this.btnNewObstacle.UseVisualStyleBackColor = true;
+            this.btnNewObstacle.Click += new System.EventHandler(this.btnNewObstacle_Click);
             // 
             // tlpInfo
             // 
@@ -355,7 +357,7 @@ namespace Cosmos
             this.ntbBaseIntelligence.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseIntelligence.TabIndex = 19;
             this.ntbBaseIntelligence.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseIntelligence.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseIntelligence_KeyPress);
+            this.ntbBaseIntelligence.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // ntbBaseStamina
             // 
@@ -366,7 +368,7 @@ namespace Cosmos
             this.ntbBaseStamina.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseStamina.TabIndex = 18;
             this.ntbBaseStamina.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseStamina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseStamina_KeyPress);
+            this.ntbBaseStamina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // ntbBaseLache
             // 
@@ -377,7 +379,7 @@ namespace Cosmos
             this.ntbBaseLache.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseLache.TabIndex = 17;
             this.ntbBaseLache.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseLache.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseLache_KeyPress);
+            this.ntbBaseLache.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // ntbBaseBalance
             // 
@@ -388,7 +390,7 @@ namespace Cosmos
             this.ntbBaseBalance.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseBalance.TabIndex = 16;
             this.ntbBaseBalance.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseBalance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseBalance_KeyPress);
+            this.ntbBaseBalance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // ntbBaseAgility
             // 
@@ -399,7 +401,7 @@ namespace Cosmos
             this.ntbBaseAgility.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseAgility.TabIndex = 15;
             this.ntbBaseAgility.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseAgility.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseAgility_KeyPress);
+            this.ntbBaseAgility.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // ntbBaseEndurance
             // 
@@ -410,7 +412,7 @@ namespace Cosmos
             this.ntbBaseEndurance.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseEndurance.TabIndex = 14;
             this.ntbBaseEndurance.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseEndurance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseEndurance_KeyPress);
+            this.ntbBaseEndurance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // ntbBaseStrength
             // 
@@ -421,7 +423,7 @@ namespace Cosmos
             this.ntbBaseStrength.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseStrength.TabIndex = 13;
             this.ntbBaseStrength.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseStrength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseStrength_KeyPress);
+            this.ntbBaseStrength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // ntbBaseGrip
             // 
@@ -432,7 +434,7 @@ namespace Cosmos
             this.ntbBaseGrip.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseGrip.TabIndex = 12;
             this.ntbBaseGrip.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseGrip.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseGrip_KeyPress);
+            this.ntbBaseGrip.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // ntbBaseTech
             // 
@@ -443,7 +445,7 @@ namespace Cosmos
             this.ntbBaseTech.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseTech.TabIndex = 11;
             this.ntbBaseTech.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseTech.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseTech_KeyPress);
+            this.ntbBaseTech.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // lblBaseSpeed
             // 
@@ -554,7 +556,7 @@ namespace Cosmos
             this.ntbBaseSpeed.Size = new System.Drawing.Size(243, 22);
             this.ntbBaseSpeed.TabIndex = 10;
             this.ntbBaseSpeed.TextChanged += new System.EventHandler(this.AnyFieldChanged);
-            this.ntbBaseSpeed.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ntbBaseSpeed_KeyPress);
+            this.ntbBaseSpeed.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumericInput);
             // 
             // btnSave
             // 
@@ -578,11 +580,23 @@ namespace Cosmos
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // btnDeleteObstacle
+            // 
+            this.btnDeleteObstacle.Enabled = false;
+            this.btnDeleteObstacle.Location = new System.Drawing.Point(14, 416);
+            this.btnDeleteObstacle.Name = "btnDeleteObstacle";
+            this.btnDeleteObstacle.Size = new System.Drawing.Size(138, 34);
+            this.btnDeleteObstacle.TabIndex = 6;
+            this.btnDeleteObstacle.Text = "Delete Obstacle";
+            this.btnDeleteObstacle.UseVisualStyleBackColor = true;
+            this.btnDeleteObstacle.Click += new System.EventHandler(this.btnDeleteObstacle_Click);
+            // 
             // ManageObstacles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 431);
+            this.ClientSize = new System.Drawing.Size(641, 469);
+            this.Controls.Add(this.btnDeleteObstacle);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tabControl1);
@@ -646,5 +660,6 @@ namespace Cosmos
         private System.Windows.Forms.TextBox ntbBaseLache;
         private System.Windows.Forms.TextBox ntbBaseStamina;
         private System.Windows.Forms.TextBox ntbBaseIntelligence;
+        private System.Windows.Forms.Button btnDeleteObstacle;
     }
 }
