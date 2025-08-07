@@ -50,6 +50,7 @@
             this.tsmiManageObstacles = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPlayersAndChannels = new System.Windows.Forms.Panel();
+            this.btnChannelInfo = new System.Windows.Forms.Button();
             this.pnlObstacle.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnlPlayersAndChannels.SuspendLayout();
@@ -248,19 +249,20 @@
             // tsmiManageObstacles
             // 
             this.tsmiManageObstacles.Name = "tsmiManageObstacles";
-            this.tsmiManageObstacles.Size = new System.Drawing.Size(224, 26);
+            this.tsmiManageObstacles.Size = new System.Drawing.Size(214, 26);
             this.tsmiManageObstacles.Text = "Manage Obstacles";
             this.tsmiManageObstacles.Click += new System.EventHandler(this.tsmiManageObstacles_Click);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(224, 26);
+            this.tsmiExit.Size = new System.Drawing.Size(214, 26);
             this.tsmiExit.Text = "Exit";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
             // pnlPlayersAndChannels
             // 
+            this.pnlPlayersAndChannels.Controls.Add(this.btnChannelInfo);
             this.pnlPlayersAndChannels.Controls.Add(this.lblChannels);
             this.pnlPlayersAndChannels.Controls.Add(this.btnNewChannel);
             this.pnlPlayersAndChannels.Controls.Add(this.btnPlayerInfo);
@@ -272,6 +274,16 @@
             this.pnlPlayersAndChannels.Name = "pnlPlayersAndChannels";
             this.pnlPlayersAndChannels.Size = new System.Drawing.Size(346, 291);
             this.pnlPlayersAndChannels.TabIndex = 12;
+            // 
+            // btnChannelInfo
+            // 
+            this.btnChannelInfo.Enabled = false;
+            this.btnChannelInfo.Location = new System.Drawing.Point(186, 218);
+            this.btnChannelInfo.Name = "btnChannelInfo";
+            this.btnChannelInfo.Size = new System.Drawing.Size(140, 32);
+            this.btnChannelInfo.TabIndex = 10;
+            this.btnChannelInfo.Text = "Channel Info";
+            this.btnChannelInfo.UseVisualStyleBackColor = true;
             // 
             // Cosmos
             // 
@@ -319,6 +331,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiManageObstacles;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.Panel pnlPlayersAndChannels;
+        private System.Windows.Forms.Button btnChannelInfo;
     }
 }
 

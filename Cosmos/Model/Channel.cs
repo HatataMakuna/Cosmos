@@ -11,6 +11,12 @@ namespace Cosmos.Model
         public string name { get; set; }
         public int currentLevel { get; set; } // Current obstacle level of the channel
         public Obstacle currentObstacle { get; set; } // Current obstacle in the channel
+        public int totalAttempts { get; set; } = 0;
+        public DateTime lastAttempted { get; set; } = DateTime.MinValue;
+
+        // A HashSet in C# is an unordered collection that
+        // stores unique elements, preventing duplicates.
+        public HashSet<int> uniquePlayerIds = new HashSet<int>();
 
         public Channel(int id, string name, int currentLevel, Obstacle currentObstacle)
         {

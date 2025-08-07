@@ -41,9 +41,6 @@ namespace Cosmos.Core
             // Simulate a random success chance
             Random rand = new Random();
             double successChance = rand.NextDouble() * 100; // Random value between 0 and 100
-            
-            //RaiseMessage($"Player {player.name} attempts obstacle: {channel.currentObstacle.name}");
-            //RaiseMessage($"Success Chance: {successChanceFactor}% (Random: {successChance})");
 
             // Check if the player successfully completes the obstacle
             if (successChance <= successChanceFactor)
@@ -62,6 +59,13 @@ namespace Cosmos.Core
                 RaiseMessage($"Player {player.name} failed to complete the obstacle: {channel.currentObstacle.name}.");
             }
             player.noAttemptedObstacles++; // Increment attempted obstacles count
+            channel.totalAttempts++;
+
+            // add unique players logic; if same player hit attempt, don't add
+            if (!channel.uniquePlayerIds.Contains(player.ID))
+            {
+                channel.uniquePlayerIds.Add(player.ID);
+            }
         }
 
         // Calculate player effectiveness against the obstacle (based on obstacle tags)

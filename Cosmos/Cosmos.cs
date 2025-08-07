@@ -8,6 +8,9 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
+// TODO: Handle CRUD for players and channels
+// - Edit channel name: ChannelInfo (new)
+
 namespace Cosmos
 {
     public partial class Cosmos : Form
@@ -206,12 +209,24 @@ namespace Cosmos
                 Player selectedPlayer = players[index];
                 PlayerInfo playerInfoForm = new PlayerInfo(selectedPlayer);
                 playerInfoForm.PlayerDeleted += PlayerInfoForm_PlayerDeleted;
+                playerInfoForm.PlayerUpdated += PlayerInfoForm_PlayerUpdated;
                 playerInfoForm.ShowDialog(); // Show as a modal dialog
             }
             else
             {
                 MessageBox.Show("Please select a player to view their information.");
             }
+        }
+
+        private void PlayerInfoForm_PlayerUpdated(object sender, Player player)
+        {
+            // Find the index of the updated player
+            int index = players.IndexOf(player);
+            if (index >= 0)
+            {
+                lstPlayers.Items[index] = player.name;
+            }
+            saveLoad.SaveData(players, channels, obstacles);
         }
 
         private void PlayerInfoForm_PlayerDeleted(object sender, Player player)

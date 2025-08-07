@@ -4,6 +4,8 @@ using Cosmos.Model;
 
 namespace Cosmos.Data
 {
+    // This class is only to initialize the data for development purposes.
+    // For release version, this class should not be used.
     public class InitData
     {
         public List<Obstacle> Obstacles { get; private set; }

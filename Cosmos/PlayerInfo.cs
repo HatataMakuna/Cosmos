@@ -1,13 +1,8 @@
 ﻿using Cosmos.Core;
 using Cosmos.Model;
+using Microsoft.VisualBasic;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cosmos
@@ -18,6 +13,7 @@ namespace Cosmos
         private EditPlayerStats _editPlayerStats;
 
         public event EventHandler<Player> PlayerDeleted;
+        public event EventHandler<Player> PlayerUpdated;
 
         public PlayerInfo(Player player)
         {
@@ -236,6 +232,19 @@ namespace Cosmos
                 MessageBox.Show("Player deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             }
+        }
+
+        private void btnEditPlayer_Click(object sender, EventArgs e)
+        {
+            // Open the edit player stats form
+            string newPlayerName = Interaction.InputBox("Enter new player name:", "Edit Player");
+            if (newPlayerName == "") return;
+
+            _currentPlayer.name = newPlayerName;
+            lblPlayerName.Text = "Name: " + _currentPlayer.name;
+
+            // Raise player updated event
+            PlayerUpdated?.Invoke(this, _currentPlayer);
         }
     }
 }
