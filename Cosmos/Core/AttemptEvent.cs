@@ -61,11 +61,20 @@ namespace Cosmos.Core
             player.noAttemptedObstacles++; // Increment attempted obstacles count
             channel.totalAttempts++;
 
+            // Ensure the uniquePlayerIds HashSet is initialized
+            if (channel.uniquePlayerIds == null)
+            {
+                channel.uniquePlayerIds = new HashSet<int>();
+            }
+
             // add unique players logic; if same player hit attempt, don't add
             if (!channel.uniquePlayerIds.Contains(player.ID))
             {
                 channel.uniquePlayerIds.Add(player.ID);
             }
+
+            // Modify last attempted to time now
+            channel.lastAttempted = DateTime.Now;
         }
 
         // Calculate player effectiveness against the obstacle (based on obstacle tags)

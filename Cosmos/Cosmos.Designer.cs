@@ -284,6 +284,7 @@
             this.btnChannelInfo.TabIndex = 10;
             this.btnChannelInfo.Text = "Channel Info";
             this.btnChannelInfo.UseVisualStyleBackColor = true;
+            this.btnChannelInfo.Click += new System.EventHandler(this.btnChannelInfo_Click);
             // 
             // Cosmos
             // 

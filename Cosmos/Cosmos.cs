@@ -100,9 +100,17 @@ namespace Cosmos
 
             Player newPlayer = new Player
             {
-                ID = players.Count + 1, name = newPlayerName, availablePoints = 0,
-                speed = 10, tech = 10, grip = 10, strength = 10,
-                balance = 10, lache = 10, stamina = 10, intelligence = 10
+                ID = players.Count + 1,
+                name = newPlayerName,
+                availablePoints = 0,
+                speed = 10,
+                tech = 10,
+                grip = 10,
+                strength = 10,
+                balance = 10,
+                lache = 10,
+                stamina = 10,
+                intelligence = 10
             };
             players.Add(newPlayer);
 
@@ -140,8 +148,8 @@ namespace Cosmos
             if (index >= 0 && index < players.Count)
             {
                 Player selectedPlayer = players[index];
+                btnPlayerInfo.Enabled = true;
             }
-            btnPlayerInfo.Enabled = true;
         }
 
         private void lstChannels_SelectedIndexChanged(object sender, EventArgs e)
@@ -153,6 +161,7 @@ namespace Cosmos
                 Channel selectedChannel = channels[index];
                 lblObsLevelNo.Text = selectedChannel.currentLevel.ToString();
                 lblObsName.Text = selectedChannel.currentObstacle?.name ?? "N/A";
+                btnChannelInfo.Enabled = true;
             }
         }
 
@@ -163,7 +172,8 @@ namespace Cosmos
             {
                 MessageBox.Show("Please select a player and a channel before attempting.");
                 return;
-            } else
+            }
+            else
             {
                 _attemptEvent.AttemptObstacle(players[lstPlayers.SelectedIndex], channels[lstChannels.SelectedIndex]);
             }
@@ -281,6 +291,34 @@ namespace Cosmos
             ManageObstacles manageObstaclesForm = new ManageObstacles(obstacles);
             //manageObstaclesForm.ObstacleUpdated += ManageObstaclesForm_ObstacleUpdated;
             manageObstaclesForm.ShowDialog();
+        }
+
+        private void btnChannelInfo_Click(object sender, EventArgs e)
+        {
+            // Open the ChannelInfo form with the selected channel
+            int index = lstChannels.SelectedIndex;
+            if (index >= 0 && index < channels.Count)
+            {
+                Channel selectedChannel = channels[index];
+                ChannelInfo channelInfoForm = new ChannelInfo(selectedChannel);
+                channelInfoForm.ChannelUpdated += ChannelInfoForm_ChannelUpdated;
+                channelInfoForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a channel to view its information.");
+            }
+        }
+
+        private void ChannelInfoForm_ChannelUpdated(object sender, Channel channel)
+        {
+            // Find the index of the updated channel
+            int index = channels.IndexOf(channel);
+            if (index >= 0)
+            {
+                lstChannels.Items[index] = channel.name;
+            }
+            saveLoad.SaveData(players, channels, obstacles);
         }
     }
 }

@@ -16,14 +16,20 @@ namespace Cosmos.Model
 
         // A HashSet in C# is an unordered collection that
         // stores unique elements, preventing duplicates.
-        public HashSet<int> uniquePlayerIds = new HashSet<int>();
+        public HashSet<int> uniquePlayerIds { get; set; } = new HashSet<int>();
 
-        public Channel(int id, string name, int currentLevel, Obstacle currentObstacle)
+        public Channel(
+            int id, string name, int currentLevel, Obstacle currentObstacle, int totalAttempts = 0,
+            DateTime lastAttempted = default, HashSet<int> uniquePlayerIds = default
+        )
         {
             ID = id;
             this.name = name;
             this.currentLevel = currentLevel;
             this.currentObstacle = currentObstacle ?? throw new ArgumentNullException(nameof(currentObstacle));
+            this.totalAttempts = totalAttempts;
+            this.lastAttempted = lastAttempted == default ? DateTime.MinValue : lastAttempted;
+            this.uniquePlayerIds = uniquePlayerIds ?? new HashSet<int>();
         }
 
         public Dictionary<string, double> GetObstacleStats()
