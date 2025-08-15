@@ -1,15 +1,15 @@
-﻿using Cosmos.Model;
+﻿using Cosmos.Core;
 using Cosmos.Data;
-using Cosmos.Core;
+using Cosmos.Model;
+using Cosmos.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
+
+// TODO:
+// - 
 
 namespace Cosmos
 {
@@ -20,16 +20,31 @@ namespace Cosmos
         private List<Channel> channels = new List<Channel>();
 
         private InitData initData;
-        private AttemptEvent attemptEvent = new AttemptEvent();
+        private AttemptEvent _attemptEvent;
+        private SaveLoadData saveLoad = new SaveLoadData();
 
         public Cosmos()
         {
             InitializeComponent();
 
-            // Initialize data
-            initData = new InitData();
-            initData.Initialize();
+            var (loadedPlayers, loadedChannels, loadedObstacles, isError) = saveLoad.LoadData();
+            players = loadedPlayers;
+            channels = loadedChannels;
+            obstacles = loadedObstacles;
+
+            // Notify the user if there was an error loading data
+            if (isError)
+            {
+                MessageBox.Show("Error loading data. Initializing with default values.");
+            }
+
+            initData = new InitData(obstacles, channels, players);
+            _attemptEvent = new AttemptEvent(initData);
             LoadData();
+
+            // Subscribe to the attempt event
+            _attemptEvent.OnMessage += DisplayMessage;
+            _attemptEvent.PropertyChanged += OnPropertyChanged;
         }
 
         private void LoadData()
@@ -53,12 +68,40 @@ namespace Cosmos
             }
         }
 
+        private void DisplayMessage(object sender, MessageEventArgs messageEventArgs)
+        {
+            rtbMessages.Text += messageEventArgs.Message + Environment.NewLine;
+            if (messageEventArgs.AddExtraNewLine)
+            {
+                rtbMessages.Text += Environment.NewLine;
+            }
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == "currentObstacle")
+            {
+                lblObsLevelNo.Text = channels[lstChannels.SelectedIndex].currentLevel.ToString();
+                lblObsName.Text = channels[lstChannels.SelectedIndex].currentObstacle?.name ?? "N/A";
+            }
+        }
+
         private void btnNewPlayer_Click(object sender, EventArgs e)
         {
+            NewPlayer();
+        }
+
+        private void NewPlayer()
+        {
+            string newPlayerName = Interaction.InputBox("Enter new player name:", "New Player");
+            if (newPlayerName == "") return;
+
             Player newPlayer = new Player
             {
                 ID = players.Count + 1,
-                name = $"Player {players.Count + 1}",
+                name = newPlayerName,
                 availablePoints = 0,
                 speed = 10,
                 tech = 10,
@@ -78,17 +121,24 @@ namespace Cosmos
 
         private void btnNewChannel_Click(object sender, EventArgs e)
         {
-            Channel newChannel = new Channel
+            string newChannelName = Interaction.InputBox("Enter new channel name:", "New Channel");
+            if (newChannelName == "") return;
+
+            // Create a new channel
+            if (obstacles.Count == 0)
             {
-                ID = channels.Count + 1,
-                name = $"Channel {channels.Count + 1}",
-                currentLevel = 1,
-                currentObstacle = obstacles.Count > 0 ? obstacles[0] : null // Assign first obstacle if available
-            };
-            channels.Add(newChannel);
-            // Update ListBox
-            lstChannels.Items.Add(newChannel.name);
-            lstChannels.SelectedIndex = lstChannels.Items.Count - 1; // Auto-select new channel
+                MessageBox.Show("No obstacles available to assign to the new channel.");
+                return;
+            }
+            else
+            {
+                Channel newChannel = new Channel(channels.Count + 1, newChannelName, 1, initData.GetRandomObstacle());
+                channels.Add(newChannel);
+
+                // Update ListBox
+                lstChannels.Items.Add(newChannel.name);
+                lstChannels.SelectedIndex = lstChannels.Items.Count - 1; // Auto-select new channel
+            }
         }
 
         private void lstPlayers_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,9 +147,8 @@ namespace Cosmos
             int index = lstPlayers.SelectedIndex;
             if (index >= 0 && index < players.Count)
             {
-                Model.Player selectedPlayer = players[index];
-                // Display player info as needed
-                //MessageBox.Show($"Selected: {selectedPlayer.name}, Level: {selectedPlayer.level}");
+                Player selectedPlayer = players[index];
+                btnPlayerInfo.Enabled = true;
             }
         }
 
@@ -112,8 +161,7 @@ namespace Cosmos
                 Channel selectedChannel = channels[index];
                 lblObsLevelNo.Text = selectedChannel.currentLevel.ToString();
                 lblObsName.Text = selectedChannel.currentObstacle?.name ?? "N/A";
-                // Display channel info as needed
-                // MessageBox.Show($"Selected: {selectedChannel.name}, Current Level: {selectedChannel.currentLevel}");
+                btnChannelInfo.Enabled = true;
             }
         }
 
@@ -124,13 +172,153 @@ namespace Cosmos
             {
                 MessageBox.Show("Please select a player and a channel before attempting.");
                 return;
-            } else
-            {
-                attemptEvent.AttemptObstacle(
-                    players[lstPlayers.SelectedIndex],
-                    channels[lstChannels.SelectedIndex]
-                );
             }
+            else
+            {
+                _attemptEvent.AttemptObstacle(players[lstPlayers.SelectedIndex], channels[lstChannels.SelectedIndex]);
+            }
+        }
+
+        private void btnAboutThisObstacle_Click(object sender, EventArgs e)
+        {
+            // TODO: Show a dialog with information about the current obstacle
+            int index = lstChannels.SelectedIndex;
+            if (index >= 0 && index < channels.Count)
+            {
+                Channel selectedChannel = channels[index];
+                if (selectedChannel.currentObstacle != null)
+                {
+                    MessageBox.Show($"Obstacle Name: {selectedChannel.currentObstacle.name}\n" +
+                                    $"Description: {selectedChannel.currentObstacle.description}\n" +
+                                    $"Difficulty: {selectedChannel.currentObstacle.difficulty}");
+                }
+                else
+                {
+                    MessageBox.Show("No obstacle selected for this channel.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a channel to view its obstacle.");
+            }
+        }
+
+        private void rtbMessages_TextChanged(object sender, EventArgs e)
+        {
+            // scroll to bottom
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
+        }
+
+        private void btnPlayerInfo_Click(object sender, EventArgs e)
+        {
+            // Open the PlayerInfo form with the selected player
+            int index = lstPlayers.SelectedIndex;
+            if (index >= 0 && index < players.Count)
+            {
+                Player selectedPlayer = players[index];
+                PlayerInfo playerInfoForm = new PlayerInfo(selectedPlayer);
+                playerInfoForm.PlayerDeleted += PlayerInfoForm_PlayerDeleted;
+                playerInfoForm.PlayerUpdated += PlayerInfoForm_PlayerUpdated;
+                playerInfoForm.ShowDialog(); // Show as a modal dialog
+            }
+            else
+            {
+                MessageBox.Show("Please select a player to view their information.");
+            }
+        }
+
+        private void PlayerInfoForm_PlayerUpdated(object sender, Player player)
+        {
+            // Find the index of the updated player
+            int index = players.IndexOf(player);
+            if (index >= 0)
+            {
+                lstPlayers.Items[index] = player.name;
+            }
+            saveLoad.SaveData(players, channels, obstacles);
+        }
+
+        private void PlayerInfoForm_PlayerDeleted(object sender, Player player)
+        {
+            players.Remove(player);
+            lstPlayers.Items.Remove(player.name);
+            saveLoad.SaveData(players, channels, obstacles);
+        }
+
+        private void CloseForm(object sender, FormClosingEventArgs e)
+        {
+            saveLoad.SaveData(players, channels, obstacles);
+        }
+
+        private void btnDeleteChannel_Click(object sender, EventArgs e)
+        {
+            // Check if a channel is selected
+            if (lstChannels.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select a channel to delete.");
+                return;
+            }
+            // Confirm deletion
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this channel?", "Confirm Deletion", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                int index = lstChannels.SelectedIndex;
+                channels.RemoveAt(index);
+                lstChannels.Items.RemoveAt(index);
+                if (channels.Count > 0)
+                {
+                    lstChannels.SelectedIndex = Math.Min(index, channels.Count - 1); // Select the next available channel
+                }
+                else
+                {
+                    lblObsLevelNo.Text = "N/A";
+                    lblObsName.Text = "N/A";
+                }
+                saveLoad.SaveData(players, channels, obstacles);
+            }
+        }
+
+        private void tsmiExit_Click(object sender, EventArgs e)
+        {
+            saveLoad.SaveData(players, channels, obstacles);
+            Close();
+        }
+
+        private void tsmiManageObstacles_Click(object sender, EventArgs e)
+        {
+            // Open the ManageObstacles form
+            ManageObstacles manageObstaclesForm = new ManageObstacles(obstacles);
+            //manageObstaclesForm.ObstacleUpdated += ManageObstaclesForm_ObstacleUpdated;
+            manageObstaclesForm.ShowDialog();
+        }
+
+        private void btnChannelInfo_Click(object sender, EventArgs e)
+        {
+            // Open the ChannelInfo form with the selected channel
+            int index = lstChannels.SelectedIndex;
+            if (index >= 0 && index < channels.Count)
+            {
+                Channel selectedChannel = channels[index];
+                ChannelInfo channelInfoForm = new ChannelInfo(selectedChannel);
+                channelInfoForm.ChannelUpdated += ChannelInfoForm_ChannelUpdated;
+                channelInfoForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a channel to view its information.");
+            }
+        }
+
+        private void ChannelInfoForm_ChannelUpdated(object sender, Channel channel)
+        {
+            // Find the index of the updated channel
+            int index = channels.IndexOf(channel);
+            if (index >= 0)
+            {
+                lstChannels.Items[index] = channel.name;
+            }
+            saveLoad.SaveData(players, channels, obstacles);
         }
     }
 }

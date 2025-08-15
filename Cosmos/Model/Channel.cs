@@ -1,17 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cosmos.Model
 {
+    [Serializable]
     public class Channel
     {
         public int ID { get; set; }
         public string name { get; set; }
         public int currentLevel { get; set; } // Current obstacle level of the channel
         public Obstacle currentObstacle { get; set; } // Current obstacle in the channel
+        public int totalAttempts { get; set; } = 0;
+        public DateTime lastAttempted { get; set; } = DateTime.MinValue;
+
+        // A HashSet in C# is an unordered collection that
+        // stores unique elements, preventing duplicates.
+        public HashSet<int> uniquePlayerIds { get; set; } = new HashSet<int>();
+
+        public Channel(
+            int id, string name, int currentLevel, Obstacle currentObstacle, int totalAttempts = 0,
+            DateTime lastAttempted = default, HashSet<int> uniquePlayerIds = default
+        )
+        {
+            ID = id;
+            this.name = name;
+            this.currentLevel = currentLevel;
+            this.currentObstacle = currentObstacle ?? throw new ArgumentNullException(nameof(currentObstacle));
+            this.totalAttempts = totalAttempts;
+            this.lastAttempted = lastAttempted == default ? DateTime.MinValue : lastAttempted;
+            this.uniquePlayerIds = uniquePlayerIds ?? new HashSet<int>();
+        }
 
         public Dictionary<string, double> GetObstacleStats()
         {
@@ -61,10 +79,38 @@ namespace Cosmos.Model
                 stats["strength"] += 3; // Increase strength for strength obstacles
                 stats["endurance"] += 1; // Increase endurance for strength obstacles
             }
+            else if (currentObstacle.tags.Contains("tech"))
+            {
+                stats["tech"] += 2; // Increase tech for tech obstacles
+                stats["intelligence"] += 1; // Increase intelligence for tech obstacles
+            }
+            else if (currentObstacle.tags.Contains("speed"))
+            {
+                stats["speed"] += 2; // Increase speed for speed obstacles
+                stats["agility"] += 1; // Increase agility for speed obstacles
+            }
+            else if (currentObstacle.tags.Contains("grip"))
+            {
+                stats["grip"] += 2; // Increase grip for grip obstacles
+                stats["strength"] += 1; // Increase strength for grip obstacles
+            }
+            else if (currentObstacle.tags.Contains("endurance"))
+            {
+                stats["endurance"] += 2; // Increase endurance for endurance obstacles
+                stats["stamina"] += 1; // Increase stamina for endurance obstacles
+            }
+            else if (currentObstacle.tags.Contains("lache"))
+            {
+                stats["lache"] += 2; // Increase lache for lache obstacles
+                stats["agility"] += 1; // Increase agility for lache obstacles
+            }
+            else if (currentObstacle.tags.Contains("intelligence"))
+            {
+                stats["intelligence"] += 2; // Increase intelligence for intelligence obstacles
+                stats["tech"] += 1; // Increase tech for intelligence obstacles
+            }
 
             return stats;
-
-            // double totalStats = stats.Values.Sum()
         }
     }
 }

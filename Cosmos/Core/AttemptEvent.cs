@@ -1,51 +1,80 @@
-﻿using Cosmos.Model;
+﻿using Cosmos.Data;
+using Cosmos.Model;
+using Cosmos.Service;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cosmos.Core
 {
     public class AttemptEvent
     {
         private Dictionary<string, double> obstacleStats;
+        private InitData data;
+        public event EventHandler<MessageEventArgs> OnMessage;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public AttemptEvent(InitData data)
+        {
+            this.data = data ?? throw new ArgumentNullException(nameof(data));
+        }
 
         public void AttemptObstacle(Player player, Channel channel)
         {
-            //if (player.level < channel.currentObstacle.requiredLevel)
-            //{
-            //    Console.WriteLine($"Player {player.name} does not meet the level requirement to attempt {channel.currentObstacle.name}.");
-            //    return;
-            //}
-
             // Calculate the player's effective stats against the obstacle's tags
             double obstacleTotalStats = channel.GetObstacleStats().Values.Sum();
-            Console.WriteLine($"Obstacle Total Stats: {obstacleTotalStats}");
             double playerTotalStats = player.GetTotalStats();
-            Console.WriteLine($"Player Total Stats: {playerTotalStats}");
             double playerEffectiveness = CalculatePlayerEffectiveness(player, channel);
-            Console.WriteLine($"Player Effectiveness: {playerEffectiveness}");
 
             // Calculate the success chance based on player effectiveness and obstacle stats
             double successChanceFactor = ((playerTotalStats * playerEffectiveness) / obstacleTotalStats) * 100;
+            if (successChanceFactor > 95)
+            {
+                successChanceFactor = 95; // Cap at 95% success chance
+            }
+            else if (successChanceFactor <= 0)
+            {
+                successChanceFactor = 0; // Minimum success chance
+            }
 
             // Simulate a random success chance
             Random rand = new Random();
             double successChance = rand.NextDouble() * 100; // Random value between 0 and 100
-            Console.WriteLine($"Player {player.name} attempts obstacle: {channel.currentObstacle.name}");
-            Console.WriteLine($"Success Chance: {successChanceFactor}% (Random: {successChance})");
 
             // Check if the player successfully completes the obstacle
             if (successChance <= successChanceFactor)
             {
-                Console.WriteLine($"Player {player.name} successfully completed the obstacle: {channel.currentObstacle.name}.");
-                //AddExperience(player, channel.currentObstacle.difficulty * 10); // Award experience based on difficulty
+                RaiseMessage($"Player {player.name} successfully completed the obstacle: {channel.currentObstacle.name}.");
+                AddExperience(player, channel.currentLevel); // Award experience based on difficulty
+                player.noCompletedObstacles++; // Increment completed obstacles count
+                channel.currentLevel++; // Increment the channel's level
+                channel.currentObstacle = data.GetRandomObstacle(); // Refresh the current obstacle with a new one
+
+                // Call the OnObstacleCompleted event to change the current obstacle and level
+                OnPropertyChanged("currentObstacle");
             }
             else
             {
-                Console.WriteLine($"Player {player.name} failed to complete the obstacle: {channel.currentObstacle.name}.");
+                RaiseMessage($"Player {player.name} failed to complete the obstacle: {channel.currentObstacle.name}.");
             }
+            player.noAttemptedObstacles++; // Increment attempted obstacles count
+            channel.totalAttempts++;
+
+            // Ensure the uniquePlayerIds HashSet is initialized
+            if (channel.uniquePlayerIds == null)
+            {
+                channel.uniquePlayerIds = new HashSet<int>();
+            }
+
+            // add unique players logic; if same player hit attempt, don't add
+            if (!channel.uniquePlayerIds.Contains(player.ID))
+            {
+                channel.uniquePlayerIds.Add(player.ID);
+            }
+
+            // Modify last attempted to time now
+            channel.lastAttempted = DateTime.Now;
         }
 
         // Calculate player effectiveness against the obstacle (based on obstacle tags)
@@ -108,10 +137,29 @@ namespace Cosmos.Core
             int previousLevel = player.level;
             player.experience += amount;
             int newLevel = player.level;
+            RaiseMessage($"Player {player.name} gained {amount} experience.");
 
+            // If player levelled up, add available points
             if (newLevel > previousLevel)
             {
+                RaiseMessage($"Player {player.name} leveled up to level {newLevel}!");
                 player.availablePoints += (newLevel - previousLevel);
+            }
+        }
+
+        private void RaiseMessage(string message, bool addExtraNewLine = false)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(this, new MessageEventArgs(message, addExtraNewLine));
+            }
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
     }
