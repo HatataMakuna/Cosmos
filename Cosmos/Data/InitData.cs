@@ -5,7 +5,6 @@ using Cosmos.Model;
 namespace Cosmos.Data
 {
     // This class is only to initialize the data for development purposes.
-    // For release version, this class should not be used.
     public class InitData
     {
         public List<Obstacle> Obstacles { get; private set; }
@@ -41,9 +40,9 @@ namespace Cosmos.Data
 
             Channels = new List<Channel>
             {
-                new Channel(1, "Beginner Channel", 1, GetRandomObstacle()),
-                new Channel(2, "Intermediate Channel", 2, GetRandomObstacle()),
-                new Channel(3, "Advanced Channel", 3, GetRandomObstacle())
+                new Channel(1, "Channel 1", 1, GetRandomObstacle()),
+                new Channel(2, "Channel 2", 2, GetRandomObstacle()),
+                new Channel(3, "Channel 3", 3, GetRandomObstacle())
             };
 
             Players = new List<Player>

@@ -8,8 +8,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
-// TODO: Handle CRUD for players and channels
-// - Edit channel name: ChannelInfo (new)
+// TODO:
+// - 
 
 namespace Cosmos
 {

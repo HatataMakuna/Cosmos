@@ -119,11 +119,11 @@ namespace Cosmos
             this.tlpInfo.Name = "tlpInfo";
             this.tlpInfo.RowCount = 5;
             this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.54753F));
-            this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.29278F));
-            this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.30798F));
-            this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.1673F));
+            this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.52941F));
+            this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.41868F));
+            this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.41868F));
             this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.68441F));
-            this.tlpInfo.Size = new System.Drawing.Size(353, 263);
+            this.tlpInfo.Size = new System.Drawing.Size(377, 289);
             this.tlpInfo.TabIndex = 2;
             // 
             // clbTags
@@ -141,7 +141,7 @@ namespace Cosmos
             "Speed",
             "Strength",
             "Tech"});
-            this.clbTags.Location = new System.Drawing.Point(108, 164);
+            this.clbTags.Location = new System.Drawing.Point(116, 185);
             this.clbTags.Name = "clbTags";
             this.clbTags.Size = new System.Drawing.Size(242, 89);
             this.clbTags.TabIndex = 3;
@@ -151,7 +151,7 @@ namespace Cosmos
             // 
             this.lblTags.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblTags.AutoSize = true;
-            this.lblTags.Location = new System.Drawing.Point(3, 201);
+            this.lblTags.Location = new System.Drawing.Point(3, 221);
             this.lblTags.Name = "lblTags";
             this.lblTags.Size = new System.Drawing.Size(39, 16);
             this.lblTags.TabIndex = 8;
@@ -161,7 +161,7 @@ namespace Cosmos
             // 
             this.nudRequiredLevel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nudRequiredLevel.Enabled = false;
-            this.nudRequiredLevel.Location = new System.Drawing.Point(108, 128);
+            this.nudRequiredLevel.Location = new System.Drawing.Point(116, 142);
             this.nudRequiredLevel.Minimum = new decimal(new int[] {
             1,
             0,
@@ -181,7 +181,7 @@ namespace Cosmos
             // 
             this.lblRequiredLevel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblRequiredLevel.AutoSize = true;
-            this.lblRequiredLevel.Location = new System.Drawing.Point(3, 131);
+            this.lblRequiredLevel.Location = new System.Drawing.Point(3, 145);
             this.lblRequiredLevel.Name = "lblRequiredLevel";
             this.lblRequiredLevel.Size = new System.Drawing.Size(99, 16);
             this.lblRequiredLevel.TabIndex = 6;
@@ -191,7 +191,7 @@ namespace Cosmos
             // 
             this.lblDifficulty.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblDifficulty.AutoSize = true;
-            this.lblDifficulty.Location = new System.Drawing.Point(3, 98);
+            this.lblDifficulty.Location = new System.Drawing.Point(3, 112);
             this.lblDifficulty.Name = "lblDifficulty";
             this.lblDifficulty.Size = new System.Drawing.Size(56, 16);
             this.lblDifficulty.TabIndex = 4;
@@ -201,7 +201,7 @@ namespace Cosmos
             // 
             this.lblDescription.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(3, 53);
+            this.lblDescription.Location = new System.Drawing.Point(3, 62);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(75, 16);
             this.lblDescription.TabIndex = 3;
@@ -211,7 +211,7 @@ namespace Cosmos
             // 
             this.tbName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tbName.Enabled = false;
-            this.tbName.Location = new System.Drawing.Point(108, 5);
+            this.tbName.Location = new System.Drawing.Point(116, 7);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(242, 22);
             this.tbName.TabIndex = 0;
@@ -221,7 +221,7 @@ namespace Cosmos
             // 
             this.lblName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(3, 8);
+            this.lblName.Location = new System.Drawing.Point(3, 10);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(44, 16);
             this.lblName.TabIndex = 1;
@@ -231,7 +231,7 @@ namespace Cosmos
             // 
             this.rtbDescription.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.rtbDescription.Enabled = false;
-            this.rtbDescription.Location = new System.Drawing.Point(108, 36);
+            this.rtbDescription.Location = new System.Drawing.Point(116, 45);
             this.rtbDescription.Name = "rtbDescription";
             this.rtbDescription.Size = new System.Drawing.Size(242, 50);
             this.rtbDescription.TabIndex = 2;
@@ -242,7 +242,7 @@ namespace Cosmos
             // 
             this.nudDifficulty.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nudDifficulty.Enabled = false;
-            this.nudDifficulty.Location = new System.Drawing.Point(108, 95);
+            this.nudDifficulty.Location = new System.Drawing.Point(116, 109);
             this.nudDifficulty.Maximum = new decimal(new int[] {
             5,
             0,
@@ -299,7 +299,7 @@ namespace Cosmos
             // lblBaseStatsHelp
             // 
             this.lblBaseStatsHelp.AutoSize = true;
-            this.lblBaseStatsHelp.Location = new System.Drawing.Point(23, 8);
+            this.lblBaseStatsHelp.Location = new System.Drawing.Point(19, 15);
             this.lblBaseStatsHelp.MaximumSize = new System.Drawing.Size(370, 0);
             this.lblBaseStatsHelp.Name = "lblBaseStatsHelp";
             this.lblBaseStatsHelp.Size = new System.Drawing.Size(370, 32);
@@ -332,7 +332,7 @@ namespace Cosmos
             this.tlpBaseStats.Controls.Add(this.lblBaseStamina, 0, 8);
             this.tlpBaseStats.Controls.Add(this.lblBaseIntelligence, 0, 9);
             this.tlpBaseStats.Controls.Add(this.ntbBaseSpeed, 1, 0);
-            this.tlpBaseStats.Location = new System.Drawing.Point(26, 49);
+            this.tlpBaseStats.Location = new System.Drawing.Point(22, 56);
             this.tlpBaseStats.Name = "tlpBaseStats";
             this.tlpBaseStats.RowCount = 10;
             this.tlpBaseStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
