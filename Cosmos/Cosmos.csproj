@@ -81,7 +81,9 @@
       <DependentUpon>PlayerInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\EncodeDecode.cs" />
     <Compile Include="Service\MessageEventArgs.cs" />
+    <Compile Include="Sudo\VerifySudo.cs" />
     <EmbeddedResource Include="ChannelInfo.resx">
       <DependentUpon>ChannelInfo.cs</DependentUpon>
     </EmbeddedResource>

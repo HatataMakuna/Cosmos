@@ -51,6 +51,7 @@
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPlayersAndChannels = new System.Windows.Forms.Panel();
             this.btnChannelInfo = new System.Windows.Forms.Button();
+            this.tsmiEnterSudoMode = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlObstacle.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnlPlayersAndChannels.SuspendLayout();
@@ -239,6 +240,7 @@
             // 
             this.tsmiMenu.BackColor = System.Drawing.SystemColors.Control;
             this.tsmiMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEnterSudoMode,
             this.tsmiManageObstacles,
             this.tsmiExit});
             this.tsmiMenu.ForeColor = System.Drawing.SystemColors.MenuText;
@@ -249,14 +251,14 @@
             // tsmiManageObstacles
             // 
             this.tsmiManageObstacles.Name = "tsmiManageObstacles";
-            this.tsmiManageObstacles.Size = new System.Drawing.Size(214, 26);
+            this.tsmiManageObstacles.Size = new System.Drawing.Size(224, 26);
             this.tsmiManageObstacles.Text = "Manage Obstacles";
             this.tsmiManageObstacles.Click += new System.EventHandler(this.tsmiManageObstacles_Click);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(214, 26);
+            this.tsmiExit.Size = new System.Drawing.Size(224, 26);
             this.tsmiExit.Text = "Exit";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -285,6 +287,13 @@
             this.btnChannelInfo.Text = "Channel Info";
             this.btnChannelInfo.UseVisualStyleBackColor = true;
             this.btnChannelInfo.Click += new System.EventHandler(this.btnChannelInfo_Click);
+            // 
+            // tsmiEnterSudoMode
+            // 
+            this.tsmiEnterSudoMode.Name = "tsmiEnterSudoMode";
+            this.tsmiEnterSudoMode.Size = new System.Drawing.Size(224, 26);
+            this.tsmiEnterSudoMode.Text = "Enter Sudo Mode";
+            this.tsmiEnterSudoMode.Click += new System.EventHandler(this.tsmiEnterSudoMode_Click);
             // 
             // Cosmos
             // 
@@ -333,6 +342,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.Panel pnlPlayersAndChannels;
         private System.Windows.Forms.Button btnChannelInfo;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEnterSudoMode;
     }
 }
 

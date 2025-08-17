@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using Cosmos.Sudo;
 
 // TODO:
-// - 
+// - (Sudo mode) Use custom competitors, can be used to simulate a competition; can manually edit stats
 
 namespace Cosmos
 {
@@ -319,6 +320,18 @@ namespace Cosmos
                 lstChannels.Items[index] = channel.name;
             }
             saveLoad.SaveData(players, channels, obstacles);
+        }
+
+        private void tsmiEnterSudoMode_Click(object sender, EventArgs e)
+        {
+            // Opens the VerifySudo form to check for sudo mode, then if successful, close the main application and opens the Sudo form
+            VerifySudo verifySudo = new VerifySudo();
+            if (verifySudo.isSudoModeActive())
+            {
+                // Close the main Cosmos window
+                this.Close();
+                // Open the Sudo functionality (not implemented in this snippet)
+            }
         }
     }
 }
