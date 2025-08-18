@@ -1,9 +1,4 @@
 ﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Cosmos.Service;
 using System.Windows.Forms;
 
@@ -12,13 +7,6 @@ namespace Cosmos.Sudo
     public class VerifySudo
     {
         private EncodeDecode enc = new EncodeDecode();
-        // TODO:
-        // - Enter a hidden sudo code to unlock the sudo functionality
-        // - Once unlocked, close the main Cosmos window and open the sudo functionality
-        // 
-        // Sudo features:
-        // - Use custom competitors, can be used to simulate a competition
-        // - Can manually edit stats
 
         public bool isSudoModeActive()
         {

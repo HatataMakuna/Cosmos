@@ -44,6 +44,9 @@ namespace Cosmos.Model
         public int stamina { get; set; }
         public int intelligence { get; set; }
 
+        // Toggles
+        public bool isCompetitor { get; set; } = false; // Indicates if the player is a competitor in a competition
+
         // Constructor to initialize a new player with default stats
         public Player()
         {

@@ -330,7 +330,7 @@ namespace Cosmos
             {
                 this.Hide(); // Hide the main Cosmos window
                 // Open the Sudo functionality
-                SudoMain sudoMain = new SudoMain();
+                SudoMain sudoMain = new SudoMain(obstacles);
                 sudoMain.ShowDialog();
             }
         }
