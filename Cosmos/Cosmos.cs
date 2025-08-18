@@ -2,12 +2,12 @@
 using Cosmos.Data;
 using Cosmos.Model;
 using Cosmos.Service;
+using Cosmos.Sudo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
-using Cosmos.Sudo;
 
 // TODO:
 // - (Sudo mode) Use custom competitors, can be used to simulate a competition; can manually edit stats
@@ -328,9 +328,10 @@ namespace Cosmos
             VerifySudo verifySudo = new VerifySudo();
             if (verifySudo.isSudoModeActive())
             {
-                // Close the main Cosmos window
-                this.Close();
-                // Open the Sudo functionality (not implemented in this snippet)
+                this.Hide(); // Hide the main Cosmos window
+                // Open the Sudo functionality
+                SudoMain sudoMain = new SudoMain();
+                sudoMain.ShowDialog();
             }
         }
     }

@@ -83,6 +83,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EncodeDecode.cs" />
     <Compile Include="Service\MessageEventArgs.cs" />
+    <Compile Include="Sudo\SudoMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sudo\SudoMain.Designer.cs">
+      <DependentUpon>SudoMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sudo\VerifySudo.cs" />
     <EmbeddedResource Include="ChannelInfo.resx">
       <DependentUpon>ChannelInfo.cs</DependentUpon>
@@ -105,6 +111,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Sudo\SudoMain.resx">
+      <DependentUpon>SudoMain.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
