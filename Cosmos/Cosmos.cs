@@ -55,11 +55,12 @@ namespace Cosmos
             obstacles = initData.Obstacles;
             channels = initData.Channels;
 
-            // Populate ListBox with player names
+            // Populate ListBox
             lstPlayers.Items.Clear(); // Clear existing items
             foreach (var player in players)
             {
-                lstPlayers.Items.Add(player.name);
+                // Exclude competitors from the player list
+                if (!player.isCompetitor) lstPlayers.Items.Add(player.name);
             }
 
             lstChannels.Items.Clear(); // Clear existing items

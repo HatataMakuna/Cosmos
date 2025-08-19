@@ -143,7 +143,9 @@ namespace Cosmos.Core
             if (newLevel > previousLevel)
             {
                 RaiseMessage($"Player {player.name} leveled up to level {newLevel}!");
-                player.availablePoints += (newLevel - previousLevel);
+
+                // Only add available points if the player is not a competitor
+                if (!player.isCompetitor) player.availablePoints += (newLevel - previousLevel);
             }
         }
 

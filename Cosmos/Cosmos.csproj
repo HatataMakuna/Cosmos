@@ -70,6 +70,7 @@
       <DependentUpon>ManageObstacles.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Channel.cs" />
+    <Compile Include="Model\Competitor.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\User.cs" />
