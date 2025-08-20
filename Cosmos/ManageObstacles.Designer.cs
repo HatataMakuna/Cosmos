@@ -583,7 +583,7 @@ namespace Cosmos
             // btnDeleteObstacle
             // 
             this.btnDeleteObstacle.Enabled = false;
-            this.btnDeleteObstacle.Location = new System.Drawing.Point(14, 416);
+            this.btnDeleteObstacle.Location = new System.Drawing.Point(13, 416);
             this.btnDeleteObstacle.Name = "btnDeleteObstacle";
             this.btnDeleteObstacle.Size = new System.Drawing.Size(138, 34);
             this.btnDeleteObstacle.TabIndex = 6;

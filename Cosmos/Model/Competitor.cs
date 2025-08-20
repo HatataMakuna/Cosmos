@@ -20,6 +20,9 @@ namespace Cosmos.Model
         public int type { get; set; }
         public bool isFemale { get; set; }
 
+        // Stats
+        public int totalClears { get; set; }
+
         public Competitor(
             // Base (Player) arguments
             int id, string name, int experience, int availablePoints,
@@ -36,6 +39,7 @@ namespace Cosmos.Model
             this.nationality = nationality;
             this.type = type;
             this.isFemale = isFemale;
+            totalClears = 0;
         }
     }
 }
