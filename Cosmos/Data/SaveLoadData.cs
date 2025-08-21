@@ -10,7 +10,9 @@ namespace Cosmos.Data
     public class SaveLoadData
     {
         private const string DataFileName = "UserData.cosmos";
+        private const string SudoFileName = "SudoData.cosmos";
 
+        // Save and load main data for the application
         public void SaveData(List<Player> players, List<Channel> channels, List<Obstacle> obstacles)
         {
             var data = new Tuple<List<Player>, List<Channel>, List<Obstacle>>(players, channels, obstacles);
@@ -61,5 +63,8 @@ namespace Cosmos.Data
             // Return empty lists if loading fails
             return (new List<Player>(), new List<Channel>(), new List<Obstacle>(), false);
         }
+
+        // Save and load sudo data for the application
+        // Include competitors and courses
     }
 }

@@ -78,6 +78,7 @@
             this.tsmiManageCompetitors.Name = "tsmiManageCompetitors";
             this.tsmiManageCompetitors.Size = new System.Drawing.Size(232, 26);
             this.tsmiManageCompetitors.Text = "Manage Competitors";
+            this.tsmiManageCompetitors.Click += new System.EventHandler(this.tsmiManageCompetitors_Click);
             // 
             // tsmiExit
             // 

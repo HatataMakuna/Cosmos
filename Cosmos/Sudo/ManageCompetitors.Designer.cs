@@ -32,7 +32,10 @@
             this.btnNewCompetitor = new System.Windows.Forms.Button();
             this.btnDeleteCompetitor = new System.Windows.Forms.Button();
             this.tlpInfo = new System.Windows.Forms.TableLayoutPanel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.nudIntelligence = new System.Windows.Forms.NumericUpDown();
+            this.lblIntelligence = new System.Windows.Forms.Label();
+            this.nudStamina = new System.Windows.Forms.NumericUpDown();
             this.lblStamina = new System.Windows.Forms.Label();
             this.nudLache = new System.Windows.Forms.NumericUpDown();
             this.lblLache = new System.Windows.Forms.Label();
@@ -48,22 +51,22 @@
             this.lblGrip = new System.Windows.Forms.Label();
             this.nudTech = new System.Windows.Forms.NumericUpDown();
             this.lblTech = new System.Windows.Forms.Label();
+            this.nudSpeed = new System.Windows.Forms.NumericUpDown();
             this.lblSpeed = new System.Windows.Forms.Label();
+            this.lblStats = new System.Windows.Forms.Label();
+            this.lblGender = new System.Windows.Forms.Label();
+            this.cbGender = new System.Windows.Forms.ComboBox();
+            this.lblType = new System.Windows.Forms.Label();
             this.cbType = new System.Windows.Forms.ComboBox();
+            this.tbNationality = new System.Windows.Forms.TextBox();
             this.lblNationality = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
-            this.tbNationality = new System.Windows.Forms.TextBox();
-            this.cbGender = new System.Windows.Forms.ComboBox();
-            this.lblGender = new System.Windows.Forms.Label();
-            this.lblType = new System.Windows.Forms.Label();
-            this.lblStats = new System.Windows.Forms.Label();
-            this.nudSpeed = new System.Windows.Forms.NumericUpDown();
-            this.lblIntelligence = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             this.tlpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudIntelligence)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStamina)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLache)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBalance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAgility)).BeginInit();
@@ -72,7 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudGrip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTech)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // lstCompetitors
@@ -81,12 +83,13 @@
             this.lstCompetitors.ItemHeight = 16;
             this.lstCompetitors.Location = new System.Drawing.Point(13, 40);
             this.lstCompetitors.Name = "lstCompetitors";
-            this.lstCompetitors.Size = new System.Drawing.Size(139, 308);
+            this.lstCompetitors.Size = new System.Drawing.Size(139, 372);
             this.lstCompetitors.TabIndex = 1;
+            this.lstCompetitors.SelectedIndexChanged += new System.EventHandler(this.lstCompetitors_SelectedIndexChanged);
             // 
             // btnNewCompetitor
             // 
-            this.btnNewCompetitor.Location = new System.Drawing.Point(13, 367);
+            this.btnNewCompetitor.Location = new System.Drawing.Point(13, 436);
             this.btnNewCompetitor.Name = "btnNewCompetitor";
             this.btnNewCompetitor.Size = new System.Drawing.Size(138, 34);
             this.btnNewCompetitor.TabIndex = 2;
@@ -96,7 +99,7 @@
             // btnDeleteCompetitor
             // 
             this.btnDeleteCompetitor.Enabled = false;
-            this.btnDeleteCompetitor.Location = new System.Drawing.Point(13, 416);
+            this.btnDeleteCompetitor.Location = new System.Drawing.Point(13, 492);
             this.btnDeleteCompetitor.Name = "btnDeleteCompetitor";
             this.btnDeleteCompetitor.Size = new System.Drawing.Size(138, 34);
             this.btnDeleteCompetitor.TabIndex = 7;
@@ -112,7 +115,7 @@
             this.tlpInfo.Controls.Add(this.lblInfo, 0, 0);
             this.tlpInfo.Controls.Add(this.nudIntelligence, 1, 15);
             this.tlpInfo.Controls.Add(this.lblIntelligence, 0, 15);
-            this.tlpInfo.Controls.Add(this.numericUpDown1, 1, 14);
+            this.tlpInfo.Controls.Add(this.nudStamina, 1, 14);
             this.tlpInfo.Controls.Add(this.lblStamina, 0, 14);
             this.tlpInfo.Controls.Add(this.nudLache, 1, 13);
             this.tlpInfo.Controls.Add(this.lblLache, 0, 13);
@@ -139,7 +142,7 @@
             this.tlpInfo.Controls.Add(this.lblNationality, 0, 2);
             this.tlpInfo.Controls.Add(this.tbName, 1, 1);
             this.tlpInfo.Controls.Add(this.lblName, 0, 1);
-            this.tlpInfo.Location = new System.Drawing.Point(198, 40);
+            this.tlpInfo.Location = new System.Drawing.Point(194, 40);
             this.tlpInfo.Name = "tlpInfo";
             this.tlpInfo.RowCount = 16;
             this.tlpInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249971F));
@@ -161,9 +164,22 @@
             this.tlpInfo.Size = new System.Drawing.Size(377, 439);
             this.tlpInfo.TabIndex = 8;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblInfo.AutoSize = true;
+            this.tlpInfo.SetColumnSpan(this.lblInfo, 2);
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(3, 5);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(32, 16);
+            this.lblInfo.TabIndex = 33;
+            this.lblInfo.Text = "Info";
+            // 
             // nudIntelligence
             // 
             this.nudIntelligence.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudIntelligence.Enabled = false;
             this.nudIntelligence.Location = new System.Drawing.Point(116, 411);
             this.nudIntelligence.Minimum = new decimal(new int[] {
             1,
@@ -178,6 +194,37 @@
             0,
             0,
             0});
+            this.nudIntelligence.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
+            // 
+            // lblIntelligence
+            // 
+            this.lblIntelligence.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblIntelligence.AutoSize = true;
+            this.lblIntelligence.Location = new System.Drawing.Point(3, 414);
+            this.lblIntelligence.Name = "lblIntelligence";
+            this.lblIntelligence.Size = new System.Drawing.Size(75, 16);
+            this.lblIntelligence.TabIndex = 31;
+            this.lblIntelligence.Text = "Intelligence";
+            // 
+            // nudStamina
+            // 
+            this.nudStamina.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudStamina.Enabled = false;
+            this.nudStamina.Location = new System.Drawing.Point(116, 381);
+            this.nudStamina.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudStamina.Name = "nudStamina";
+            this.nudStamina.Size = new System.Drawing.Size(120, 22);
+            this.nudStamina.TabIndex = 30;
+            this.nudStamina.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudStamina.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblStamina
             // 
@@ -192,6 +239,7 @@
             // nudLache
             // 
             this.nudLache.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudLache.Enabled = false;
             this.nudLache.Location = new System.Drawing.Point(116, 354);
             this.nudLache.Minimum = new decimal(new int[] {
             1,
@@ -206,6 +254,7 @@
             0,
             0,
             0});
+            this.nudLache.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblLache
             // 
@@ -220,6 +269,7 @@
             // nudBalance
             // 
             this.nudBalance.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudBalance.Enabled = false;
             this.nudBalance.Location = new System.Drawing.Point(116, 327);
             this.nudBalance.Minimum = new decimal(new int[] {
             1,
@@ -234,6 +284,7 @@
             0,
             0,
             0});
+            this.nudBalance.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblBalance
             // 
@@ -248,6 +299,7 @@
             // nudAgility
             // 
             this.nudAgility.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudAgility.Enabled = false;
             this.nudAgility.Location = new System.Drawing.Point(116, 300);
             this.nudAgility.Minimum = new decimal(new int[] {
             1,
@@ -262,6 +314,7 @@
             0,
             0,
             0});
+            this.nudAgility.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblAgility
             // 
@@ -276,6 +329,7 @@
             // nudEndurance
             // 
             this.nudEndurance.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudEndurance.Enabled = false;
             this.nudEndurance.Location = new System.Drawing.Point(116, 273);
             this.nudEndurance.Minimum = new decimal(new int[] {
             1,
@@ -290,6 +344,7 @@
             0,
             0,
             0});
+            this.nudEndurance.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblEndurance
             // 
@@ -304,6 +359,7 @@
             // nudStrength
             // 
             this.nudStrength.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudStrength.Enabled = false;
             this.nudStrength.Location = new System.Drawing.Point(116, 246);
             this.nudStrength.Minimum = new decimal(new int[] {
             1,
@@ -318,6 +374,7 @@
             0,
             0,
             0});
+            this.nudStrength.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblStrength
             // 
@@ -332,6 +389,7 @@
             // nudGrip
             // 
             this.nudGrip.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudGrip.Enabled = false;
             this.nudGrip.Location = new System.Drawing.Point(116, 219);
             this.nudGrip.Minimum = new decimal(new int[] {
             1,
@@ -346,6 +404,7 @@
             0,
             0,
             0});
+            this.nudGrip.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblGrip
             // 
@@ -360,6 +419,7 @@
             // nudTech
             // 
             this.nudTech.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudTech.Enabled = false;
             this.nudTech.Location = new System.Drawing.Point(116, 192);
             this.nudTech.Minimum = new decimal(new int[] {
             1,
@@ -374,6 +434,7 @@
             0,
             0,
             0});
+            this.nudTech.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblTech
             // 
@@ -385,6 +446,26 @@
             this.lblTech.TabIndex = 15;
             this.lblTech.Text = "Tech";
             // 
+            // nudSpeed
+            // 
+            this.nudSpeed.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nudSpeed.Enabled = false;
+            this.nudSpeed.Location = new System.Drawing.Point(116, 165);
+            this.nudSpeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSpeed.Name = "nudSpeed";
+            this.nudSpeed.Size = new System.Drawing.Size(120, 22);
+            this.nudSpeed.TabIndex = 14;
+            this.nudSpeed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSpeed.ValueChanged += new System.EventHandler(this.AnyFieldChanged);
+            // 
             // lblSpeed
             // 
             this.lblSpeed.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -395,9 +476,56 @@
             this.lblSpeed.TabIndex = 13;
             this.lblSpeed.Text = "Speed";
             // 
+            // lblStats
+            // 
+            this.lblStats.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblStats.AutoSize = true;
+            this.tlpInfo.SetColumnSpan(this.lblStats, 2);
+            this.lblStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStats.Location = new System.Drawing.Point(3, 140);
+            this.lblStats.Name = "lblStats";
+            this.lblStats.Size = new System.Drawing.Size(42, 16);
+            this.lblStats.TabIndex = 12;
+            this.lblStats.Text = "Stats";
+            // 
+            // lblGender
+            // 
+            this.lblGender.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblGender.AutoSize = true;
+            this.lblGender.Location = new System.Drawing.Point(3, 113);
+            this.lblGender.Name = "lblGender";
+            this.lblGender.Size = new System.Drawing.Size(52, 16);
+            this.lblGender.TabIndex = 4;
+            this.lblGender.Text = "Gender";
+            // 
+            // cbGender
+            // 
+            this.cbGender.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbGender.Enabled = false;
+            this.cbGender.FormattingEnabled = true;
+            this.cbGender.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.cbGender.Location = new System.Drawing.Point(116, 111);
+            this.cbGender.Name = "cbGender";
+            this.cbGender.Size = new System.Drawing.Size(242, 24);
+            this.cbGender.TabIndex = 10;
+            this.cbGender.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            // 
+            // lblType
+            // 
+            this.lblType.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(3, 86);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(39, 16);
+            this.lblType.TabIndex = 6;
+            this.lblType.Text = "Type";
+            // 
             // cbType
             // 
             this.cbType.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbType.Enabled = false;
             this.cbType.FormattingEnabled = true;
             this.cbType.Items.AddRange(new object[] {
             "Unknown",
@@ -410,6 +538,17 @@
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(242, 24);
             this.cbType.TabIndex = 11;
+            this.cbType.TextChanged += new System.EventHandler(this.AnyFieldChanged);
+            // 
+            // tbNationality
+            // 
+            this.tbNationality.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tbNationality.Enabled = false;
+            this.tbNationality.Location = new System.Drawing.Point(116, 57);
+            this.tbNationality.Name = "tbNationality";
+            this.tbNationality.Size = new System.Drawing.Size(242, 22);
+            this.tbNationality.TabIndex = 9;
+            this.tbNationality.TextChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblNationality
             // 
@@ -429,6 +568,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(242, 22);
             this.tbName.TabIndex = 0;
+            this.tbName.TextChanged += new System.EventHandler(this.AnyFieldChanged);
             // 
             // lblName
             // 
@@ -440,122 +580,35 @@
             this.lblName.TabIndex = 1;
             this.lblName.Text = "Name";
             // 
-            // tbNationality
+            // btnSave
             // 
-            this.tbNationality.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbNationality.Enabled = false;
-            this.tbNationality.Location = new System.Drawing.Point(116, 57);
-            this.tbNationality.Name = "tbNationality";
-            this.tbNationality.Size = new System.Drawing.Size(242, 22);
-            this.tbNationality.TabIndex = 9;
+            this.btnSave.Enabled = false;
+            this.btnSave.Location = new System.Drawing.Point(222, 492);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(138, 34);
+            this.btnSave.TabIndex = 9;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // cbGender
+            // btnReset
             // 
-            this.cbGender.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cbGender.FormattingEnabled = true;
-            this.cbGender.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.cbGender.Location = new System.Drawing.Point(116, 111);
-            this.cbGender.Name = "cbGender";
-            this.cbGender.Size = new System.Drawing.Size(242, 24);
-            this.cbGender.TabIndex = 10;
-            // 
-            // lblGender
-            // 
-            this.lblGender.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblGender.AutoSize = true;
-            this.lblGender.Location = new System.Drawing.Point(3, 113);
-            this.lblGender.Name = "lblGender";
-            this.lblGender.Size = new System.Drawing.Size(52, 16);
-            this.lblGender.TabIndex = 4;
-            this.lblGender.Text = "Gender";
-            // 
-            // lblType
-            // 
-            this.lblType.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(3, 86);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(39, 16);
-            this.lblType.TabIndex = 6;
-            this.lblType.Text = "Type";
-            // 
-            // lblStats
-            // 
-            this.lblStats.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblStats.AutoSize = true;
-            this.tlpInfo.SetColumnSpan(this.lblStats, 2);
-            this.lblStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStats.Location = new System.Drawing.Point(3, 140);
-            this.lblStats.Name = "lblStats";
-            this.lblStats.Size = new System.Drawing.Size(42, 16);
-            this.lblStats.TabIndex = 12;
-            this.lblStats.Text = "Stats";
-            // 
-            // nudSpeed
-            // 
-            this.nudSpeed.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.nudSpeed.Location = new System.Drawing.Point(116, 165);
-            this.nudSpeed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudSpeed.Name = "nudSpeed";
-            this.nudSpeed.Size = new System.Drawing.Size(120, 22);
-            this.nudSpeed.TabIndex = 14;
-            this.nudSpeed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // lblIntelligence
-            // 
-            this.lblIntelligence.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblIntelligence.AutoSize = true;
-            this.lblIntelligence.Location = new System.Drawing.Point(3, 414);
-            this.lblIntelligence.Name = "lblIntelligence";
-            this.lblIntelligence.Size = new System.Drawing.Size(75, 16);
-            this.lblIntelligence.TabIndex = 31;
-            this.lblIntelligence.Text = "Intelligence";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDown1.Location = new System.Drawing.Point(116, 381);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDown1.TabIndex = 30;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblInfo.AutoSize = true;
-            this.tlpInfo.SetColumnSpan(this.lblInfo, 2);
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo.Location = new System.Drawing.Point(3, 5);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(32, 16);
-            this.lblInfo.TabIndex = 33;
-            this.lblInfo.Text = "Info";
+            this.btnReset.Enabled = false;
+            this.btnReset.Location = new System.Drawing.Point(396, 492);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(138, 34);
+            this.btnReset.TabIndex = 10;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // ManageCompetitors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 507);
+            this.ClientSize = new System.Drawing.Size(641, 556);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tlpInfo);
             this.Controls.Add(this.btnDeleteCompetitor);
             this.Controls.Add(this.btnNewCompetitor);
@@ -565,6 +618,7 @@
             this.tlpInfo.ResumeLayout(false);
             this.tlpInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudIntelligence)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStamina)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLache)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBalance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAgility)).EndInit();
@@ -573,7 +627,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudGrip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTech)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -612,7 +665,9 @@
         private System.Windows.Forms.Label lblStamina;
         private System.Windows.Forms.NumericUpDown nudIntelligence;
         private System.Windows.Forms.Label lblIntelligence;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nudStamina;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnReset;
     }
 }

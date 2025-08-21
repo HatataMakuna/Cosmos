@@ -25,21 +25,32 @@ namespace Cosmos.Model
 
         public Competitor(
             // Base (Player) arguments
-            int id, string name, int experience, int availablePoints,
-            int speed, int tech, int grip, int strength, int endurance,
-            int agility, int balance, int lache, int stamina,
-            int intelligence, bool isCompetitor,
+            int id, string name, int speed, int tech, int grip,
+            int strength, int endurance, int agility, int balance,
+            int lache, int stamina, int intelligence,
             // Competitor specific arguments
             string nationality, int type, bool isFemale) :
-            base(id, name, experience, availablePoints,
+            base(id, name, 0, 0,
                  speed, tech, grip, strength, endurance,
                  agility, balance, lache, stamina,
-                 intelligence, isCompetitor)
+                 intelligence, true)
         {
             this.nationality = nationality;
             this.type = type;
             this.isFemale = isFemale;
             totalClears = 0;
+        }
+
+        public static Competitor CreateFromForm(
+            int id, string name, int speed, int tech, int grip,
+            int strength, int endurance, int agility, int balance,
+            int lache, int stamina, int intelligence,
+            string nationality, int type, bool isFemale)
+        {
+            return new Competitor(
+                id, name, speed, tech, grip,
+                strength, endurance, agility, balance,
+                lache, stamina, intelligence, nationality, type, isFemale);
         }
     }
 }

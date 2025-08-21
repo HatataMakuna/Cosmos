@@ -91,5 +91,10 @@ namespace Cosmos.Sudo
                     return (true, result);
             }
         }
+
+        private void tsmiManageCompetitors_Click(object sender, EventArgs e)
+        {
+            ManageCompetitors manageCompetitorsForm = new ManageCompetitors();
+        }
     }
 }
