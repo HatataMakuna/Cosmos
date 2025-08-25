@@ -71,8 +71,10 @@
     </Compile>
     <Compile Include="Model\Channel.cs" />
     <Compile Include="Model\Competitor.cs" />
+    <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Stage.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="PlayerInfo.cs">
@@ -89,6 +91,12 @@
     </Compile>
     <Compile Include="Sudo\ManageCompetitors.Designer.cs">
       <DependentUpon>ManageCompetitors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sudo\ManageCourses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sudo\ManageCourses.Designer.cs">
+      <DependentUpon>ManageCourses.cs</DependentUpon>
     </Compile>
     <Compile Include="Sudo\SudoMain.cs">
       <SubType>Form</SubType>
