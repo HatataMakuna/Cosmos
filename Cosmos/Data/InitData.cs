@@ -10,6 +10,8 @@ namespace Cosmos.Data
         public List<Obstacle> Obstacles { get; private set; }
         public List<Channel> Channels { get; private set; }
         public List<Player> Players { get; private set; }
+        public List<Course> Courses { get; private set; }
+        public List<Competitor> Competitors { get; private set; }
 
         public InitData(List<Obstacle> obstacles, List<Channel> channels, List<Player> players)
         {

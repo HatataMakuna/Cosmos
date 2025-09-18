@@ -268,5 +268,10 @@ namespace Cosmos.Sudo
             }
             SaveChanges();
         }
+
+        private void btnNewCompetitor_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

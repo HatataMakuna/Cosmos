@@ -129,6 +129,9 @@
     <EmbeddedResource Include="Sudo\ManageCompetitors.resx">
       <DependentUpon>ManageCompetitors.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sudo\ManageCourses.resx">
+      <DependentUpon>ManageCourses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sudo\SudoMain.resx">
       <DependentUpon>SudoMain.cs</DependentUpon>
     </EmbeddedResource>

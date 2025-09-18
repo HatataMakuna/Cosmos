@@ -95,6 +95,7 @@
             this.btnNewCompetitor.TabIndex = 2;
             this.btnNewCompetitor.Text = "New Competitor";
             this.btnNewCompetitor.UseVisualStyleBackColor = true;
+            this.btnNewCompetitor.Click += new System.EventHandler(this.btnNewCompetitor_Click);
             // 
             // btnDeleteCompetitor
             // 

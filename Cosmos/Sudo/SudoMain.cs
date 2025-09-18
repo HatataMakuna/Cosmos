@@ -1,4 +1,5 @@
-﻿using Cosmos.Model;
+﻿using Cosmos.Data;
+using Cosmos.Model;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -12,8 +13,11 @@ namespace Cosmos.Sudo
         // - Create and manage own course, used those to simulate
         // - Manually edit stats
         private Cosmos cosmos = new Cosmos();
+        private SaveLoadData saveLoad = new SaveLoadData();
 
         private List<Obstacle> _obstacles = new List<Obstacle>();
+        private List<Competitor> _competitors = new List<Competitor>();
+        private List<Course> _courses = new List<Course>();
 
         private bool _isExitingApp = false;
         private (bool, DialogResult) _exitMode;
@@ -23,6 +27,16 @@ namespace Cosmos.Sudo
             InitializeComponent();
 
             _obstacles = obstacles;
+
+            var (loadedCompetitors, loadedCourses, isError) = saveLoad.LoadSudoData();
+            _competitors = loadedCompetitors;
+            _courses = loadedCourses;
+
+            // Notify the user if there was an error loading data
+            if (isError)
+            {
+                MessageBox.Show("Error loading sudo data.");
+            }
         }
 
         private void tsmiManageObstacles_Click(object sender, EventArgs e)
@@ -51,15 +65,17 @@ namespace Cosmos.Sudo
 
             if (_isExitingApp)
             {
-                // If we are already exiting, don’t show dialog again
+                // If we are already exiting, don't show dialog again
                 return;
             }
 
             _exitMode = ExitApplication();
             if (_exitMode == (false, DialogResult.Yes)) {
+                saveLoad.SaveSudoData(_courses, _competitors);
                 cosmos.Show();
             }
             else if (_exitMode == (false, DialogResult.No)) {
+                saveLoad.SaveSudoData(_courses, _competitors);
                 _isExitingApp = true;   // prevent dialog from reopening
                 Application.Exit();     // close all forms, including hidden Cosmos
             }
@@ -94,7 +110,8 @@ namespace Cosmos.Sudo
 
         private void tsmiManageCompetitors_Click(object sender, EventArgs e)
         {
-            ManageCompetitors manageCompetitorsForm = new ManageCompetitors();
+            ManageCompetitors manageCompetitorsForm = new ManageCompetitors(_competitors);
+            manageCompetitorsForm.ShowDialog();
         }
     }
 }
