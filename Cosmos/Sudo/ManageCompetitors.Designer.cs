@@ -106,6 +106,7 @@
             this.btnDeleteCompetitor.TabIndex = 7;
             this.btnDeleteCompetitor.Text = "Delete Competitor";
             this.btnDeleteCompetitor.UseVisualStyleBackColor = true;
+            this.btnDeleteCompetitor.Click += new System.EventHandler(this.btnDeleteCompetitor_Click);
             // 
             // tlpInfo
             // 

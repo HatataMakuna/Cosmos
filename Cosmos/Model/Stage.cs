@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cosmos.Model
 {
+    [Serializable]
     public class Stage
     {
         public string ID { get; set; }

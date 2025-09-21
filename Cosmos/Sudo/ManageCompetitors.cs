@@ -16,6 +16,7 @@ namespace Cosmos.Sudo
             InitializeComponent();
 
             competitors = comp;
+            Console.WriteLine($"[ManageCompetitors] Loaded {competitors.Count} competitors.");
             LoadCompetitors();
         }
 
@@ -164,6 +165,7 @@ namespace Cosmos.Sudo
                     (int)nudBalance.Value, (int)nudLache.Value,
                     (int)nudStamina.Value, (int)nudIntelligence.Value,
                     tbNationality.Text, cbType.SelectedIndex, isFemale);
+                Console.WriteLine($"[ManageCompetitors] New competitor created: " + Environment.NewLine + newCompetitor);
                 competitors.Add(newCompetitor);
 
                 lstCompetitors.Items.Add(newCompetitor.name);
@@ -250,6 +252,7 @@ namespace Cosmos.Sudo
                 lstCompetitors.Enabled = true;
                 isNewCompetitor = false;
                 originalCompetitor = null;
+                btnNewCompetitor.Enabled = true;
                 LoadDetails(null);
             }
             else
@@ -271,7 +274,35 @@ namespace Cosmos.Sudo
 
         private void btnNewCompetitor_Click(object sender, EventArgs e)
         {
+            if (lstCompetitors.SelectedIndex >= 0)
+            {
+                lstCompetitors.ClearSelected();
+                LoadDetails(null);
+            }
 
+            ToggleTextFields(true);
+            lstCompetitors.Enabled = false;
+            btnNewCompetitor.Enabled = false;
+            originalCompetitor = new Competitor();
+            isNewCompetitor = true;
+        }
+
+        private void btnDeleteCompetitor_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to delete this obstacle?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                competitors.RemoveAt(lstCompetitors.SelectedIndex);
+                MessageBox.Show("Obstacle deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Reset the form fields
+                LoadDetails(null);
+                originalCompetitor = null;
+                CheckForChanges();
+                btnDeleteCompetitor.Enabled = false;
+
+                // Update the list box
+                LoadCompetitors();
+            }
         }
     }
 }

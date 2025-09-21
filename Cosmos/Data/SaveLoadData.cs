@@ -14,15 +14,16 @@ namespace Cosmos.Data
 
         // Save and load main data for the application
         public void SaveData(
-            List<Player> players, List<Channel> channels, List<Obstacle> obstacles
+            List<Player> players, List<Channel> channels, List<Obstacle> obstacles,
+            List<Course> courses, List<Competitor> competitors
         )
         {
+            Console.WriteLine($"Saving main data to: {DataFileName}");
             var mainData = new Tuple<List<Player>, List<Channel>, List<Obstacle>>(players, channels, obstacles);
             SaveDataProcess(DataFileName, mainData);
-        }
 
-        public void SaveSudoData(List<Course> courses, List<Competitor> competitors)
-        {
+            Console.WriteLine($"Saving sudo data to: {SudoFileName}");
+            Console.WriteLine($"Courses count: {courses?.Count ?? 0}, Competitors count: {competitors?.Count ?? 0}");
             var sudoData = new Tuple<List<Course>, List<Competitor>>(courses, competitors);
             SaveDataProcess(SudoFileName, sudoData);
         }
@@ -43,16 +44,17 @@ namespace Cosmos.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error saving main data: " + ex.Message);
+                Console.WriteLine("Error saving data: " + ex.Message);
             }
         }
 
         public (List<Player> players, List<Channel> channels, List<Obstacle> obstacles, bool flag) LoadData()
         {
             bool isError;
+            string error;
             var data = LoadDataProcess<
                 Tuple<List<Player>, List<Channel>, List<Obstacle>>
-            >(DataFileName, out isError);
+            >(DataFileName, out isError, out error);
 
             if (isError || data == null)
             {
@@ -62,25 +64,29 @@ namespace Cosmos.Data
             return (data.Item1, data.Item2, data.Item3, false);
         }
 
-        public (List<Competitor> competitors, List<Course> courses, bool flag) LoadSudoData()
+        public (List<Course> courses, List<Competitor> competitors, bool flag, string error) LoadSudoData()
         {
+            Console.WriteLine($"Attempting to load sudo data from: {SudoFileName}");
+            Console.WriteLine($"File exists: {File.Exists(SudoFileName)}");
             bool isError;
+            string error;
             var data = LoadDataProcess<
-                Tuple<List<Competitor>, List<Course>>
-            >(SudoFileName, out isError);
+                Tuple<List<Course> , List <Competitor>>
+            >(SudoFileName, out isError, out error);
 
             if (isError || data == null)
             {
-                return (new List<Competitor>(), new List<Course>(), true);
+                return (new List<Course>(), new List<Competitor>(), true, error);
             }
-
-            return (data.Item1, data.Item2, false);
+            Console.WriteLine($"Loaded {data?.Item1?.Count ?? 0} courses and {data?.Item2?.Count ?? 0} competitors");
+            return (data.Item1, data.Item2, false, error);
         }
 
         // T - generics to handle different tuple types
-        private T LoadDataProcess<T>(string fileName, out bool isError) where T : class
+        private T LoadDataProcess<T>(string fileName, out bool isError, out string error) where T : class
         {
             isError = false;
+            error = string.Empty;
 
             if (File.Exists(fileName))
             {
@@ -97,14 +103,14 @@ namespace Cosmos.Data
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error loading data from {fileName}: " + ex.Message);
+                    error = $"Error loading data from {fileName}: " + ex.Message;
                     isError = true;
                     return default;
                 }
             }
             else
             {
-                Console.WriteLine($"Data file {fileName} not found.");
+                error = $"Data file {fileName} not found.";
                 isError = true;
                 return default;
             }

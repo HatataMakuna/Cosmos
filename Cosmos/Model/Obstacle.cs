@@ -27,7 +27,6 @@ namespace Cosmos.Model
         public double stamina { get; set; }
         public double intelligence { get; set; }
 
-        // Empty constructor to allow serialization and deserialization
         public Obstacle() { }
 
         public Obstacle(int id, string name, string description, int difficulty,
@@ -96,5 +95,8 @@ namespace Cosmos.Model
                 TryParse(intelligenceText)
             );
         }
+
+        // Get the entire Obstacle object
+
     }
 }

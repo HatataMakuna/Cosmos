@@ -13,16 +13,23 @@ namespace Cosmos.Data
         public List<Course> Courses { get; private set; }
         public List<Competitor> Competitors { get; private set; }
 
-        public InitData(List<Obstacle> obstacles, List<Channel> channels, List<Player> players)
+        public InitData(List<Obstacle> obstacles, List<Channel> channels, List<Player> players, List<Course> courses, List<Competitor> competitors)
         {
             Obstacles = obstacles ?? new List<Obstacle>();
             Channels = channels ?? new List<Channel>();
             Players = players ?? new List<Player>();
+            Courses = courses ?? new List<Course>();
+            Competitors = competitors ?? new List<Competitor>();
 
             // If the lists are empty, initialize them with default values
             if (Obstacles.Count == 0 || Channels.Count == 0 || Players.Count == 0)
             {
                 Initialize();
+            }
+
+            if (Courses.Count == 0 || Competitors.Count == 0)
+            {
+                InitializeCompetitorsAndCourses();
             }
         }
 
@@ -54,6 +61,38 @@ namespace Cosmos.Data
             };
 
             Console.WriteLine("Cosmos data initialized.");
+        }
+
+        // Method to initalize competitors and courses
+        public void InitializeCompetitorsAndCourses()
+        {
+            Competitors = new List<Competitor>
+            {
+                new Competitor(1, "Competitor 1", 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, "oof", 1, false),
+                new Competitor(2, "Competitor 2", 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, "oof", 1, false)
+            };
+            Console.WriteLine("Competitors initialized." + Environment.NewLine + "Competitors count: " + Competitors.Count);
+            Courses = new List<Course>
+            {
+                new Course(1, "Course 1",
+                    new List<Stage>{
+                        // Obstacles[0] return null
+                        new Stage("1", "Stage 1", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                        new Stage("2", "Stage 2", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                        new Stage("3", "Stage 3", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                        new Stage("4", "Stage 4", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                    }
+                ),
+                new Course(1, "Course 1",
+                    new List<Stage>{
+                        new Stage("1", "Stage 1", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                        new Stage("2", "Stage 2", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                        new Stage("3", "Stage 3", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                        new Stage("4", "Stage 4", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                    }
+                ),
+            };
+            Console.WriteLine("Courses initialized." + Environment.NewLine + "Courses count: " + Courses.Count);
         }
 
         // Method to get a random obstacle

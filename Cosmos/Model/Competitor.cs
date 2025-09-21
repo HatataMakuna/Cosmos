@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cosmos.Model
 {
+    [Serializable]
     public class Competitor : Player
     {
         public string nationality { get; set; }
@@ -22,6 +23,8 @@ namespace Cosmos.Model
 
         // Stats
         public int totalClears { get; set; }
+
+        public Competitor() { }
 
         public Competitor(
             // Base (Player) arguments

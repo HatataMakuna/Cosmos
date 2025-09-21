@@ -22,21 +22,15 @@ namespace Cosmos.Sudo
         private bool _isExitingApp = false;
         private (bool, DialogResult) _exitMode;
 
-        public SudoMain(List<Obstacle> obstacles)
+        public SudoMain(List<Obstacle> obstacles, List<Course> courses, List<Competitor> competitors)
         {
             InitializeComponent();
 
             _obstacles = obstacles;
-
-            var (loadedCompetitors, loadedCourses, isError) = saveLoad.LoadSudoData();
-            _competitors = loadedCompetitors;
-            _courses = loadedCourses;
-
-            // Notify the user if there was an error loading data
-            if (isError)
-            {
-                MessageBox.Show("Error loading sudo data.");
-            }
+            _courses = courses;
+            _competitors = competitors;
+            Console.WriteLine(courses.Count + " courses loaded.");
+            Console.WriteLine(competitors.Count + " competitors loaded.");
         }
 
         private void tsmiManageObstacles_Click(object sender, EventArgs e)
@@ -71,11 +65,9 @@ namespace Cosmos.Sudo
 
             _exitMode = ExitApplication();
             if (_exitMode == (false, DialogResult.Yes)) {
-                saveLoad.SaveSudoData(_courses, _competitors);
                 cosmos.Show();
             }
             else if (_exitMode == (false, DialogResult.No)) {
-                saveLoad.SaveSudoData(_courses, _competitors);
                 _isExitingApp = true;   // prevent dialog from reopening
                 Application.Exit();     // close all forms, including hidden Cosmos
             }
