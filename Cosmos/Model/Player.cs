@@ -44,6 +44,9 @@ namespace Cosmos.Model
         public int stamina { get; set; }
         public int intelligence { get; set; }
 
+        // Toggles
+        public bool isCompetitor { get; set; } = false;
+
         // Constructor to initialize a new player with default stats
         public Player()
         {
@@ -66,7 +69,8 @@ namespace Cosmos.Model
         // Constructor to initialize a player with specific values
         public Player(int id, string name, int experience, int availablePoints,
                      int speed, int tech, int grip, int strength, int endurance,
-                     int agility, int balance, int lache, int stamina, int intelligence)
+                     int agility, int balance, int lache, int stamina,
+                     int intelligence, bool isCompetitor)
         {
             ID = id;
             this.name = name;
@@ -82,6 +86,9 @@ namespace Cosmos.Model
             this.lache = lache;
             this.stamina = stamina;
             this.intelligence = intelligence;
+            this.isCompetitor = isCompetitor;
+            noAttemptedObstacles = 0;
+            noCompletedObstacles = 0;
         }
 
         public double GetExperiencePercentage()

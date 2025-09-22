@@ -2,6 +2,7 @@
 using Cosmos.Data;
 using Cosmos.Model;
 using Cosmos.Service;
+using Cosmos.Sudo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
 // TODO:
-// - 
+// - (Sudo mode) Use custom competitors, can be used to simulate a competition; can manually edit stats
 
 namespace Cosmos
 {
@@ -18,6 +19,8 @@ namespace Cosmos
         private List<Player> players = new List<Player>();
         private List<Obstacle> obstacles = new List<Obstacle>();
         private List<Channel> channels = new List<Channel>();
+        private List<Course> courses = new List<Course>();
+        private List<Competitor> competitors = new List<Competitor>();
 
         private InitData initData;
         private AttemptEvent _attemptEvent;
@@ -32,13 +35,24 @@ namespace Cosmos
             channels = loadedChannels;
             obstacles = loadedObstacles;
 
+            var (loadedCourses, loadedCompetitors, isErrorSudo, error) = saveLoad.LoadSudoData();
+            competitors = loadedCompetitors;
+            courses = loadedCourses;
+
+            Console.WriteLine(courses.Count + " courses loaded from sudo data.");
+            Console.WriteLine(competitors.Count + " competitors loaded from sudo data.");
+
             // Notify the user if there was an error loading data
             if (isError)
             {
                 MessageBox.Show("Error loading data. Initializing with default values.");
             }
+            if (isErrorSudo)
+            {
+                MessageBox.Show("Error loading sudo data:" + Environment.NewLine + error);
+            }
 
-            initData = new InitData(obstacles, channels, players);
+            initData = new InitData(obstacles, channels, players, courses, competitors);
             _attemptEvent = new AttemptEvent(initData);
             LoadData();
 
@@ -53,12 +67,15 @@ namespace Cosmos
             players = initData.Players;
             obstacles = initData.Obstacles;
             channels = initData.Channels;
+            courses = initData.Courses;
+            competitors = initData.Competitors;
 
-            // Populate ListBox with player names
+            // Populate ListBox
             lstPlayers.Items.Clear(); // Clear existing items
             foreach (var player in players)
             {
-                lstPlayers.Items.Add(player.name);
+                // Exclude competitors from the player list
+                if (!player.isCompetitor) lstPlayers.Items.Add(player.name);
             }
 
             lstChannels.Items.Clear(); // Clear existing items
@@ -236,19 +253,19 @@ namespace Cosmos
             {
                 lstPlayers.Items[index] = player.name;
             }
-            saveLoad.SaveData(players, channels, obstacles);
+            saveLoad.SaveData(players, channels, obstacles, courses, competitors);
         }
 
         private void PlayerInfoForm_PlayerDeleted(object sender, Player player)
         {
             players.Remove(player);
             lstPlayers.Items.Remove(player.name);
-            saveLoad.SaveData(players, channels, obstacles);
+            saveLoad.SaveData(players, channels, obstacles, courses, competitors);
         }
 
         private void CloseForm(object sender, FormClosingEventArgs e)
         {
-            saveLoad.SaveData(players, channels, obstacles);
+            saveLoad.SaveData(players, channels, obstacles, courses, competitors);
         }
 
         private void btnDeleteChannel_Click(object sender, EventArgs e)
@@ -275,13 +292,13 @@ namespace Cosmos
                     lblObsLevelNo.Text = "N/A";
                     lblObsName.Text = "N/A";
                 }
-                saveLoad.SaveData(players, channels, obstacles);
+                saveLoad.SaveData(players, channels, obstacles, courses, competitors);
             }
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
         {
-            saveLoad.SaveData(players, channels, obstacles);
+            saveLoad.SaveData(players, channels, obstacles, courses, competitors);
             Close();
         }
 
@@ -318,7 +335,20 @@ namespace Cosmos
             {
                 lstChannels.Items[index] = channel.name;
             }
-            saveLoad.SaveData(players, channels, obstacles);
+            saveLoad.SaveData(players, channels, obstacles, courses, competitors);
+        }
+
+        private void tsmiEnterSudoMode_Click(object sender, EventArgs e)
+        {
+            // Opens the VerifySudo form to check for sudo mode, then if successful, close the main application and opens the Sudo form
+            VerifySudo verifySudo = new VerifySudo();
+            if (verifySudo.isSudoModeActive())
+            {
+                this.Hide(); // Hide the main Cosmos window
+                // Open the Sudo functionality
+                SudoMain sudoMain = new SudoMain(obstacles, courses, competitors);
+                sudoMain.ShowDialog();
+            }
         }
     }
 }
