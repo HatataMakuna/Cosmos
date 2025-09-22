@@ -283,6 +283,7 @@ namespace Cosmos.Sudo
             ToggleTextFields(true);
             lstCompetitors.Enabled = false;
             btnNewCompetitor.Enabled = false;
+            btnDeleteCompetitor.Enabled = false;
             originalCompetitor = new Competitor();
             isNewCompetitor = true;
         }

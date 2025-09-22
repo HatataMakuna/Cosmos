@@ -33,6 +33,7 @@
             this.btnNewCourse = new System.Windows.Forms.Button();
             this.btnDeleteCourse = new System.Windows.Forms.Button();
             this.btnManageObstacles = new System.Windows.Forms.Button();
+            this.lstObstaclesinStage = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // lstObstacles
@@ -80,11 +81,21 @@
             this.btnManageObstacles.Text = "Manage Obstacles";
             this.btnManageObstacles.UseVisualStyleBackColor = true;
             // 
+            // lstObstaclesinStage
+            // 
+            this.lstObstaclesinStage.FormattingEnabled = true;
+            this.lstObstaclesinStage.ItemHeight = 16;
+            this.lstObstaclesinStage.Location = new System.Drawing.Point(383, 16);
+            this.lstObstaclesinStage.Name = "lstObstaclesinStage";
+            this.lstObstaclesinStage.Size = new System.Drawing.Size(139, 308);
+            this.lstObstaclesinStage.TabIndex = 6;
+            // 
             // ManageCourses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lstObstaclesinStage);
             this.Controls.Add(this.btnManageObstacles);
             this.Controls.Add(this.btnDeleteCourse);
             this.Controls.Add(this.btnNewCourse);
@@ -103,5 +114,6 @@
         private System.Windows.Forms.Button btnNewCourse;
         private System.Windows.Forms.Button btnDeleteCourse;
         private System.Windows.Forms.Button btnManageObstacles;
+        private System.Windows.Forms.ListBox lstObstaclesinStage;
     }
 }
