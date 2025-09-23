@@ -105,5 +105,11 @@ namespace Cosmos.Sudo
             ManageCompetitors manageCompetitorsForm = new ManageCompetitors(_competitors);
             manageCompetitorsForm.ShowDialog();
         }
+
+        private void tsmiManageCourses_Click(object sender, EventArgs e)
+        {
+            ManageCourses manageCoursesForm = new ManageCourses(_courses, _obstacles);
+            manageCoursesForm.ShowDialog();
+        }
     }
 }

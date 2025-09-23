@@ -72,6 +72,7 @@
             this.tsmiManageCourses.Name = "tsmiManageCourses";
             this.tsmiManageCourses.Size = new System.Drawing.Size(232, 26);
             this.tsmiManageCourses.Text = "Manage Courses";
+            this.tsmiManageCourses.Click += new System.EventHandler(this.tsmiManageCourses_Click);
             // 
             // tsmiManageCompetitors
             // 
