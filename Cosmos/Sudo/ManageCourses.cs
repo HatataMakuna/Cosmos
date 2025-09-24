@@ -1,6 +1,8 @@
 ﻿using Cosmos.Model;
+using Cosmos.Service;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,9 +13,6 @@ namespace Cosmos.Sudo
         private List<Course> courses = new List<Course>();
         private List<Obstacle> obstacles = new List<Obstacle>();
         private Course originalCourse = null;
-
-        // How to reorder obstacles in a stage?
-        // Hint: Drag and drop in the ListBox?
 
         public ManageCourses(List<Course> loadedCourses, List<Obstacle> loadedObstacles)
         {
@@ -27,6 +26,18 @@ namespace Cosmos.Sudo
 
             // Initialize controls state
             btnDeleteCourse.Enabled = false;
+
+            Label dragAndDropHint = new Label
+            {
+                Text = "Drag and drop to reorder obstacles in a stage.",
+                AutoSize = true,
+                ForeColor = Color.Blue,
+                Dock = DockStyle.Bottom,
+                Height = 20,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Location = new Point(481, 310)
+            };
+            this.Controls.Add(dragAndDropHint);
         }
 
         private void LoadCourses()
@@ -171,18 +182,17 @@ namespace Cosmos.Sudo
 
         private void btnAddObstacleToStage_Click(object sender, EventArgs e)
         {
+            // Validate selections
             if (lstCourses.SelectedIndex < 0)
             {
                 MessageBox.Show("Please select a course first.", "No Course Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (tabStages.TabPages.Count == 0)
             {
                 MessageBox.Show("Please add a stage to the course first.", "No Stage Available", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (lstObstacles.SelectedIndex < 0)
             {
                 MessageBox.Show("Please select an obstacle to add.", "No Obstacle Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -201,14 +211,13 @@ namespace Cosmos.Sudo
             Obstacle selectedObstacle = obstacles[lstObstacles.SelectedIndex];
             selectedStage.Obstacles.Add(selectedObstacle);
 
-            // Add obstacle to the ListBox in the current tab
-            ListBox stageObstaclesListBox = tabStages.SelectedTab.Controls.OfType<ListBox>().FirstOrDefault();
+            DragDropListBox stageObstaclesListBox = tabStages.SelectedTab.Controls.OfType<DragDropListBox>().FirstOrDefault();
             if (stageObstaclesListBox != null)
             {
                 stageObstaclesListBox.Items.Add(selectedObstacle.name);
             }
 
-            MessageBox.Show($"Obstacle '{selectedObstacle.name}' added to stage '{selectedStage.Name}'.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show($"Obstacle '{selectedObstacle.name}' added to stage '{selectedStage.Name}'.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnRemoveObstacleFromStage_Click(object sender, EventArgs e)
@@ -219,11 +228,10 @@ namespace Cosmos.Sudo
                 return;
             }
 
-            // Get the ListBox in the current tab
-            ListBox stageObstaclesListBox = tabStages.SelectedTab.Controls.OfType<ListBox>().FirstOrDefault();
+            DragDropListBox stageObstaclesListBox = tabStages.SelectedTab.Controls.OfType<DragDropListBox>().FirstOrDefault();
             if (stageObstaclesListBox == null || stageObstaclesListBox.SelectedIndex < 0)
             {
-                MessageBox.Show("Please select an obstacle to remove from the stage.", "No Obstacle Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select an obstacle in the stage to remove.", "No Obstacle Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -265,9 +273,24 @@ namespace Cosmos.Sudo
                     tabPage.Tag = stage; // Store the stage object in the tag property
 
                     // Create a ListBox for obstacles in this stage
-                    ListBox listBox = new ListBox();
+                    DragDropListBox listBox = new DragDropListBox();
                     listBox.Dock = DockStyle.Fill;
                     listBox.Name = "lstObstacles_" + stage.ID;
+
+                    listBox.ItemsReordered += (sender, args) =>
+                    {
+                        // Update the order of obstacles in the stage based on the new order in the ListBox
+                        List<Obstacle> reorderedObstacles = new List<Obstacle>();
+                        foreach (var item in listBox.Items)
+                        {
+                            Obstacle obs = stage.Obstacles.FirstOrDefault(o => o.name == item.ToString());
+                            if (obs != null)
+                            {
+                                reorderedObstacles.Add(obs);
+                            }
+                        }
+                        stage.Obstacles = reorderedObstacles;
+                    };
 
                     // Populate the ListBox with obstacles
                     foreach (var obstacle in stage.Obstacles)
