@@ -2,7 +2,6 @@
 using Cosmos.Service;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -23,21 +22,6 @@ namespace Cosmos.Sudo
 
             LoadCourses();
             LoadObstacles();
-
-            // Initialize controls state
-            btnDeleteCourse.Enabled = false;
-
-            Label dragAndDropHint = new Label
-            {
-                Text = "Drag and drop to reorder obstacles in a stage.",
-                AutoSize = true,
-                ForeColor = Color.Blue,
-                Dock = DockStyle.Bottom,
-                Height = 20,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Location = new Point(481, 310)
-            };
-            this.Controls.Add(dragAndDropHint);
         }
 
         private void LoadCourses()
@@ -61,6 +45,7 @@ namespace Cosmos.Sudo
         private void ToggleControls(bool enabled)
         {
             btnAddStage.Enabled = enabled;
+            btnDeleteCourse.Enabled = enabled;
             btnAddObstacleToStage.Enabled = enabled;
             btnRemoveObstacleFromStage.Enabled = enabled;
             txtStageName.Enabled = enabled;
@@ -157,7 +142,7 @@ namespace Cosmos.Sudo
                 stageNumber.ToString(), // Using stage number as ID
                 stageName,
                 new List<Obstacle>(),
-                60 // Default time limit of 60 seconds
+                false, 0 // Default time limit 0
             );
 
             // Add to course
@@ -308,6 +293,18 @@ namespace Cosmos.Sudo
                     // Update the stage name textbox with the selected stage name
                     Stage selectedStage = tabStages.SelectedTab.Tag as Stage;
                     txtStageName.Text = selectedStage?.Name ?? "";
+
+                    if (selectedStage != null)
+                    {
+                        txtStageName.Text = selectedStage.Name;
+
+                        // Set radio button based on HasTimeLimit
+                        rbNoTimeLimit.Checked = !selectedStage.HasTimeLimit;
+                        rbUseTimeLimit.Checked = selectedStage.HasTimeLimit;
+
+                        // Set the time limit text
+                        txtTimeLimit.Text = selectedStage.TimeLimit.ToString();
+                    }
                 }
             }
             else
@@ -321,11 +318,22 @@ namespace Cosmos.Sudo
             if (tabStages.SelectedTab != null)
             {
                 Stage selectedStage = tabStages.SelectedTab.Tag as Stage;
-                txtStageName.Text = selectedStage?.Name ?? "";
+                if (selectedStage != null)
+                {
+                    txtStageName.Text = selectedStage.Name;
+
+                    rbNoTimeLimit.Checked = !selectedStage.HasTimeLimit;
+                    rbUseTimeLimit.Checked = selectedStage.HasTimeLimit;
+
+                    txtTimeLimit.Text = selectedStage.TimeLimit.ToString();
+                }
             }
             else
             {
                 txtStageName.Clear();
+                rbNoTimeLimit.Checked = true;
+                rbUseTimeLimit.Checked = false;
+                txtTimeLimit.Text = "0";
             }
         }
 
@@ -344,6 +352,38 @@ namespace Cosmos.Sudo
             else
             {
                 MessageBox.Show("Please select a stage and enter a valid name.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void rbUseTimeLimit_CheckedChanged(object sender, EventArgs e)
+        {
+            // Enable/disable textbox based on radio button selection
+            txtTimeLimit.Enabled = rbUseTimeLimit.Checked;
+        }
+
+        private void btnApplyTimeLimit_Click(object sender, EventArgs e)
+        {
+            if (tabStages.SelectedTab != null)
+            {
+                Stage selectedStage = tabStages.SelectedTab.Tag as Stage;
+                if (selectedStage != null)
+                {
+                    // Update stage properties
+                    selectedStage.HasTimeLimit = rbUseTimeLimit.Checked;
+
+                    // Safely parse the time limit value
+                    int timeLimit = 0;
+                    if (rbUseTimeLimit.Checked && int.TryParse(txtTimeLimit.Text, out timeLimit))
+                    {
+                        selectedStage.TimeLimit = timeLimit;
+                    }
+                    else
+                    {
+                        selectedStage.TimeLimit = 0;
+                    }
+
+                    MessageBox.Show("Time limit settings applied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
     }

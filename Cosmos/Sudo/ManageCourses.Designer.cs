@@ -40,6 +40,14 @@
             this.btnEditStageName = new System.Windows.Forms.Button();
             this.txtStageName = new System.Windows.Forms.TextBox();
             this.lblStageName = new System.Windows.Forms.Label();
+            this.lblDragDropHint = new System.Windows.Forms.Label();
+            this.grpTimeLimit = new System.Windows.Forms.GroupBox();
+            this.rbNoTimeLimit = new System.Windows.Forms.RadioButton();
+            this.rbUseTimeLimit = new System.Windows.Forms.RadioButton();
+            this.txtTimeLimit = new System.Windows.Forms.TextBox();
+            this.lblSeconds = new System.Windows.Forms.Label();
+            this.btnApplyTimeLimit = new System.Windows.Forms.Button();
+            this.grpTimeLimit.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstObstacles
@@ -137,7 +145,7 @@
             // btnEditStageName
             // 
             this.btnEditStageName.Enabled = false;
-            this.btnEditStageName.Location = new System.Drawing.Point(716, 236);
+            this.btnEditStageName.Location = new System.Drawing.Point(723, 235);
             this.btnEditStageName.Name = "btnEditStageName";
             this.btnEditStageName.Size = new System.Drawing.Size(55, 23);
             this.btnEditStageName.TabIndex = 13;
@@ -148,7 +156,7 @@
             // txtStageName
             // 
             this.txtStageName.Enabled = false;
-            this.txtStageName.Location = new System.Drawing.Point(573, 236);
+            this.txtStageName.Location = new System.Drawing.Point(580, 235);
             this.txtStageName.Name = "txtStageName";
             this.txtStageName.Size = new System.Drawing.Size(137, 22);
             this.txtStageName.TabIndex = 12;
@@ -162,11 +170,83 @@
             this.lblStageName.TabIndex = 11;
             this.lblStageName.Text = "Stage Name:";
             // 
+            // lblDragDropHint
+            // 
+            this.lblDragDropHint.AutoSize = true;
+            this.lblDragDropHint.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblDragDropHint.ForeColor = System.Drawing.Color.Blue;
+            this.lblDragDropHint.Location = new System.Drawing.Point(0, 434);
+            this.lblDragDropHint.Name = "lblDragDropHint";
+            this.lblDragDropHint.Size = new System.Drawing.Size(217, 16);
+            this.lblDragDropHint.TabIndex = 14;
+            this.lblDragDropHint.Text = "Drag and drop to reorder obstacles";
+            this.lblDragDropHint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grpTimeLimit
+            // 
+            this.grpTimeLimit.Controls.Add(this.rbNoTimeLimit);
+            this.grpTimeLimit.Controls.Add(this.rbUseTimeLimit);
+            this.grpTimeLimit.Controls.Add(this.txtTimeLimit);
+            this.grpTimeLimit.Controls.Add(this.lblSeconds);
+            this.grpTimeLimit.Controls.Add(this.btnApplyTimeLimit);
+            this.grpTimeLimit.Location = new System.Drawing.Point(484, 277);
+            this.grpTimeLimit.Name = "grpTimeLimit";
+            this.grpTimeLimit.Size = new System.Drawing.Size(300, 138);
+            this.grpTimeLimit.TabIndex = 0;
+            this.grpTimeLimit.TabStop = false;
+            this.grpTimeLimit.Text = "Stage Time Limit";
+            // 
+            // rbNoTimeLimit
+            // 
+            this.rbNoTimeLimit.Checked = true;
+            this.rbNoTimeLimit.Location = new System.Drawing.Point(11, 27);
+            this.rbNoTimeLimit.Name = "rbNoTimeLimit";
+            this.rbNoTimeLimit.Size = new System.Drawing.Size(104, 24);
+            this.rbNoTimeLimit.TabIndex = 0;
+            this.rbNoTimeLimit.TabStop = true;
+            this.rbNoTimeLimit.Text = "No time limit";
+            // 
+            // rbUseTimeLimit
+            // 
+            this.rbUseTimeLimit.Location = new System.Drawing.Point(11, 57);
+            this.rbUseTimeLimit.Name = "rbUseTimeLimit";
+            this.rbUseTimeLimit.Size = new System.Drawing.Size(104, 24);
+            this.rbUseTimeLimit.TabIndex = 1;
+            this.rbUseTimeLimit.Text = "Use time limit:";
+            this.rbUseTimeLimit.CheckedChanged += new System.EventHandler(this.rbUseTimeLimit_CheckedChanged);
+            // 
+            // txtTimeLimit
+            // 
+            this.txtTimeLimit.Enabled = false;
+            this.txtTimeLimit.Location = new System.Drawing.Point(121, 57);
+            this.txtTimeLimit.Name = "txtTimeLimit";
+            this.txtTimeLimit.Size = new System.Drawing.Size(100, 22);
+            this.txtTimeLimit.TabIndex = 2;
+            this.txtTimeLimit.Text = "0";
+            // 
+            // lblSeconds
+            // 
+            this.lblSeconds.Location = new System.Drawing.Point(221, 58);
+            this.lblSeconds.Name = "lblSeconds";
+            this.lblSeconds.Size = new System.Drawing.Size(65, 23);
+            this.lblSeconds.TabIndex = 3;
+            this.lblSeconds.Text = "seconds";
+            // 
+            // btnApplyTimeLimit
+            // 
+            this.btnApplyTimeLimit.Location = new System.Drawing.Point(19, 98);
+            this.btnApplyTimeLimit.Name = "btnApplyTimeLimit";
+            this.btnApplyTimeLimit.Size = new System.Drawing.Size(75, 23);
+            this.btnApplyTimeLimit.TabIndex = 4;
+            this.btnApplyTimeLimit.Text = "Apply";
+            this.btnApplyTimeLimit.UseVisualStyleBackColor = true;
+            this.btnApplyTimeLimit.Click += new System.EventHandler(this.btnApplyTimeLimit_Click);
+            // 
             // ManageCourses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 450);
+            this.ClientSize = new System.Drawing.Size(853, 450);
             this.Controls.Add(this.btnRemoveObstacleFromStage);
             this.Controls.Add(this.btnAddObstacleToStage);
             this.Controls.Add(this.btnAddStage);
@@ -179,8 +259,12 @@
             this.Controls.Add(this.txtStageName);
             this.Controls.Add(this.btnEditStageName);
             this.Controls.Add(this.tabStages);
+            this.Controls.Add(this.lblDragDropHint);
+            this.Controls.Add(this.grpTimeLimit);
             this.Name = "ManageCourses";
             this.Text = "ManageCourses";
+            this.grpTimeLimit.ResumeLayout(false);
+            this.grpTimeLimit.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +284,12 @@
         private System.Windows.Forms.Button btnEditStageName;
         private System.Windows.Forms.TextBox txtStageName;
         private System.Windows.Forms.Label lblStageName;
+        private System.Windows.Forms.Label lblDragDropHint;
+        private System.Windows.Forms.GroupBox grpTimeLimit;
+        private System.Windows.Forms.RadioButton rbNoTimeLimit;
+        private System.Windows.Forms.RadioButton rbUseTimeLimit;
+        private System.Windows.Forms.TextBox txtTimeLimit;
+        private System.Windows.Forms.Label lblSeconds;
+        private System.Windows.Forms.Button btnApplyTimeLimit;
     }
 }

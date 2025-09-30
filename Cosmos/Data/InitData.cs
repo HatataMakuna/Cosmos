@@ -77,18 +77,18 @@ namespace Cosmos.Data
                 new Course(1, "Course 1",
                     new List<Stage>{
                         // Obstacles[0] return null
-                        new Stage("1", "Stage 1", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
-                        new Stage("2", "Stage 2", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
-                        new Stage("3", "Stage 3", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
-                        new Stage("4", "Stage 4", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                        new Stage("1", "Stage 1", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, true, 60),
+                        new Stage("2", "Stage 2", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, true, 60),
+                        new Stage("3", "Stage 3", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, true, 60),
+                        new Stage("4", "Stage 4", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, true, 60),
                     }
                 ),
                 new Course(1, "Course 1",
                     new List<Stage>{
-                        new Stage("1", "Stage 1", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
-                        new Stage("2", "Stage 2", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
-                        new Stage("3", "Stage 3", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
-                        new Stage("4", "Stage 4", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, 60),
+                        new Stage("1", "Stage 1", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, true, 60),
+                        new Stage("2", "Stage 2", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, true, 60),
+                        new Stage("3", "Stage 3", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, true, 60),
+                        new Stage("4", "Stage 4", new List<Obstacle> { Obstacles[0], Obstacles[1], Obstacles[2] }, true, 60),
                     }
                 ),
             };

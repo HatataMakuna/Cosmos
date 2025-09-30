@@ -21,5 +21,10 @@ namespace Cosmos.Model
             Name = name;
             Stages = stages;
         }
+
+        public Stage GetStage(string name)
+        {
+            return Stages.FirstOrDefault(s => s.Name == name);
+        }
     }
 }
